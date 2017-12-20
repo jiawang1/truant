@@ -1,0 +1,5 @@
+--require test/mocha.env.js
+--require test/testSetup.js
+--compilers js:babel-register,css:tools/nullCompiler
+
+
