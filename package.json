@@ -1,0 +1,15 @@
+{
+  "name": "school",
+  "version": "0.1.0",
+  "description": "School project",
+  "scripts": {
+    "start": "node ./tools/server.js",
+    "build": "node ./tools/build.js",
+    "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
+    "st": "./node_modules/.bin/_mocha --"
+  },
+  "webpackDevServerPort": 8012,
+  "devDependencies": {
+    "lerna": "^2.5.1"
+  }
+}
