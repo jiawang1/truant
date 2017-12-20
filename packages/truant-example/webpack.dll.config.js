@@ -9,8 +9,6 @@ module.exports = {
       'react-redux',
       'react-router-redux',
       'redux',
-      'redux-logger',
-      'redux-saga',
       'whatwg-fetch'
     ],
   },

@@ -1,5 +1,5 @@
 'use strict';
-
+/*eslint-disable*/
 const path = require('path');
 const shell = require('shelljs');
 const webpack = require('webpack');
@@ -7,10 +7,10 @@ const config = require('../webpack.dist.config');
 const buildDll = require('./buildDistDll.js').buildDll;
 const logger = (...text) => { console.log('\x1b[36m', ...text, '\x1b[0m'); };
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-
-var params = process.argv.slice(2),
-  showAnalyze = params.indexOf('--analyze') >= 0;
+/*eslint-enable*/
+const params = process.argv.slice(2);
+const buildMode = params.indexOf('--build') >= 0 ? 'build' : 'dist';
+const showAnalyze = params.indexOf('--analyze') >= 0;
 
 // Clean folder
 logger('start to build front end resources');
@@ -24,36 +24,42 @@ const timestamp = require('crypto')
   .digest('hex')
   .substring(0, 10);
 
-
-buildDll('dist').then(oDllInfo => {
-  const srcPath = path.join(__dirname, '../src');
-  const tmpPath = oDllInfo.tmpPath;
-  const manifestPath = path.join(tmpPath, 'vendors-manifest.json');
+const buildProcess = (oDllInfo) => {
+  let targetFileName = null;
+  if (oDllInfo) {
+    const srcPath = path.join(__dirname, '../src');
+    const manifestPath = path.join(oDllInfo.tmpPath, 'vendors-manifest.json');
+    config.plugins.push(
+      new webpack.DllReferencePlugin({    //include dll
+        context: srcPath,
+        manifest: require(manifestPath),
+      }));
+    targetFileName = `[name].bundle.${timestamp}.js`;
+  } else {
+    targetFileName = `[name].bundle.js`;
+  }
   config.output = {
     path: path.join(__dirname, '../build'),
-    filename: `[name].bundle.${timestamp}.js`,
+    filename: targetFileName,
     libraryTarget: 'commonjs2'
   };
-  showAnalyze && config.plugins.push(new BundleAnalyzerPlugin());
-  config.plugins.push(
-    new webpack.DllReferencePlugin({    //include dll
-      context: srcPath,
-      manifest: require(manifestPath),
-    }));
-
+  !!showAnalyze && config.plugins.push(new BundleAnalyzerPlugin());
   const start = new Date().getTime();
   logger(`start to build main resources at ${start}`);
   console.log(config);
   webpack(config, (err) => {
     if (err) console.error(err);
     else {
-      shell.cp(path.join(oDllInfo.tmpPath, './' + oDllInfo.dllFileName), path.join(buildFolder, `./${oDllInfo.dllFileName}`));
+      !!oDllInfo && shell.cp(path.join(oDllInfo.tmpPath, './' + oDllInfo.dllFileName), path.join(buildFolder, `./${oDllInfo.dllFileName}`));
       const end = new Date().getTime();
       logger('Done, build time: ', end - start, 'ms');
     }
   });
+};
 
-}).catch(err => {
-  logger(err.message || err);
+if (buildMode === 'build') {
+  buildProcess();
+} else {
+  buildDll('dist').then(buildProcess).catch(err => logger(err.message || err));
 }
-  );
+
