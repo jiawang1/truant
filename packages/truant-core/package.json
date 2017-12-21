@@ -3,13 +3,11 @@
     "version": "0.1.0",
     "description": "School project",
     "scripts": {
-        "start": "node ./tools/server.js",
         "build": "node ./tools/build.js --build",
         "dist": "node ./tools/build.js --dist",
         "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
         "st": "./node_modules/.bin/_mocha --"
     },
-    "webpackDevServerPort": 8012,
     "dependencies": {
         "immutable": "^3.8.2",
         "isomorphic-fetch": "^2.2.1",
