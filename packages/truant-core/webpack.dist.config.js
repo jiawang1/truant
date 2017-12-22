@@ -1,4 +1,3 @@
-'use strict';
 const path = require('path');
 const webpack = require('webpack');
 
@@ -8,7 +7,7 @@ module.exports = {
   entry: {
     truant: [
       './index'
-    ],
+    ]
   },
   output: {
   },
@@ -19,7 +18,7 @@ module.exports = {
     new webpack.DefinePlugin({
       ENV: '"dist"',
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ],

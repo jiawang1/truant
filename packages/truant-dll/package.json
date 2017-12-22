@@ -2,7 +2,7 @@
   "name": "truant-dll",
   "version": "0.1.0",
   "description": "DLL shared for all packages",
-  "main": "index.js",
+  "main": "./tools/buildDll.js",
   "scripts": {
     "dist": "node ./tools/buildDll.js"
   },

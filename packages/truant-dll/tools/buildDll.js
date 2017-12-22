@@ -6,6 +6,10 @@ const webpack = require('webpack');
 const crypto = require('crypto');
 const dllConfig = require('../webpack.dll.config.js');
 const distPath = '../../dist';
+const pkgJson = require(path.join(__dirname, '../', 'package.json'));
+const projectName = pkgJson.name;
+const targetPath = path.join(__dirname, '../', distPath, projectName);
+const manifestPath = path.join(targetPath, 'vendors-manifest.json');
 /*eslint-enable*/
 
 function buildDll(env = 'dist') {
@@ -20,9 +24,6 @@ function buildDll(env = 'dist') {
   const dllName = `vendors_${dllHash}`;
   const dllFileName = `${dllName}.dll.js`;
   console.log('dll name: ', dllName);
-
-  const targetPath = path.join(__dirname, '../', distPath, './truant-dll');
-  const manifestPath = path.join(targetPath, 'vendors-manifest.json');
 
   return new Promise((resolve, reject) => {
     if (!shell.test('-e', manifestPath) // dll doesn't exist
