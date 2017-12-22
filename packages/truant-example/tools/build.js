@@ -1,84 +1,81 @@
 'use strict';
 
+/*eslint-disable*/
 const path = require('path');
+const fs = require('fs');
 const shell = require('shelljs');
 const webpack = require('webpack');
 const config = require('../webpack.dist.config');
-const buildDll = require('./buildDll.js').buildDll;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const defaultContext = '/fivestaradminstorefront';
+const distRelativePath = '../../dist';
+const distFolder = path.join(__dirname, '../', distRelativePath);
+const dllFolder = path.join(distFolder, 'truant-dll');
+const buildFolder = path.join(distFolder, '/truant-example');
+const manifestName = 'vendors-manifest.json';
 const logger = (...text) => { console.log('\x1b[36m', ...text, '\x1b[0m'); };
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-//config.warnings = true;
+/*eslint-enable*/
 
-var params = process.argv.slice(2),
-    showAnalyze = params.indexOf('--analyze') >= 0,
-    contextRoot = params.indexOf('--contextRoot') >= 0 ? params[params.indexOf('--contextRoot') + 1]: defaultContext;
+const params = process.argv.slice(2);
+const showAnalyze = params.indexOf('--analyze') >= 0;
+const contextRoot = params.indexOf('--contextRoot') >= 0 ? params[params.indexOf('--contextRoot') + 1] : defaultContext;
 
 // Clean folder
 logger('start to build front end resources');
-const buildFolder = path.join(__dirname, '../build');
 shell.rm('-rf', buildFolder);
 shell.mkdir(buildFolder);
 shell.mkdir(`${buildFolder}/static`);
-
+logger(`clear dist folder ${buildFolder}`);
 const timestamp = require('crypto')
-    .createHash('md5')
-    .update(new Date().getTime().toString())
-    .digest('hex')
-    .substring(0, 10);
+  .createHash('md5')
+  .update(new Date().getTime().toString())
+  .digest('hex')
+  .substring(0, 8);
 
+const buildApp = () => {
+  let manifestFile = null;
+  let dllName = null;
+  try {
+    manifestFile = require(path.join(dllFolder, manifestName));
+    dllName = fs.readdirSync(dllFolder).filter(file => file !== manifestName)[0];
+    logger(`found manifest file ${path.join(dllFolder, manifestName)}`);
+    logger(`found DLL file ${dllName}`);
+  } catch (err) {
+    console.error('manifest or DLL file not found , build process stopped');
+    console.error(err);
+    return;
+  }
+  config.output = {
+    path: path.join(buildFolder, './static'),
+    filename: `[name].bundle.${timestamp}.js`,
+    publicPath: `${contextRoot}/_admin/static/`,
+    chunkFilename: '[name].[chunkhash:8].chunk.js'
+  };
+  showAnalyze && config.plugins.push(new BundleAnalyzerPlugin());
+  config.plugins.push(
+    new webpack.DllReferencePlugin({    //  include dll
+      manifest: manifestFile
+    }));
+  config.plugins.push(
+    new HtmlWebpackPlugin({       // generate HTML
+      fileName: 'index.html',
+      template: 'index.ejs',
+      inject: true,
+      dllName: config.output.publicPath + dllName,
+      publicContext: contextRoot
+    })
+  );
+  const start = new Date().getTime();
+  logger(`start to build main resources at ${start}`);
+  webpack(config, (err) => {
+    if (err) console.error(err);
+    else {
+      shell.mv(path.join(buildFolder, './static/index.html'), path.join(buildFolder, './index.html'));
+      logger('Done, build time: ', new Date().getTime() - start, 'ms');
+    }
+  });
+};
 
-buildDll('dist').then(oDllInfo => {
-
-    const srcPath = path.join(__dirname, '../src');
-    const tmpPath = oDllInfo.tmpPath;
-    const manifestPath = path.join(tmpPath, 'vendors-manifest.json');
-    config.output = {
-        path: path.join(__dirname, '../build/static'),
-        filename: `[name].bundle.${timestamp}.js`,
-        publicPath: `${contextRoot}/_admin/static/`,
-        chunkFilename: '[name].[chunkhash:8].chunk.js'
-    };
-
-    showAnalyze && config.plugins.push(new BundleAnalyzerPlugin());
-    config.plugins.push(
-        new webpack.DllReferencePlugin({    //include dll
-            context: srcPath,
-            manifest: require(manifestPath),
-        }));
-
-    config.plugins.push(
-        new HtmlWebpackPlugin({				  // generate HTML
-            fileName: `index.html`,
-            template: 'index.ejs',
-            inject: true,
-            dllName: config.output.publicPath + oDllInfo.dllFileName,
-            publicContext: defaultContext
-        })
-    );
-
-
-    const start = new Date().getTime();
-    logger(`start to build main resources at ${start}`);
-    console.log(config);
-    webpack(config, (err) => {
-        if (err) console.error(err);
-        else {
-            //	shell.mv(path.join(buildFolder, './static/main.bundle.js'), path.join(buildFolder, `./static/main.bundle.${timestamp}.js`));
-            shell.cp(path.join(oDllInfo.tmpPath, './' + oDllInfo.dllFileName), path.join(buildFolder, `./static/${oDllInfo.dllFileName}`));
-            shell.mv(path.join(buildFolder, './static/index.html'), path.join(buildFolder, './index.html'));
-            const end = new Date().getTime();
-            logger('Done, build time: ', end - start, 'ms');
-        }
-    });
-
-}).catch(err => {
-    logger(err.message || err);
-}
-);
-
-
-
-
+buildApp();
 

@@ -1,4 +1,5 @@
 'use strict';
+
 /*eslint-disable*/
 const path = require('path');
 const shell = require('shelljs');
@@ -47,7 +48,7 @@ const buildProcess = (oDllInfo) => {
   const start = new Date().getTime();
   logger(`start to build main resources at ${start}`);
   console.log(config);
-  webpack(config, (err) => {
+  webpack(config, err => {
     if (err) console.error(err);
     else {
       !!oDllInfo && shell.cp(path.join(oDllInfo.tmpPath, './' + oDllInfo.dllFileName), path.join(buildFolder, `./${oDllInfo.dllFileName}`));
