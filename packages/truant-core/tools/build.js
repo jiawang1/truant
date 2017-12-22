@@ -53,7 +53,6 @@ const buildProcess = () => {
   !!showAnalyze && config.plugins.push(new BundleAnalyzerPlugin());
   const start = new Date().getTime();
   logger(`start to build main resources at ${start}`);
-  console.log(config);
   webpack(config, err => {
     if (err) {
       console.error(err);

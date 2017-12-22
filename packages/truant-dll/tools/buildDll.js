@@ -6,27 +6,34 @@ const webpack = require('webpack');
 const crypto = require('crypto');
 const dllConfig = require('../webpack.dll.config.js');
 const distPath = '../../dist';
-const pkgJson = require(path.join(__dirname, '../', 'package.json'));
-const projectName = pkgJson.name;
+const oPackage = require(path.join(__dirname, '../', 'package.json'));
+const projectName = oPackage.name;
 const targetPath = path.join(__dirname, '../', distPath, projectName);
 const manifestPath = path.join(targetPath, 'vendors-manifest.json');
 /*eslint-enable*/
 
-function buildDll(env = 'dist') {
+const params = process.argv.slice(2);
+const forceBuild = params.indexOf('--force') >= 0;
+
+const generateHash = () => {
   const nameVersions = dllConfig.entry.vendors.map(pkgName => {
     const pkgJson = require(path.join(pkgName.split('/')[0], 'package.json'));
     return `${pkgJson.name}_${pkgJson.version}`;
   }).join('-');
-  const dllHash = crypto
+  return crypto
     .createHash('md5')
     .update(nameVersions)
     .digest('hex');
+};
+
+function buildDll(env = 'dist') {
+  const dllHash = generateHash();
   const dllName = `vendors_${dllHash}`;
   const dllFileName = `${dllName}.dll.js`;
   console.log('dll name: ', dllName);
 
   return new Promise((resolve, reject) => {
-    if (!shell.test('-e', manifestPath) // dll doesn't exist
+    if (forceBuild || !shell.test('-e', manifestPath) // dll doesn't exist
       || require(manifestPath).name !== dllName // dll hash has changed
     ) {
       delete require.cache[manifestPath]; // force reload the new manifest
@@ -38,7 +45,7 @@ function buildDll(env = 'dist') {
         library: dllName // reference to current dll, should be the same with dll plugin name
       };
 
-      var oEnvironment = {
+      const oEnvironment = {
         ENV: `"${env}"`
       };
       if (env === 'dist') {
@@ -54,7 +61,6 @@ function buildDll(env = 'dist') {
       dllConfig.plugins.push(new webpack.DllPlugin({
         path: manifestPath,
         name: dllName
-        //context: srcPath
       }));
 
       webpack(dllConfig, (err, stats) => {
@@ -86,7 +92,4 @@ function buildDll(env = 'dist') {
 }
 
 buildDll();
-console.log(`DLL build finish time ${new Date().getTime()}`);
-module.exports = {
-  buildDll
-};
+
