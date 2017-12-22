@@ -62,12 +62,16 @@ function buildDll(env = 'dist') {
           console.error('dll build failed:');
           console.error((err && err.stack) || stats.hasErrors());
           reject(err || stats.hasErrors());
+          console.log(`DLL build exit time ${new Date().getTime()}`);
+          process.exit(1);
         }
         console.log('dll build success.');
         resolve({
           dllFileName,
           targetPath
         });
+        console.log(`DLL build exit time ${new Date().getTime()}`);
+        process.exit(0);
       });
     } else {
       console.log('vendors dll is up to date, no need to rebuild.');
@@ -75,12 +79,14 @@ function buildDll(env = 'dist') {
         dllFileName,
         targetPath
       });
+      console.log(`DLL build exit time ${new Date().getTime()}`);
+      process.exit(0);
     }
   });
 }
 
 buildDll();
-
+console.log(`DLL build finish time ${new Date().getTime()}`);
 module.exports = {
   buildDll
 };

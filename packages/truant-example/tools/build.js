@@ -18,7 +18,6 @@ const manifestName = 'vendors-manifest.json';
 const logger = (...text) => { console.log('\x1b[36m', ...text, '\x1b[0m'); };
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 /*eslint-enable*/
-
 const params = process.argv.slice(2);
 const showAnalyze = params.indexOf('--analyze') >= 0;
 const contextRoot = params.indexOf('--contextRoot') >= 0 ? params[params.indexOf('--contextRoot') + 1] : defaultContext;

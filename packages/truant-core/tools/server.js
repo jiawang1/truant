@@ -8,7 +8,6 @@ const devConfig = require('../webpack.dev.config');
 const PORT = require('../package.json').webpackDevServerPort;
 
 function startDevServer(oDllInfo) {
-
   const srcPath = path.join(__dirname, '../src');
   const tmpPath = oDllInfo.tmpPath;
   const manifestPath = path.join(tmpPath, 'vendors-manifest.json');

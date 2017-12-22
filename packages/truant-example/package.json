@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./tools/server.js",
-    "build": "node ./tools/build.js",
+    "build": "node ./tools/build.js --build",
+    "dist": "node ./tools/build.js --dist",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
     "st": "./node_modules/.bin/_mocha --"
   },

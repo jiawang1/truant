@@ -1,14 +1,10 @@
 {
-  "name": "school",
+  "name": "truant",
   "version": "0.1.0",
-  "description": "School project",
+  "description": "truant project",
   "scripts": {
-    "start": "node ./tools/server.js",
-    "build": "node ./tools/build.js",
-    "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
-    "st": "./node_modules/.bin/_mocha --"
+    "dist": "node ./tools/build.js"
   },
-  "webpackDevServerPort": 8012,
   "devDependencies": {
     "lerna": "^2.5.1"
   }

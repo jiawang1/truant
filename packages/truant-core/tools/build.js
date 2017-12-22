@@ -18,7 +18,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const params = process.argv.slice(2);
 const buildMode = params.indexOf('--build') >= 0 ? 'build' : 'dist';
 const showAnalyze = params.indexOf('--analyze') >= 0;
-
 // Clean folder
 logger('start to build front end resources');
 shell.rm('-rf', distFolder);
