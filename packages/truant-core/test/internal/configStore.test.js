@@ -1,11 +1,10 @@
 import { expect } from 'chai';
-import configureStore, { injectAsyncReducer, injectAsyncState } from '../../src/internal/configStore';
 import { createStore } from 'redux';
 import { put } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
+import configureStore, { injectAsyncReducer, injectAsyncState } from '../../src/internal/configStore';
 
-describe("test configure store", () => {
-  const initialState = {};
+describe('test configure store', () => {
   let store;
   const sagaMiddle = createSagaMiddleware();
 
