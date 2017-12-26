@@ -11,7 +11,7 @@ const centralDistFolder = path.join(__dirname, '../', distRelativePath);
 const projectName = require(path.join(__dirname, '../', 'package.json')).name;
 const distFolder = path.join(centralDistFolder, projectName);
 const dllFolder = path.join(centralDistFolder, 'truant-dll');
-const manifestName = 'vendors-manifest.json';
+const manifestName = 'dist/vendors-manifest.json';
 const logger = (...text) => { console.log('\x1b[36m', ...text, '\x1b[0m'); };
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 /*eslint-enable*/

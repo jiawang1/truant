@@ -4,7 +4,8 @@
   "description": "DLL shared for all packages",
   "main": "./tools/buildDll.js",
   "scripts": {
-    "dist": "node ./tools/buildDll.js"
+    "dist": "node ./tools/buildDll.js",
+    "dev": "node ./tools/buildDll.js --dev"
   },
   "keywords": [
     "DLL"

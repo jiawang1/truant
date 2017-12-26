@@ -1,29 +1,43 @@
 "use strict";
 const path = require('path');
+const fs = require('fs');
+const util = require('util');
 const webpack = require('webpack');
-const buildDll = require('./buildDll.js').buildDll;
+const exec = util.promisify(require('child_process').exec);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackDevServer = require('webpack-dev-server');
 const devConfig = require('../webpack.dev.config');
 const PORT = require('../package.json').webpackDevServerPort;
 
-function startDevServer(oDllInfo) {
+const buildDLL = 'npm run dev';
+const manifestName = 'vendors-manifest.json';
+const dllRelativePath = '../../dist/truant-dll/dev';
+const dllFolder = path.join(__dirname, '../', dllRelativePath);
 
-  const srcPath = path.join(__dirname, '../src');
-  const tmpPath = oDllInfo.tmpPath;
-  const manifestPath = path.join(tmpPath, 'vendors-manifest.json');
+
+function startDevServer() {
+  // if DDL not exist, will throw error and trigger rebuild DLL
+
+  let manifest;
+  let dllName;
+  try {
+    manifest = require(path.join(dllFolder, manifestName));
+    dllName = fs.readdirSync(dllFolder).filter(file => file !== manifestName)[0];
+  } catch (err) {
+    console.error();
+    throw err;
+  }
   devConfig.entry = {
     main: [
       'react-hot-loader/patch',
       `webpack-dev-server/client?http://localhost:${PORT}`,
       'webpack/hot/only-dev-server',
       './styles/index.less',
-      './index',
-    ],
+      './index'
+    ]
   };
   devConfig.plugins.push(new webpack.DllReferencePlugin({    //include dll
-    context: srcPath,
-    manifest: require(manifestPath),
+    manifest
   }));
 
   devConfig.plugins.push(
@@ -31,7 +45,7 @@ function startDevServer(oDllInfo) {
       fileName: 'index.html',
       template: 'index.ejs',
       inject: true,
-      dllName: "/_tmp/dev/" + oDllInfo.dllFileName,
+      dllName: "/_tmp/dev/" + dllName,
       publicContext: devConfig.output.publicPath.match(/^(\/[^/]*)\/.*/)[1]
     })
   );
@@ -46,20 +60,18 @@ function startDevServer(oDllInfo) {
     quiet: true,
     index: `index.html`,
     https: true,
-    historyApiFallback: true,
-  }).listen(PORT, (err) => {
+    historyApiFallback: true
+  }).listen(PORT, err => {
     if (err) {
-      console.log(err);
+      console.error(err);
     }
     console.log(`Listening at localhost:${PORT}`);
   });
 }
 
-
-buildDll('dev').then(oDllInfo => {
-  startDevServer(oDllInfo);
-}).catch(err => {
-  console.error(err.message || err);
-});
-
-
+try {
+  startDevServer();
+} catch (err) {
+  console.log('manifest or DLL file not found , start to build DLL');
+  exec(buildDLL, { cwd: path.join(__dirname, '../../truant-dll') }).then(startDevServer).catch(error => console.error(error));
+}
