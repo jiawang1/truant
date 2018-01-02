@@ -8,7 +8,7 @@ class VideoPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classStartPause: 'start',
+      classStartPause: 'start'
     };
   }
 
@@ -25,8 +25,6 @@ class VideoPage extends Component {
   }
 
   render() {
-    const { location, match, history } = this.props;
-
     return (<div className='video-frame'>
       <VideoPlayer />
     </div>);

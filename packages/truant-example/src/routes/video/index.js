@@ -2,10 +2,10 @@ import {AsyncFactory} from 'truant-core';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-const UnitRoute = AsyncFactory(() => import('./VideoPage'));
+const VidoeRoute = AsyncFactory()(() => import('./VideoPage'));
 
 export default () => {
   return (
-    <Route path="/video" component={UnitRoute} />
+    <Route path="/video" component={VidoeRoute} />
   );
 };

@@ -32,7 +32,7 @@ render() {
 
     return (<div className='video-player'>
       <div className='view-area'>
-        <video autoplay = 'true' style={{ display: 'block', width: '100%', height: 100 }} src={this.state.videoUrl} />
+        <video autoPlay = 'true' style={{ display: 'block', width: '100%', height: 100 }} src={this.state.videoUrl} />
       </div>
       <div className='control-area'>
         <div className={`button-${this.state.classStartPause} circle`} onClick={(e) => { this.handleStartAndPause(e); }}>

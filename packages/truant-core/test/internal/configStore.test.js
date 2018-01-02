@@ -8,10 +8,10 @@ describe('test configure store', () => {
   let store;
   const sagaMiddle = createSagaMiddleware();
 
-  beforeEach(() => {
-    store = createStore(() => { }, [sagaMiddle]);
-    store.asyncReducers = {};
-  });
+  // beforeEach(() => {
+  //   store = createStore(() => { }, [sagaMiddle]);
+  //   store.asyncReducers = {};
+  // });
   it('test injectAsyncReducer', () => {
     const test = (state, action) => {
       if (action.type === 'test') {
@@ -22,7 +22,8 @@ describe('test configure store', () => {
         return {};
       }
     };
-    injectAsyncReducer(store, '@@unitTest', test);
+    store = configureStore({});
+    injectAsyncReducer('@@unitTest', test);
     expect(store.asyncReducers['@@unitTest']).to.equal(test);
     store.dispatch({ type: 'test' });
     expect(store.getState()['@@unitTest']).to.have.property('value');
@@ -57,7 +58,7 @@ describe('test configure store', () => {
       reducer: () => ({})
     };
     store = configureStore({ mockInitState });
-    injectAsyncState(store, { mockState }, 'test');
+    injectAsyncState({ mockState }, 'test');
     store.dispatch({ type: 'mock/testMock' });
     expect(store.getState()).has.property('mockInitState');
     store.dispatch({ type: 'testSaga/testManage' });

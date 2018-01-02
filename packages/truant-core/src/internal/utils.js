@@ -12,3 +12,8 @@
  */
 export const getType = obj =>
   Object.prototype.toString.call(obj).replace(/.*\s(.*)]$/, '$1');
+
+
+export const getDisplayName = WrappedComponent => {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+};

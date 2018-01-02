@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
+const shell = require('shelljs');
 const webpack = require('webpack');
 const exec = util.promisify(require('child_process').exec);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -13,6 +14,7 @@ const buildDLL = 'npm run dev';
 const manifestName = 'vendors-manifest.json';
 const dllRelativePath = '../../dist/truant-dll/dev';
 const dllFolder = path.join(__dirname, '../', dllRelativePath);
+const folderTmp = './src/_tmp/';
 
 
 function startDevServer() {
@@ -23,6 +25,9 @@ function startDevServer() {
   try {
     manifest = require(path.join(dllFolder, manifestName));
     dllName = fs.readdirSync(dllFolder).filter(file => file !== manifestName)[0];
+    shell.rm('-rf', folderTmp);
+    shell.mkdir(folderTmp);
+    shell.cp(`${dllFolder}/${dllName}`, folderTmp);
   } catch (err) {
     console.error();
     throw err;
@@ -41,11 +46,11 @@ function startDevServer() {
   }));
 
   devConfig.plugins.push(
-    new HtmlWebpackPlugin({				  // generate HTML
+    new HtmlWebpackPlugin({       // generate HTML
       fileName: 'index.html',
       template: 'index.ejs',
       inject: true,
-      dllName: "/_tmp/dev/" + dllName,
+      dllName: path.join('/_tmp', dllName),
       publicContext: devConfig.output.publicPath.match(/^(\/[^/]*)\/.*/)[1]
     })
   );
@@ -58,7 +63,7 @@ function startDevServer() {
     hot: true,
     noInfo: false,
     quiet: true,
-    index: `index.html`,
+    index: 'index.html',
     https: true,
     historyApiFallback: true
   }).listen(PORT, err => {

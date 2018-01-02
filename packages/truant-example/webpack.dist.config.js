@@ -1,4 +1,3 @@
-
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -22,7 +21,7 @@ module.exports = {
     new webpack.DefinePlugin({
       ENV: '"dist"',
       'process.env': {
-        NODE_ENV: JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ],
@@ -38,8 +37,10 @@ module.exports = {
       }, {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader', use: ['css-loader', {
-            loader: 'postcss-loader', options: {
+          fallback: 'style-loader',
+          use: ['css-loader', {
+            loader: 'postcss-loader',
+            options: {
               ident: 'postcss',
               plugins: loader => [require('autoprefixer')()]
             }

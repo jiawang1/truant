@@ -3,6 +3,7 @@
 **/node_modules/**
 **/src/_temp/**
 **/build/**
+**/dist/**
 **/src/_tmp/**
 src/_tmp/**
 **/.DS_store

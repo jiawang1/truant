@@ -31,7 +31,7 @@ module.exports = {
     /*eslint-enable*/
 
     proxy: {
-      '!(**/_admin/**|/_tmp/**|/**/_admin/|/_tmp/*/**)': {
+      '!(**/_admin/**|**/_tmp/**|/**/_admin/|/_tmp/*/**)': {
         //target: 'http://localhost:8088',
         //target: 'https://localhost:9002',
         target: 'http://localhost:8079',

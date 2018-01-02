@@ -1,14 +1,11 @@
-import DefaultPage from './DefaultPage';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import React, { Component } from 'react';
+import DefaultPage from './DefaultPage';
 
-//export { DefaultPage };
 /**
  * routes for sample
  */
-export default (...props) => {
-  return (
-    <Route {...props} path="/sample" component={DefaultPage} />
-  );
-};
+export default (...props) => (
+  <Route {...props} path="/sample" component={DefaultPage} />
+);
 

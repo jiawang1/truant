@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import hoistStatics from 'hoist-non-react-statics';
 import invariant from 'invariant';
-
+import { getDisplayName } from './utils';
+// TODO improved
 const handleError = (error, info) => {
   if (error) {
     console.error(error);
@@ -9,39 +11,55 @@ const handleError = (error, info) => {
     console.log(info);
   }
 };
+// TODO improved
 const fallback = () => ('render failed');
 
 /**
- * @param  {} WrappedComponent
- * @param  {} FallbackComponent=fallback
- * @param  {} onError=handleError
+ * @param  {} WrappedComponent  : the component will be wrapped with error capture function
+ * @param  {} option : HOC options includes follows properties:
+ *    {
+ *      @param  {} FallbackComponent=fallback : default error rendering component
+ *      @param  {} onError=handleError : default error tracing function
+ *    }
  */
-const withErrorBoundary =
-  (WrappedComponent, FallbackComponent = fallback, onError = handleError) => {
-    invariant(WrappedComponent, 'Wrapped component must be supplied');
-    invariant(typeof onError === 'function', 'parameter onError must be a function');
+const withErrorBoundary = (option = {}) => WrappedComponent => {
+  invariant(WrappedComponent, 'Wrapped component must be supplied');
+  const { FallbackComponent = fallback, onError = handleError } = option;
 
-    return class ErrorBoundary extends Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          hasError: false
-        };
+  class ErrorBoundary extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        hasError: false
+      };
+      this.ref = null;
+      this.setWrappedInstance = this.setWrappedInstance.bind(this);
+    }
+    componentDidCatch(error, info) {
+      this.setState({
+        hasError: true
+      });
+      onError(error, info);
+    }
+    getWrappedInstance() {
+      if (!this.state.hasError) {
+        return typeof this.ref.getWrappedInstance === 'function' ? this.ref.getWrappedInstance() : this.ref;
       }
-      componentDidCatch(error, info) {
-        this.setState({
-          hasError: true
-        });
-        //onError(error, info);
+      return undefined;
+    }
+    setWrappedInstance(ref) {
+      this.ref = ref;
+    }
+    render() {
+      if (this.state.hasError) {
+        return <FallbackComponent />;
       }
-
-      render() {
-        if (this.state.hasError) {
-          return <FallbackComponent />;
-        }
-        return <WrappedComponent {...this.props} />;
-      }
-    };
-  };
+      const props = { ref: this.setWrappedInstance, ...this.props };
+      return <WrappedComponent {...props} />;
+    }
+  }
+  ErrorBoundary.displayName = `withErrorBoundary(${getDisplayName(WrappedComponent)})`;
+  return hoistStatics(ErrorBoundary, WrappedComponent);
+};
 
 export default withErrorBoundary;
