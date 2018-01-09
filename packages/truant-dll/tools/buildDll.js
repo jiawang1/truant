@@ -55,7 +55,7 @@ function buildDll(env = 'dist') {
       };
       const oEnvironment = {
         ENV: `"${env}"`,
-        ['process.env']: {
+        'process.env': {
           NODE_ENV: JSON.stringify(env)
         }
       };

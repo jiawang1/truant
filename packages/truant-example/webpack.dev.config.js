@@ -63,21 +63,19 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: { sourceMap: true } },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                sourceMap: true,
-                plugins: loader => [require('autoprefixer')()]
-              }
-            },
-            { loader: 'less-loader', options: { sourceMap: true } }
-          ]
-        })
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: loader => [require('autoprefixer')()]
+            }
+          },
+          { loader: 'less-loader', options: { sourceMap: true } }
+        ]
       },
       {
         test: /\.(png|jpg)$/,

@@ -31,8 +31,9 @@ class DefaultPage extends Component {
 
   render() {
     const { random, num } = this.props;
-    return (<div>
+    return (<div className='home-default-page'>
       <h5>Welcome to School project!</h5>
+
       <div>
         <span>{random}</span>
         <input

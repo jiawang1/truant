@@ -14,7 +14,7 @@ module.exports = {
   output: {
   },
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin({ filename: 'styles.css' }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
