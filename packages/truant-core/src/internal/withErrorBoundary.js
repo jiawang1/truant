@@ -35,12 +35,6 @@ const withErrorBoundary = (option = {}) => WrappedComponent => {
       this.ref = null;
       this.setWrappedInstance = this.setWrappedInstance.bind(this);
     }
-    componentDidCatch(error, info) {
-      this.setState({
-        hasError: true
-      });
-      onError(error, info);
-    }
     getWrappedInstance() {
       if (!this.state.hasError) {
         return typeof this.ref.getWrappedInstance === 'function' ? this.ref.getWrappedInstance() : this.ref;
@@ -49,6 +43,12 @@ const withErrorBoundary = (option = {}) => WrappedComponent => {
     }
     setWrappedInstance(ref) {
       this.ref = ref;
+    }
+    componentDidCatch(error, info) {
+      this.setState({
+        hasError: true
+      });
+      onError(error, info);
     }
     render() {
       if (this.state.hasError) {

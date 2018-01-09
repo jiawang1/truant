@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import {configureStore} from 'truant-core';
+import { configureStore } from 'truant-core';
 import { RootApp } from './containers/Routes';
 import rootState from './containers/rootState';
 
@@ -33,14 +33,3 @@ if (module.hot) {
   });
 }
 
-// if (module.hot) {
-//   module.hot.accept('./containers/App.js', () => {
-//     const RootContainer = require('./containers/App').RootApp;
-//     render(
-//       <AppContainer>
-//         <RootContainer store={store} history={history} />
-//       </AppContainer>,
-//       root,
-//     );
-//   });
-// }

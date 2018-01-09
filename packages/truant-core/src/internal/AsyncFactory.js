@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
-import { getDisplayName } from './utils';
+import { generateSagaMap } from './sagaManager';
 
 /**
  * @param  {} importComponent : function used to load component asynchronized
@@ -26,9 +26,13 @@ const AsyncFactory = importState => importComponent => {
       this.setState({
         component: components[0].default
       });
+
+      if(importState&&components.length>1){
+        generateSagaMap(components[1]);
+      }
     }
     getWrappedInstance() {
-        return typeof this.ref.getWrappedInstance === 'function' ? this.ref.getWrappedInstance() : this.ref;
+      return typeof this.ref.getWrappedInstance === 'function' ? this.ref.getWrappedInstance() : this.ref;
     }
     setWrappedInstance(ref) {
       this.ref = ref;
@@ -38,7 +42,9 @@ const AsyncFactory = importState => importComponent => {
         try {
           this.load();
         } catch (error) {
-
+          console.error(`load async component failed, error info: `);
+          console.error(error.stack || error);
+          throw error;
         }
       }
     }
@@ -47,8 +53,7 @@ const AsyncFactory = importState => importComponent => {
       return this.state.component ? React.createElement(this.state.component, { ...props }) : null;
     }
   };
-   AsyncComponent.getDisplayName = `AsyncComponent(${getDisplayName(importComponent)})`;
-   return AsyncComponent;
+  return AsyncComponent;
 
 };
 

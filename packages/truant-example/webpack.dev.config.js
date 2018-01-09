@@ -1,13 +1,11 @@
-'use strict';
+
 const path = require('path');
 const webpack = require('webpack');
-const defaultContext = '/fivestaradminstorefront';
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-
-// Webpak Dashboard
 const Dashboard = require('webpack-dashboard');
+const defaultContext =  require('./package.json').defaultContext;
+
 const dashboard = new Dashboard();
 
 module.exports = {
@@ -32,16 +30,12 @@ module.exports = {
 
     proxy: {
       '!(**/_admin/**|**/_tmp/**|/**/_admin/|/_tmp/*/**)': {
-        //target: 'http://localhost:8088',
-        //target: 'https://localhost:9002',
         target: 'http://localhost:8079',
-        //target:'https://172.26.132.3',
         secure: false
       }
     }
   },
   plugins: [
-    // new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new ExtractTextPlugin({ filename: 'styles.css' }),

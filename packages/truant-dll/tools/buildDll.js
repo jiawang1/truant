@@ -56,12 +56,10 @@ function buildDll(env = 'dist') {
       const oEnvironment = {
         ENV: `"${env}"`,
         'process.env': {
-          NODE_ENV: JSON.stringify(env)
+          NODE_ENV: JSON.stringify('production')
         }
       };
-      // oEnvironment['process.env'] = {
-      //   NODE_ENV: JSON.stringify(env)
-      // };
+
       if (env === 'dist') {
         dllConfig.plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
         dllConfig.plugins.push(new webpack.optimize.DedupePlugin());
@@ -71,7 +69,8 @@ function buildDll(env = 'dist') {
       dllConfig.plugins.push(new webpack.DefinePlugin(oEnvironment));
       dllConfig.plugins.push(new webpack.DllPlugin({
         path: manifestPath,
-        name: dllName
+        name: dllName,
+        context: path.join(__dirname, '../..')
       }));
 
       webpack(dllConfig, (err, stats) => {

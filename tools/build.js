@@ -34,6 +34,7 @@ const runBuildParall = (files) => {
     let projectsBuildPath = path.join(envirnPath, f);
     let startTime = new Date().getTime();
     exec(commandBuild, { cwd: projectsBuildPath }).then(stdout => {
+      console.log(stdout);
       console.log(`projects ${f} build successed within ${new Date().getTime() - startTime} ms`);
     }).catch(err => {
       console.error(`projects ${f} build failed caused by :`);

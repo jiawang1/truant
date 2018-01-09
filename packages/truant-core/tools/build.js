@@ -5,10 +5,10 @@ const path = require('path');
 const shell = require('shelljs');
 const webpack = require('webpack');
 const config = require('../webpack.dist.config');
+const projectName = require(path.join(__dirname, '../', 'package.json')).name;
 
 const distRelativePath = '../../dist';
 const centralDistFolder = path.join(__dirname, '../', distRelativePath);
-const projectName = require(path.join(__dirname, '../', 'package.json')).name;
 const distFolder = path.join(centralDistFolder, projectName);
 const dllFolder = path.join(centralDistFolder, 'truant-dll');
 const manifestName = 'dist/vendors-manifest.json';
@@ -36,7 +36,7 @@ const buildProcess = () => {
       const manifestFile = require(path.join(dllFolder, manifestName));
       logger(`found manifest file ${path.join(dllFolder, manifestName)}`);
       config.plugins.push(
-        new webpack.DllReferencePlugin({    //include dll
+        new webpack.DllReferencePlugin({    // include dll
           manifest: manifestFile
         }));
     } catch (err) {
