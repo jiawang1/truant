@@ -1,6 +1,6 @@
 {
-  "name": "truant-dll",
-  "version": "0.1.0",
+  "name": "@school/truant-dll",
+  "version": "0.1.1",
   "description": "DLL shared for all packages",
   "main": "./tools/buildDll.js",
   "scripts": {
@@ -34,6 +34,6 @@
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.3.0"
-},
+  },
   "license": "MIT"
 }

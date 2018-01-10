@@ -1,6 +1,6 @@
 {
     "name": "truant-core",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "School project",
     "scripts": {
         "build": "node ./tools/build.js --build",
@@ -56,5 +56,6 @@
         "webpack-bundle-analyzer": "^2.9.1",
         "webpack-dashboard": "^0.4.0",
         "webpack-dev-server": "^2.3.0"
-    }
+    },
+    "private": true
 }
