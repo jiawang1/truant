@@ -4,9 +4,9 @@ const fs = require('fs');
 const shell = require('shelljs');
 const util = require('util');
 const webpack = require('webpack');
-const exec = util.promisify(require('child_process').exec);
+const exec = require('child_process').exec;
+const execPromise = util.promisify(exec);
 const commandDiff = 'lerna updated --json';
-const logger = (...text) => { console.log('\x1b[36m', ...text, '\x1b[0m'); };
 let envirnPath = path.join(__dirname, '../packages');
 let commandBuild = 'npm run dist';
 /*eslint-enable*/
@@ -16,7 +16,7 @@ const forceBuild = params.indexOf('--force') >= 0;
 
 const buildDLL = async () => {
   let dllprojectsBuildPath = path.join(envirnPath, 'truant-dll');
-  const { err, stdout } = await exec(commandBuild, { cwd: dllprojectsBuildPath });
+  const { err, stdout } = await execPromise(commandBuild, { cwd: dllprojectsBuildPath });
   if (err) {
     console.log(`DLL building failed caused by:`);
     console.error(err);
@@ -33,12 +33,21 @@ const runBuildParall = (files) => {
   files.filter(f => f !== 'truant-dll' && f.indexOf('.') !== 0).map(f => {
     let projectsBuildPath = path.join(envirnPath, f);
     let startTime = new Date().getTime();
-    exec(commandBuild, { cwd: projectsBuildPath }).then(stdout => {
-      console.log(stdout);
-      console.log(`projects ${f} build successed within ${new Date().getTime() - startTime} ms`);
-    }).catch(err => {
-      console.error(`projects ${f} build failed caused by :`);
-      console.error(err);
+    const child = exec(commandBuild, { cwd: projectsBuildPath });
+
+    return new Promise((res, rej) => {
+      child.stdout.on('data', data => {
+        console.log(`${f} : ${data}`);
+      });
+      child.stderr.on('data', data => {
+        console.error(`${f} :  has error ${data}`);
+      });
+      child.on('error', error => {
+        rej(error);
+      });
+      child.on('exit', code => {
+        res();
+      })
     });
   });
 };
@@ -52,7 +61,7 @@ const buildProjects = async () => {
     runBuildParall(files);
   } else {
     let buildCommand = null;
-    const { err, stdout } = await exec(commandDiff);
+    const { err, stdout } = await execPromise(commandDiff);
     if (err) {
       console.error(err);
       return;

@@ -1,10 +1,9 @@
-
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const Dashboard = require('webpack-dashboard');
-const defaultContext =  require('./package.json').defaultContext;
+const baseConfig = require('./base.config');
 
 const dashboard = new Dashboard();
 
@@ -12,7 +11,6 @@ module.exports = {
   devtool: 'inline-source-map',
   cache: true,
   /*eslint-disable*/
-
   context: path.join(__dirname, 'src'),
   entry: {
     // dynamically add by server.js
@@ -20,20 +18,19 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'build/static'),
     filename: '[name].bundle.js',
-    publicPath: `${defaultContext}/_admin/`,
+    publicPath: baseConfig.publicPath,
     chunkFilename: '[name].[chunkhash:8].chunk.js',
     sourceMapFilename: '[name].map',
   },
   devServer: {
     contentBase: path.join(__dirname, 'src'),
     /*eslint-enable*/
-
-    proxy: {
-      '!(**/_admin/**|**/_tmp/**|/**/_admin/|/_tmp/*/**)': {
-        target: 'http://localhost:8079',
-        secure: false
-      }
-    }
+    // proxy: {
+    //   '!(**/_admin/**|**/_tmp/**|/**/_admin/|/_tmp/*/**)': {
+    //     target: 'http://localhost:8079',
+    //     secure: false
+    //   }
+    // }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

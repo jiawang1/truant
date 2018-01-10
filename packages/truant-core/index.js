@@ -1,6 +1,7 @@
 export AsyncFactory from './src/internal/AsyncFactory';
-export configureStore from "./src/internal/configStore";
-export service from "./src/internal/commonService";
+export configureStore from './src/internal/configStore';
+export service from './src/internal/commonService';
+export { logger  } from './src/internal/utils';
 export {
   take,
   takeMaybe,
