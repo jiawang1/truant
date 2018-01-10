@@ -1,6 +1,6 @@
 {
   "name": "truant-example",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "an example base on truant",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "style-loader": "^0.13.1",
-    "truant-core": "^0.1.1"
+    "truant-core": "^0.1.2-0"
   },
   "devDependencies": {
     "@school/truant-dll": "^0.1.1",
