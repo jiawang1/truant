@@ -9,7 +9,7 @@ const babelOptions = {
   presets: [
     'es2015',
     'react',
-    'babel-preset-stage-0'
+    'babel-preset-stage-2'
   ]
 };
 module.exports = {
@@ -62,7 +62,7 @@ module.exports = {
     lineIndex(lines, str, fromIndex = 0) {
 
             //return _.findIndex(lines, l => l.indexOf(str) >= 0, fromIndex || 0);
-        let __index =lines.slice(fromIndex).findIndex(l => {   
+        let __index =lines.slice(fromIndex).findIndex(l => {
             if(typeof str === 'string'){
                 return l.indexOf(str) >= 0;
             }else{

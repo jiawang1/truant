@@ -30,7 +30,7 @@ const buildDLL = async () => {
  * @param  {} files: projects folder
  */
 const runBuildParall = (files) => {
-  files.filter(f => f !== 'truant-dll' && f.indexOf('.') !== 0).map(f => {
+  files.filter(f => f.indexOf('truant-dll') < 0 && f.indexOf('.') !== 0).map(f => {
     let projectsBuildPath = path.join(envirnPath, f);
     let startTime = new Date().getTime();
     const child = exec(commandBuild, { cwd: projectsBuildPath });
@@ -67,7 +67,7 @@ const buildProjects = async () => {
       return;
     }
     const results = JSON.parse(stdout);
-    if (results.some(rel => rel.name === 'truant-dll')) {
+    if (results.some(rel => rel.name.indexOf('truant-dll') < 0)) {
       if (!await buildDLL()) {
         return;
       }

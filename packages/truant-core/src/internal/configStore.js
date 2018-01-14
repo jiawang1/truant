@@ -16,12 +16,12 @@ if (process.env.NODE_ENV !== 'production') {
  * @param  {} rootState: root level state. The state is not redux state, but object should contain saga and reducer
  * @param  {} additionMiddles=[]: redux middlewares
  */
-export default function configureStore(rootState, additionMiddles = []) {
+export default function configureStore(rootState, additionalMiddles = []) {
   store = createStore(
     composeReducer(rootState),
     // TODO support initial state
     compose(
-      applyMiddleware(...middlewares, ...additionMiddles),
+      applyMiddleware(...additionalMiddles, ...middlewares),
       typeof window !== 'undefined' && window.devToolsExtension
         ? window.devToolsExtension()
         : f => f

@@ -2,10 +2,51 @@
 
 .home-default-page {
   line-height: 160%;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   h5{
     color: green;
+    font-size: 2rem;
+    padding: 1rem 0;
   }
+  span{
+    display: inline-flex;
+    padding: 0 1rem;
+    margin: 1rem;
+    background-color: bisque;
+  }
+  input{
+    margin: 0.5rem;
+  }
+  .button{
+    font-size: 1rem;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    padding: 0.5rem 0.8rem;
+    outline: 0;
+    &:hover{
+      color: #fff;
+      background-color: #40a9ff;
+      border-color: #40a9ff;
+    }
+    &:active{
+      color: #fff;
+      background-color: #096dd9;
+      border-color: #096dd9;
+    }
+  }
+  .link{
+
+  }
+
   ul {
     margin: 10px 15px 0;
     color: #666;
@@ -16,12 +57,4 @@
     margin-top: 10px;
   }
 
-  .demo-count {
-    label {
-      color: red;
-    }
-    button {
-      margin-left: 10px;
-    }
-  }
 }

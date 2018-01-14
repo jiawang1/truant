@@ -11,7 +11,7 @@
       }
     ],
     "react",
-    "babel-preset-stage-0"
+    "babel-preset-stage-2"
   ],
   "plugins": [
     [

@@ -10,7 +10,7 @@ const projectName = require(path.join(__dirname, '../', 'package.json')).name;
 const distRelativePath = '../../dist';
 const centralDistFolder = path.join(__dirname, '../', distRelativePath);
 const distFolder = path.join(centralDistFolder, projectName);
-const dllFolder = path.join(centralDistFolder, 'truant-dll');
+const dllFolder = path.join(centralDistFolder, '@school/truant-dll');
 const manifestName = 'dist/vendors-manifest.json';
 const logger = (...text) => { console.log('\x1b[36m', ...text, '\x1b[0m'); };
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
