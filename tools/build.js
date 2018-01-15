@@ -40,9 +40,11 @@ const runBuildParall = (files) => {
         console.log(`${f} : ${data}`);
       });
       child.stderr.on('data', data => {
-        console.error(`${f} :  has error ${data}`);
+        console.error(`${f} :  error ${data}`);
       });
       child.on('error', error => {
+        console.error(`build project ${f} failed`);
+        console.error(error);
         rej(error);
       });
       child.on('exit', code => {
@@ -52,8 +54,13 @@ const runBuildParall = (files) => {
   });
 };
 
-const buildProjects = async () => {
-  if (forceBuild) {
+/**
+ * this function used to build all projects managed in current repo
+ * @param  boolean force: if true, will re-builde all projects, else, only build projects
+ *  changed
+ */
+const buildProjects = async force => {
+  if (force) {
     let files = fs.readdirSync(envirnPath);
     if (!await buildDLL()) {
       return;
@@ -66,14 +73,14 @@ const buildProjects = async () => {
       console.error(err);
       return;
     }
-    const results = JSON.parse(stdout);
-    if (results.some(rel => rel.name.indexOf('truant-dll') < 0)) {
+    const projects = JSON.parse(stdout);
+    if (projects.some(project => project.name.indexOf('truant-dll') >= 0)) {
       if (!await buildDLL()) {
         return;
       }
     }
-    runBuildParall(results.map(rel => rel.name));
+    runBuildParall(projects.map(project => project.name));
   }
 };
 
-buildProjects();
+buildProjects(forceBuild);

@@ -3,6 +3,8 @@
 
 truant is a javascript framework for building scalable web applications base on React, redux, redux-saga and some other libraries. This repository is a monorepo that we manage using [Lerna](https://github.com/lerna/lerna).
 
+# truant
+
 ### Quick Start
 1. You can get source code from git or just down load code. 
 2. install lerna globaly
@@ -11,7 +13,7 @@ truant is a javascript framework for building scalable web applications base on 
 ````
 3. navigate to root folder and run following command to initialize projects
 ````shell
- lerna bootstrap --hoist
+ npm run init
 ````
 4. when the installation finished, go to folder truant/packages/truant-example/ and startup example project
 ````shell
@@ -27,3 +29,6 @@ navigate to root folder and run command
 ````
 this command will build all packages and put generated stuff in dist folder
 
+### current packages
+
+1. [truant-dll](): all open source libraries shared by other packages in the repo. This package will be built as webpack DLL. 
