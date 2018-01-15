@@ -5,8 +5,7 @@
   "main": "./tools/buildDll.js",
   "scripts": {
     "dist": "node ./tools/buildDll.js",
-    "dev": "node ./tools/buildDll.js --dev",
-    "analyze":"node ./tools/build.js --dist -- --analyze"
+    "dev": "node ./tools/buildDll.js --dev"
   },
   "keywords": [
     "DLL"

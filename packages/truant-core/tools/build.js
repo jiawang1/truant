@@ -50,7 +50,7 @@ const buildProcess = () => {
     filename: buildMode === 'dist' ? `[name].bundle.${timestamp}.js` : '[name].min.js',
     libraryTarget: 'commonjs2'
   };
-  !!showAnalyze && config.plugins.push(new BundleAnalyzerPlugin());
+  !!showAnalyze && config.plugins.push(new BundleAnalyzerPlugin({ generateStatsFile: true }));
   const start = new Date().getTime();
   logger(`start to build main resources at ${start}`);
   webpack(config, err => {

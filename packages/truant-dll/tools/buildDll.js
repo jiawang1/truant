@@ -5,6 +5,7 @@ const shell = require('shelljs');
 const webpack = require('webpack');
 const crypto = require('crypto');
 const dllConfig = require('../webpack.dll.config.js');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const distPath = '../../dist';
 const oPackage = require(path.join(__dirname, '../', 'package.json'));
 const projectName = oPackage.name;

@@ -53,7 +53,7 @@ const buildApp = () => {
     chunkFilename: '[name].[chunkhash:8].chunk.js'
   };
   if (showAnalyze) {
-    config.plugins.push(new BundleAnalyzerPlugin());
+    config.plugins.push(new BundleAnalyzerPlugin({ generateStatsFile: true }));
   }
   config.plugins.push(
     new webpack.DllReferencePlugin({    //  include dll
