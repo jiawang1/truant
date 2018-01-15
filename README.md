@@ -1,3 +1,6 @@
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+
+
 truant is a javascript framework for building scalable web applications base on React, redux, redux-saga and some other libraries. This repository is a monorepo that we manage using [Lerna](https://github.com/lerna/lerna).
 
 ### Quick Start
@@ -15,3 +18,12 @@ truant is a javascript framework for building scalable web applications base on 
  npm start
 ````
 5. open address http://localhost:8012/school/_admin/#/sample in browser, you will see the example page.
+
+### build projects
+
+navigate to root folder and run command
+````shell
+ npm run dist
+````
+this command will build all packages and put generated stuff in dist folder
+

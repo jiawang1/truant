@@ -6,7 +6,8 @@
         "build": "node ./tools/build.js --build",
         "dist": "node ./tools/build.js --dist",
         "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
-        "st": "./node_modules/.bin/_mocha --"
+        "st": "./node_modules/.bin/_mocha --",
+        "analyze":"node ./tools/build.js --dist -- --analyze"
     },
     "dependencies": {
         "hoist-non-react-statics": "^2.3.1",

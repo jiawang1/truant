@@ -5,12 +5,25 @@
   "main": "./tools/buildDll.js",
   "scripts": {
     "dist": "node ./tools/buildDll.js",
-    "dev": "node ./tools/buildDll.js --dev"
+    "dev": "node ./tools/buildDll.js --dev",
+    "analyze":"node ./tools/build.js --dist -- --analyze"
   },
   "keywords": [
     "DLL"
   ],
   "author": "Jia Wang",
+  "dependencies": {
+    "hoist-non-react-statics": "^2.3.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "isomorphic-fetch": "^2.2.1"
+  },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.14.0",

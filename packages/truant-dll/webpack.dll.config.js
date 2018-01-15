@@ -8,7 +8,7 @@ module.exports = {
       'react-router-redux',
       'redux',
       'redux-logger',
-      'whatwg-fetch'
+      'isomorphic-fetch'
     ]
   },
   plugins: [
@@ -19,16 +19,17 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: ['react-hot-loader/webpack', 'babel-loader?cacheDirectory=true']
-      }, {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: 'file-loader'
-      }, {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
-      }, {
-        test: /\.(png|jpg)$/,
-        use: 'url-loader?limit=8192'
       }
+      // , {
+      //   test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      //   use: 'file-loader'
+      // }, {
+      //   test: /\.less$/,
+      //   use: ['style-loader', 'css-loader', 'less-loader']
+      // }, {
+      //   test: /\.(png|jpg)$/,
+      //   use: 'url-loader?limit=8192'
+      // }
     ]
   }
 };

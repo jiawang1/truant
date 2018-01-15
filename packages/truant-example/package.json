@@ -8,7 +8,8 @@
     "build": "node ./tools/build.js --build",
     "dist": "node ./tools/build.js --dist",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
-    "st": "./node_modules/.bin/_mocha --"
+    "st": "./node_modules/.bin/_mocha --",
+    "analyze":"node ./tools/build.js --dist -- --analyze"
   },
   "author": "Wang jia",
   "dependencies": {
@@ -23,7 +24,8 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0",
     "style-loader": "^0.13.1",
-    "truant-core": "^0.1.2-0"
+    "truant-core": "^0.1.2-0",
+    "hoist-non-react-statics": "^2.3.1"
   },
   "devDependencies": {
     "@school/truant-dll": "^0.1.1",

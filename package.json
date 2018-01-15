@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "truant project",
   "scripts": {
-    "dist": "node ./tools/build.js"
+    "dist": "node ./tools/build.js",
+    "init":"lerna bootstrap --hoist"
   },
   "devDependencies": {
     "lerna": "^2.5.1",

@@ -47,7 +47,7 @@ module.exports = {
           }, 'less-loader']
         })
       }, {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif)$/,
         use: 'url-loader?limit=8192'
       }
     ]
