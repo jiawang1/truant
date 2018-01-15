@@ -25,7 +25,6 @@ class LoadingProgress extends Component {
       </div>
     );
   }
-
   render() {
     const { shown } = this.props;
     return ReactDOM.createPortal(

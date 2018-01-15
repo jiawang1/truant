@@ -63,7 +63,7 @@ function startDevServer() {
     noInfo: false,
     quiet: true,
     index: 'index.html',
-    https: true,
+    //https: true,
     historyApiFallback: true
   }).listen(baseConfig.webpackDevServerPort, err => {
     if (err) {

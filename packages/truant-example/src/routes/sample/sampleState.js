@@ -5,13 +5,11 @@ const SAMPLE_RANDOM = 'sample/random';
 const SAMPLE_INCREASE = 'sample/store_increase';
 const SAMPLE_DECREASE = 'sample/store_decrease';
 
-
 const delayAction = (fn, ...args) => (new Promise(res => {
   setTimeout(() => {
     res(fn.call(null, ...args));
   }, 1000);
 }));
-
 
 const getRandom = () => Math.floor(Math.random() * 1000);
 const increase = () => 1;
@@ -45,12 +43,13 @@ export default {
       const change = yield delayAction(decrease);
       yield put({ type: SAMPLE_DECREASE, payload: num + change });
     },
-    * calculate(action, res) {
+    * calculate() {
       // call other saga synchronisely
       yield call(this.increase, { type: 'sample/increase' });
-      // call other sagas async with promise returned
-      const result = yield put({ type: 'sample/decrease' });
-      return result.then(res);
+      /** call other sagas async with promise returned, return this promise to saga middleware
+      * will enable middleware to control the async transaction
+      */
+      return yield put({ type: 'sample/decrease' });
     }
   },
 
@@ -64,15 +63,15 @@ export default {
   },
   reducer: (state = initialState, action) => {
     switch (action.type) {
-      case SAMPLE_RANDOM:
-        return state.set('random', action.payload);
-      case SAMPLE_INCREASE:
-        return state.set('num', action.payload);
+    case SAMPLE_RANDOM:
+      return state.set('random', action.payload);
+    case SAMPLE_INCREASE:
+      return state.set('num', action.payload);
 
-      case SAMPLE_DECREASE:
-        return state.set('num', action.payload);
-      default:
-        return state;
+    case SAMPLE_DECREASE:
+      return state.set('num', action.payload);
+    default:
+      return state;
     }
   }
 };
