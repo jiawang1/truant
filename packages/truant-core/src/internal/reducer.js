@@ -14,7 +14,7 @@ const composeReducer = rootState => {
   originReducermap = extractReducerFromState(rootState);
   return combineReducers({
     ...originReducermap,
-    routing: routerReducer,
+    routing: routerReducer
   });
 };
 
@@ -22,6 +22,6 @@ export const injectReducer = asyncReducers =>
   combineReducers({
     ...originReducermap,
     routing: routerReducer,
-    ...asyncReducers,
+    ...asyncReducers
   });
 export default composeReducer;

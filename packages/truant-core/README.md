@@ -1,6 +1,6 @@
 # truant-core
 
-this projects provides some functions like code spliting, error handling, manage the global state base on redux-saga.
+this projects provides some functions like code spliting, error handling, manage the global state base on [redux-saga](https://github.com/redux-saga/redux-saga).
 
 ### project structure
 truant based projects will be expected has the following structure:
