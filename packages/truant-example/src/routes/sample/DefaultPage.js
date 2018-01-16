@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class DefaultPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentWillUnmount() {
     console.log('######### component unmount #########');
   }
@@ -21,7 +18,7 @@ class DefaultPage extends Component {
 
   handleFlash() {
     const { dispatch } = this.props;
-    dispatch({ type: "sample/calculate" });
+    dispatch({ type: 'sample/calculate' });
   }
 
   handleIncrease() {
@@ -34,7 +31,7 @@ class DefaultPage extends Component {
 
   render() {
     const { random, num } = this.props;
-    return (<div className='home-default-page'>
+    return (<div className="home-default-page">
       <h5>Welcome to School project!</h5>
 
       <div>

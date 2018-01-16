@@ -1,14 +1,8 @@
-import { Switch, Route } from 'react-router-dom';
-import CoursePage from './CoursePage';
+import { Route } from 'react-router-dom';
 import React, { Component } from 'react';
+import CoursePage from './CoursePage';
 
 
-
-
-export default (...props) => {
-  return (
-      <Route  path="/course" component={CoursePage} />
-  );
-};
-
-
+export default () => (
+  <Route path="/course" component={CoursePage} />
+);

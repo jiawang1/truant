@@ -32,11 +32,11 @@ export default {
       const payload = yield call(delayAction, getRandom);
       yield put({ type: SAMPLE_RANDOM, payload });
     },
-    * increase(action, res) {
+    * increase(action, resolve, reject) {
       const num = yield select(selectNum);
       const change = yield delayAction(increase);
       yield put({ type: SAMPLE_INCREASE, payload: num + change });
-      res && res('haha');
+      resolve && resolve(`finish ${num + change}`);
     },
     * decrease() {
       const num = yield select(selectNum);
