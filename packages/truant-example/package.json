@@ -55,7 +55,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^3.2.0",
     "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-dashboard": "^0.4.0",
+    "webpack-dashboard": "^1.0.0",
     "webpack-dev-server": "^2.3.0"
   },
   "license": "MIT",

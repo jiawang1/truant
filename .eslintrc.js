@@ -35,5 +35,6 @@ module.exports = {
       "error",
       "always"
     ]
-  }
+  },
+  "root":true
 };
