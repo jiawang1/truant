@@ -1,5 +1,4 @@
 import { getType } from './utils';
-import { ApplicationError, SystemError } from './commonErrorState.js';
 import 'isomorphic-fetch';
 
 var rootContext = null;
@@ -46,38 +45,37 @@ const correctURL = (ops) => {
 /**
  * Rejects a promise after `ms` number of milliseconds, if it is still pending
  */
-const timeout = (promise, ms) => {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('timeout')), ms);
-    promise.then(response => {
-      clearTimeout(timer);
-      resolve(response);
-    })
-      .catch(reject);
-  });
-};
+// const timeout = (promise, ms) => {
+//   return new Promise((resolve, reject) => {
+//     const timer = setTimeout(() => reject(new Error('timeout')), ms);
+//     promise.then(response => {
+//       clearTimeout(timer);
+//       resolve(response);
+//     })
+//       .catch(reject);
+//   });
+// };
 
 
-const correctOption = async (option, method) => {
-  return {
+const correctOption =  (option, method) => (
+  {
     ...option,
     headers: {
       ...option.headers,
     },
     method: method
-  };
-};
+  }
+);
 
 /**
  * @param  {} option : request options.  { url: '', headers:{}, body:{}, param:{} ... }
  */
 const __fetch = (_method) => async (option) => {
-
-  let ops = await correctOption(option, _method);
+  let ops =  correctOption(option, _method);
   correctURL(ops);
   let response = await fetch(ops.url, ops);
   if (response.status >= 400) {
-    var error = new SystemError(`response status : ${response.status}, Error is ${response.statusText}`);
+    var error = new Error(`response status : ${response.status}, Error is ${response.statusText}`);
     error.response = response;
     throw error;
   }
@@ -127,5 +125,4 @@ export const postJson = async (url, body, option = {}) => {
   return response.json();
 };
 
-export const getContent = json => json.map.__content__;
 

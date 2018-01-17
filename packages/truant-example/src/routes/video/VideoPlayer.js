@@ -53,7 +53,6 @@ export class VideoPlayer extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-
   }
 
   componentWillUnmount() {
@@ -105,8 +104,7 @@ VideoPlayer.propTypes = {
   src: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
-  poster: PropTypes.string,
-  showProgress: PropTypes.bool
+  poster: PropTypes.string
 };
 
 VideoPlayer.defaultProps = {

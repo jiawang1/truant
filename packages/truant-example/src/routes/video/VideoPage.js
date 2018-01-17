@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import VideoPlayer from './VideoPlayer';
 
 
@@ -14,24 +14,16 @@ class VideoPage extends Component {
   }
 
   handleStartAndPause(e) {
-    let classStartPause = this.state.classStartPause === 'start' ? 'pause' : 'start';
+    const classStartPause = this.state.classStartPause === 'start' ? 'pause' : 'start';
     this.setState({
       classStartPause
     });
   }
 
-  handleStop() {
-
-
-  }
-
   handleSelect(e) {
-
     this.setState({
       videoSrc: e.target.value
     });
-
-    console.log(e);
   }
 
   /**
@@ -42,10 +34,11 @@ class VideoPage extends Component {
   render() {
     return (
       <div>
-        <div className='video-frame'>
-          <VideoPlayer src={this.state.videoSrc}
-            width='100%'
-            height='300' />
+        <div className="video-frame">
+          <VideoPlayer
+            src={this.state.videoSrc}
+            width="100%"
+            height="300" />
         </div>
         <div>
           <select type='select' name='videoType' value={this.state.videoSrc} onChange={e => { this.handleSelect(e); }}>

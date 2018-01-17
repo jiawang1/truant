@@ -6,7 +6,7 @@ let originReducermap = {};
 const extractReducerFromState = state => Object.keys(state)
   .filter(key => typeof state[key].reducer === 'function')
   .reduce((pre, cur) => {
-    pre[cur] = state[cur].reducer;
+    pre[cur] = state[cur].reducer; // eslint-disable-line
     return pre;
   }, {});
 

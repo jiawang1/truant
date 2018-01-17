@@ -1,13 +1,8 @@
 import {
-  take,
-  put,
   call,
   fork,
-  race,
-  cancelled,
-  takeEvery,
+  takeEvery
 } from 'redux-saga/effects';
-import { ADD_GLOBAL_ERROR } from './commonErrorState.js';
 
 const PROMISE_META = '@@meta';
 const aNamespace = [];
@@ -45,7 +40,7 @@ const exec = (saga, context) => function* (...args) {
         args[0].cb(error);
       }
       rej(error);
-      //TODO handle error
+      // TODO handle error
       throw error;
     }
   } else {
@@ -69,7 +64,7 @@ const generateManagedSagaMap = _state => Object.keys(_state)
     }
     Object.keys(_state[key].managedSaga)
       .filter(_key => _key !== namespace)
-      .map(_key => {
+      .forEach(_key => {
         pre.push(function* () {
           const pattern = `${namespace}/${_key}`;
           aPattern.push(pattern);
@@ -94,6 +89,7 @@ export const generateSagaMap = state => ([
  *  redux middleware used to generate a promise for top level saga, this
  *  promise return to View layer
  */
+// eslint-disable-next-line no-unused-vars
 export const sagaEnhancer = () => ({ dispatch, getState }) => next => action => {
   // make sure only one saga monitor the action so we can provide one promise for this saga
   if (action && aPattern.filter(_pattern => _pattern === action.type).length === 1) {

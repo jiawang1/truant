@@ -54,7 +54,6 @@ const AsyncFactory = importState => importComponent => {
     }
   };
   return AsyncComponent;
-
 };
 
 export default AsyncFactory;
