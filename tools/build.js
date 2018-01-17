@@ -73,13 +73,16 @@ const buildProjects = async force => {
       console.error(err);
       return;
     }
-    const projects = JSON.parse(stdout);
-    if (projects.some(project => project.name.indexOf('truant-dll') >= 0)) {
+    const projects = JSON.parse(stdout).map(project=>project.name);
+    let files;
+    if (projects.some(project => project.indexOf('truant-dll') >= 0)) {
       if (!await buildDLL()) {
         return;
       }
+      files = fs.readdirSync(envirnPath);
     }
-    runBuildParall(projects.map(project => project.name));
+    // if DLL changed, all projects should be re-build
+    runBuildParall(files || projects);
   }
 };
 
