@@ -1,6 +1,6 @@
 {
   "name": "@school/truant-dll",
-  "version": "0.1.1",
+  "version": "0.1.2-0",
   "description": "DLL shared for all packages",
   "main": "./tools/buildDll.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "author": "Jia Wang",
   "dependencies": {
     "hoist-non-react-statics": "^2.3.1",
+    "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -20,8 +21,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "isomorphic-fetch": "^2.2.1"
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",

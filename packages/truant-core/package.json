@@ -1,13 +1,13 @@
 {
     "name": "truant-core",
-    "version": "0.1.2-0",
+    "version": "0.1.2-beta",
     "description": "School project",
     "scripts": {
         "build": "node ./tools/build.js --build",
         "dist": "node ./tools/build.js --dist",
         "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
         "st": "./node_modules/.bin/_mocha --",
-        "analyze":"node ./tools/build.js --dist -- --analyze"
+        "analyze": "node ./tools/build.js --dist -- --analyze"
     },
     "dependencies": {
         "hoist-non-react-statics": "^2.3.1",
