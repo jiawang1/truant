@@ -44,7 +44,8 @@ export class VideoPlayer extends Component {
   }
 
   handleError(e) {
-    console.log(`handle error ${e}`);
+    console.log('handle error');
+    console.log(e);
   }
 
   componentDidMount() {
