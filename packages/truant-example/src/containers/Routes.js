@@ -8,21 +8,17 @@ import LoadingProgress from '../components/LoadingProgress/LoadingProgress';
 
 const Routes = () => (
   <React.Fragment>
-     <LoadingProgress />
+    <LoadingProgress />
     <SampleRoute />
     <CourseRoute />
     <UnitRoute />
   </React.Fragment>
 );
 
-
 export default ({ store }) => (
   <Provider store={store}>
-    <HashRouter >
+    <HashRouter>
       <Routes />
-
     </HashRouter>
-
   </Provider>
 );
-

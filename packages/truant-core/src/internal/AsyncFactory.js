@@ -7,7 +7,6 @@ import { generateSagaMap } from './sagaManager';
  * @param  {} importState : function used to load state of component async, the state should include both reducer and saga.
  */
 const AsyncFactory = importState => importComponent => {
-
   class AsyncComponent extends Component {
     constructor() {
       super();
@@ -27,12 +26,14 @@ const AsyncFactory = importState => importComponent => {
         component: components[0].default
       });
 
-      if(importState&&components.length>1){
+      if (importState && components.length > 1) {
         generateSagaMap(components[1]);
       }
     }
     getWrappedInstance() {
-      return typeof this.ref.getWrappedInstance === 'function' ? this.ref.getWrappedInstance() : this.ref;
+      return typeof this.ref.getWrappedInstance === 'function'
+        ? this.ref.getWrappedInstance()
+        : this.ref;
     }
     setWrappedInstance(ref) {
       this.ref = ref;
@@ -52,7 +53,7 @@ const AsyncFactory = importState => importComponent => {
       const props = { ref: this.setWrappedInstance, ...this.props };
       return this.state.component ? React.createElement(this.state.component, { ...props }) : null;
     }
-  };
+  }
   return AsyncComponent;
 };
 

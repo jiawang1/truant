@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
@@ -14,7 +14,6 @@ const buildDLL = 'npm run dev';
 const dllRelativePath = `${baseConfig.dllRootFolder}/dev`;
 const dllFolder = path.join(__dirname, '../', dllRelativePath);
 const folderTmp = './src/_tmp/';
-
 
 function startDevServer() {
   // if DDL not exist, will throw error and trigger rebuild DLL
@@ -40,12 +39,16 @@ function startDevServer() {
       './index'
     ]
   };
-  devConfig.plugins.push(new webpack.DllReferencePlugin({    // include dll
-    manifest
-  }));
+  devConfig.plugins.push(
+    new webpack.DllReferencePlugin({
+      // include dll
+      manifest
+    })
+  );
 
   devConfig.plugins.push(
-    new HtmlWebpackPlugin({       // generate HTML
+    new HtmlWebpackPlugin({
+      // generate HTML
       fileName: 'index.html',
       template: 'index.ejs',
       inject: true,
@@ -77,5 +80,7 @@ try {
   startDevServer();
 } catch (err) {
   console.log('manifest or DLL file not found , start to build DLL');
-  exec(buildDLL, { cwd: path.join(__dirname, '../../truant-dll') }).then(startDevServer).catch(error => console.error(error));
+  exec(buildDLL, { cwd: path.join(__dirname, '../../truant-dll') })
+    .then(startDevServer)
+    .catch(error => console.error(error));
 }

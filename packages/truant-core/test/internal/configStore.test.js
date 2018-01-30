@@ -1,12 +1,14 @@
 import { expect } from 'chai';
-import { createStore } from 'redux';
 import { put } from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
-import configureStore, { injectAsyncReducer, injectAsyncState } from '../../src/internal/configStore';
+import configureStore, {
+  injectAsyncReducer,
+  injectAsyncState
+} from '../../src/internal/configStore';
 
 describe('test configure store', () => {
   let store;
-  const sagaMiddle = createSagaMiddleware();
+ // const sagaMiddle = createSagaMiddleware();
 
   // beforeEach(() => {
   //   store = createStore(() => { }, [sagaMiddle]);
@@ -33,7 +35,7 @@ describe('test configure store', () => {
     const mockState = {
       managedSaga: {
         sagaNamespace: 'testSaga',
-        * testManage() {
+        *testManage() {
           yield put({ type: 'test1' });
         }
       },
@@ -51,7 +53,7 @@ describe('test configure store', () => {
     const mockInitState = {
       managedSaga: {
         sagaNamespace: 'mock',
-        * testMock() {
+        *testMock() {
           yield true;
         }
       },

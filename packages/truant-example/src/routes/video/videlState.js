@@ -1,18 +1,18 @@
-import { put, takeEvery, select, call } from 'truant-core';
+import { put } from 'truant-core';
 
 /**
  *  construct initial state. this should be immutable object
  */
 const initialState = {
-  url: null,
+  url: null
 };
 
 export default {
   managedSaga: {
     sagaNamespace: 'unit',
-    * getRandom() {
+    *getRandom() {
       yield put({ type: 'dd', payload: {} });
-    },
+    }
   },
 
   topSaga: {},
@@ -21,7 +21,7 @@ export default {
       case '':
         return {
           ...state,
-          random: action.payload,
+          random: action.payload
         };
 
       default:

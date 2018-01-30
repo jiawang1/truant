@@ -12,7 +12,7 @@ const handleError = (error, info) => {
   }
 };
 // TODO improved
-const fallback = () => ('render failed');
+const fallback = () => 'render failed';
 
 /**
  * @param  {} WrappedComponent  : the component will be wrapped with error capture function
@@ -37,7 +37,9 @@ const withErrorBoundary = (option = {}) => WrappedComponent => {
     }
     getWrappedInstance() {
       if (!this.state.hasError) {
-        return typeof this.ref.getWrappedInstance === 'function' ? this.ref.getWrappedInstance() : this.ref;
+        return typeof this.ref.getWrappedInstance === 'function'
+          ? this.ref.getWrappedInstance()
+          : this.ref;
       }
       return undefined;
     }

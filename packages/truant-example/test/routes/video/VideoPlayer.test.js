@@ -1,10 +1,10 @@
-import { render, mount, shallow } from 'enzyme';
+import { render } from 'enzyme';
 import React from 'react';
 import { expect } from 'chai';
 import configureStore from 'redux-mock-store';
-import  VideoPlayer from '../../../src/routes/video/VideoPlayer';
+import VideoPlayer from '../../../src/routes/video/VideoPlayer';
 
-describe('video', function () {
+describe('video', () => {
   const initialState = {};
   const mockStore = configureStore();
   let store;

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 export class VideoPlayer extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -52,9 +51,7 @@ export class VideoPlayer extends Component {
     this.initVideo();
   }
 
-  componentWillReceiveProps(nextProps) {
-
-  }
+  componentWillReceiveProps(nextProps) {}
 
   componentWillUnmount() {
     console.log('unmount method called ');
@@ -73,31 +70,54 @@ export class VideoPlayer extends Component {
 
   render() {
     const { src, width, height, poster } = this.props;
-    return (<div className='video-player'>
-      <div className='view-area'>
-        <video style={{ display: 'block', width: width || '100%', height: height || 'auto' }}
-          ref={ref => { this.eleVideo = ref; }}
-          src={src}
-          poster={poster}
-        >
-
-        </video>
+    return (
+      <div className="video-player">
+        <div className="view-area">
+          <video
+            style={{ display: 'block', width: width || '100%', height: height || 'auto' }}
+            ref={ref => {
+              this.eleVideo = ref;
+            }}
+            src={src}
+            poster={poster}
+          />
+        </div>
+        <div className="control-area">
+          <div
+            className={`button-${this.state.classStartPause} circle`}
+            onClick={e => {
+              this.handleStartAndPause(e);
+            }}
+          >
+            <span />
+          </div>
+          <div
+            className="button-stop circle"
+            onClick={e => {
+              this.handleStop(e);
+            }}
+          >
+            <span />
+          </div>
+          <div
+            className="button-stop circle"
+            onClick={e => {
+              this.handleStop(e);
+            }}
+          >
+            <span />
+          </div>
+          <div
+            className="button-stop circle"
+            onClick={e => {
+              this.handleStop(e);
+            }}
+          >
+            <span />
+          </div>
+        </div>
       </div>
-      <div className='control-area'>
-        <div className={`button-${this.state.classStartPause} circle`} onClick={(e) => { this.handleStartAndPause(e); }}>
-          <span></span>
-        </div>
-        <div className='button-stop circle' onClick={(e) => { this.handleStop(e); }}>
-          <span></span>
-        </div>
-        <div className='button-stop circle' onClick={(e) => { this.handleStop(e); }}>
-          <span></span>
-        </div>
-        <div className='button-stop circle' onClick={(e) => { this.handleStop(e); }}>
-          <span></span>
-        </div>
-      </div>
-    </div>);
+    );
   }
 }
 
@@ -114,6 +134,5 @@ VideoPlayer.defaultProps = {
   poster: '',
   showProgress: true
 };
-
 
 export default connect()(VideoPlayer);

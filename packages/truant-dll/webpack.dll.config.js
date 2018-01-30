@@ -11,8 +11,7 @@ module.exports = {
       'isomorphic-fetch'
     ]
   },
-  plugins: [
-  ],
+  plugins: [],
   module: {
     rules: [
       {

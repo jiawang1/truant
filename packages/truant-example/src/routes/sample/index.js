@@ -5,7 +5,4 @@ import DefaultPage from './DefaultPage';
 /**
  * routes for sample
  */
-export default (...props) => (
-  <Route {...props} path="/sample" component={DefaultPage} />
-);
-
+export default (...props) => <Route {...props} path="/sample" component={DefaultPage} />;

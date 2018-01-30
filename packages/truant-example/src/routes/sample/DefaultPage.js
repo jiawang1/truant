@@ -31,51 +31,55 @@ class DefaultPage extends Component {
 
   render() {
     const { random, num } = this.props;
-    return (<div className="home-default-page">
-      <h5>Welcome to School project!</h5>
+    return (
+      <div className="home-default-page">
+        <h5>Welcome to School project!</h5>
 
-      <div>
-        <span>{random}</span>
-        <input
-          className="button"
-          type="button"
-          value="get random"
-          onClick={() => {
-            this.getRandom();
-          }}
-        />
-      </div>
-      <div>
-        <span>{num}</span>
-        <input
-          className="button"
-          type="button"
-          value=" + "
-          onClick={() => {
-            this.handleIncrease();
-          }}
-        />
-        <input
-          className="button"
-          type="button"
-          value=" - "
-          onClick={() => {
-            this.handleDecrease();
-          }}
-        />
-        <input
-          className="button"
-          type="button"
-          value=" flash "
-          onClick={() => {
-            this.handleFlash();
-          }}
-        />
-        <div style={{ position: 'relative', top: 30 }}>
-          <Link className="link" to="/course"> to course page</Link>
+        <div>
+          <span>{random}</span>
+          <input
+            className="button"
+            type="button"
+            value="get random"
+            onClick={() => {
+              this.getRandom();
+            }}
+          />
+        </div>
+        <div>
+          <span>{num}</span>
+          <input
+            className="button"
+            type="button"
+            value=" + "
+            onClick={() => {
+              this.handleIncrease();
+            }}
+          />
+          <input
+            className="button"
+            type="button"
+            value=" - "
+            onClick={() => {
+              this.handleDecrease();
+            }}
+          />
+          <input
+            className="button"
+            type="button"
+            value=" flash "
+            onClick={() => {
+              this.handleFlash();
+            }}
+          />
+          <div style={{ position: 'relative', top: 30 }}>
+            <Link className="link" to="/course">
+              {' '}
+              to course page
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 }
@@ -90,4 +94,7 @@ DefaultPage.defaultProps = {
   num: 0
 };
 
-export default connect(({ sampleState }) => ({ random: sampleState.get('random'), num: sampleState.get('num') }))(DefaultPage);
+export default connect(({ sampleState }) => ({
+  random: sampleState.get('random'),
+  num: sampleState.get('num')
+}))(DefaultPage);

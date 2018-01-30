@@ -18,8 +18,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 /*eslint-enable*/
 const params = process.argv.slice(2);
 const showAnalyze = params.indexOf('--analyze') >= 0;
-const contextRoot = params.indexOf('--contextRoot') >= 0 ? params[params.indexOf('--contextRoot') + 1] : baseConfig.defaultContext;
-
+const contextRoot =
+  params.indexOf('--contextRoot') >= 0
+    ? params[params.indexOf('--contextRoot') + 1]
+    : baseConfig.defaultContext;
 
 // Clean folder
 console.log('start to build front end resources');
@@ -38,7 +40,9 @@ const buildApp = () => {
   let dllName = null;
   try {
     manifestFile = require(path.join(dllFolder, baseConfig.manifestName));
-    dllName = fs.readdirSync(dllFolder).filter(file => file !== baseConfig.manifestName && !file.startsWith('.'))[0];
+    dllName = fs
+      .readdirSync(dllFolder)
+      .filter(file => file !== baseConfig.manifestName && !file.startsWith('.'))[0];
     console.log(`found manifest file ${path.join(dllFolder, baseConfig.manifestName)}`);
     console.log(`found DLL file ${dllName}`);
   } catch (err) {
@@ -56,12 +60,15 @@ const buildApp = () => {
     config.plugins.push(new BundleAnalyzerPlugin({ generateStatsFile: true }));
   }
   config.plugins.push(
-    new webpack.DllReferencePlugin({    //  include dll
+    new webpack.DllReferencePlugin({
+      //  include dll
       manifest: manifestFile,
       context: path.join(__dirname, '../..')
-    }));
+    })
+  );
   config.plugins.push(
-    new HtmlWebpackPlugin({       // generate HTML
+    new HtmlWebpackPlugin({
+      // generate HTML
       fileName: 'index.html',
       template: 'index.ejs',
       inject: true,
@@ -76,11 +83,13 @@ const buildApp = () => {
       console.error(err);
       throw err;
     } else {
-      shell.mv(path.join(buildFolder, './static/index.html'), path.join(buildFolder, './index.html'));
+      shell.mv(
+        path.join(buildFolder, './static/index.html'),
+        path.join(buildFolder, './index.html')
+      );
       console.log('Done, build time: ', new Date().getTime() - start, 'ms');
     }
   });
 };
 
 buildApp();
-

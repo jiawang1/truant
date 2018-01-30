@@ -1,4 +1,3 @@
-
 /*eslint-disable*/
 const path = require('path');
 const shell = require('shelljs');
@@ -17,10 +16,12 @@ const forceBuild = params.indexOf('--force') >= 0;
 const mode = params.indexOf('--dev') >= 0 ? 'dev' : 'dist';
 
 const generateHash = () => {
-  const nameVersions = dllConfig.entry.vendors.map(pkgName => {
-    const pkgJson = require(path.join(pkgName.split('/')[0], 'package.json'));
-    return `${pkgJson.name}_${pkgJson.version}`;
-  }).join('-');
+  const nameVersions = dllConfig.entry.vendors
+    .map(pkgName => {
+      const pkgJson = require(path.join(pkgName.split('/')[0], 'package.json'));
+      return `${pkgJson.name}_${pkgJson.version}`;
+    })
+    .join('-');
   return crypto
     .createHash('md5')
     .update(nameVersions)
@@ -42,8 +43,10 @@ function buildDll(env = 'dist') {
   const manifestPath = path.join(relativeTargetPath, env, 'vendors-manifest.json');
 
   return new Promise((resolve, reject) => {
-    if (forceBuild || !shell.test('-e', manifestPath) // dll doesn't exist
-      || require(manifestPath).name !== dllName // dll hash has changed
+    if (
+      forceBuild ||
+      !shell.test('-e', manifestPath) || // dll doesn't exist
+      require(manifestPath).name !== dllName // dll hash has changed
     ) {
       delete require.cache[manifestPath]; // force reload the new manifest
       cleanUp(targetPath);
@@ -68,11 +71,13 @@ function buildDll(env = 'dist') {
         dllConfig.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
       }
       dllConfig.plugins.push(new webpack.DefinePlugin(oEnvironment));
-      dllConfig.plugins.push(new webpack.DllPlugin({
-        path: manifestPath,
-        name: dllName,
-        context: path.join(__dirname, '../..')
-      }));
+      dllConfig.plugins.push(
+        new webpack.DllPlugin({
+          path: manifestPath,
+          name: dllName,
+          context: path.join(__dirname, '../..')
+        })
+      );
 
       webpack(dllConfig, (err, stats) => {
         if (err || stats.hasErrors()) {
@@ -102,4 +107,3 @@ function buildDll(env = 'dist') {
   });
 }
 buildDll(mode);
-

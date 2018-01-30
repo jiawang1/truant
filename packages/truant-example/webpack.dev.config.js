@@ -20,10 +20,10 @@ module.exports = {
     filename: '[name].bundle.js',
     publicPath: baseConfig.publicPath,
     chunkFilename: '[name].[chunkhash:8].chunk.js',
-    sourceMapFilename: '[name].map',
+    sourceMapFilename: '[name].map'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'src'),
+    contentBase: path.join(__dirname, 'src')
     /*eslint-enable*/
     // proxy: {
     //   '!(**/_admin/**|**/_tmp/**|/**/_admin/|/_tmp/*/**)': {

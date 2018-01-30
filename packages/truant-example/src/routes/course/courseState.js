@@ -10,13 +10,13 @@ const initialState = {
 export default {
   managedSaga: {
     sagaNamespace: 'course',
-    * getRandom() {
+    *getRandom() {
       yield put({ type: 'dd', payload: {} });
     }
   },
   topSaga: {},
   reducer: (state = initialState, action) => {
-    switch (action.type) {
+  switch (action.type) {
     case '':
       return {
         ...state,

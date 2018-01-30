@@ -16,7 +16,8 @@ module.exports = {
   "plugins": [
     "react",
     "eslint-plugin-jsx-a11y",
-    "import"
+    "import",
+    "prettier"
   ],
   "rules": {
     "indent": [
@@ -34,7 +35,8 @@ module.exports = {
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "prettier/prettier": "error"
   },
   "root":true
 };

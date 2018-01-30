@@ -5,13 +5,13 @@ var rootContext = null;
 
 (() => {
   if (window && window.document) {
-    rootContext = document.getElementById("context-root").getAttribute('value');
+    rootContext = document.getElementById('context-root').getAttribute('value');
   }
 })();
 /*
  *  generate absolute URL for backend service
  */
-const correctURL = (ops) => {
+const correctURL = ops => {
   if (rootContext) {
     if (ops.url.charAt(0) === '.') {
       ops.url = ops.url.slice(1);
@@ -24,20 +24,31 @@ const correctURL = (ops) => {
   if (ops.param) {
     var sParam = Object.keys(ops.param).reduce((pre, current) => {
       if (getType(ops.param[current]) === 'String' || getType(ops.param[current]) === 'Number') {
-        return pre + (pre.length > 0 ? "&" : '') + current + '=' + encodeURIComponent(ops.param[current]);
+        return (
+          pre + (pre.length > 0 ? '&' : '') + current + '=' + encodeURIComponent(ops.param[current])
+        );
       } else if (getType(ops.param[current]) === 'Array') {
-        return pre + (pre.length > 0 ? "&" : '') + current + '=' + encodeURIComponent(ops.param[current].join(','));
-      } else if (getType(ops.param[current]) === 'Undefined' || getType(ops.param[current]) === 'Null') {
+        return (
+          pre +
+          (pre.length > 0 ? '&' : '') +
+          current +
+          '=' +
+          encodeURIComponent(ops.param[current].join(','))
+        );
+      } else if (
+        getType(ops.param[current]) === 'Undefined' ||
+        getType(ops.param[current]) === 'Null'
+      ) {
         return pre;
       } else if (getType(ops.param[current]) === 'Date') {
-        return pre + (pre.length > 0 ? "&" : '') + current + '=' + ops.param[current].getTime();
+        return pre + (pre.length > 0 ? '&' : '') + current + '=' + ops.param[current].getTime();
       } else {
         throw new Error(`param type ${getType(ops.param[current])} for query is not supported`);
       }
     }, '');
 
     if (sParam && sParam.length > 0) {
-      ops.url = ops.url + "?" + sParam;
+      ops.url = ops.url + '?' + sParam;
     }
   }
 };
@@ -56,22 +67,19 @@ const correctURL = (ops) => {
 //   });
 // };
 
-
-const correctOption =  (option, method) => (
-  {
-    ...option,
-    headers: {
-      ...option.headers,
-    },
-    method: method
-  }
-);
+const correctOption = (option, method) => ({
+  ...option,
+  headers: {
+    ...option.headers
+  },
+  method: method
+});
 
 /**
  * @param  {} option : request options.  { url: '', headers:{}, body:{}, param:{} ... }
  */
-const __fetch = (_method) => async (option) => {
-  let ops =  correctOption(option, _method);
+const __fetch = _method => async option => {
+  let ops = correctOption(option, _method);
   correctURL(ops);
   let response = await fetch(ops.url, ops);
   if (response.status >= 400) {
@@ -98,7 +106,7 @@ export const getJson = async (url, option = {}) => {
     _option.headers['Accept'] = 'application/json';
   } else {
     _option.headers = {
-      'Accept': 'application/json',
+      Accept: 'application/json'
     };
   }
   let response = await get(_option);
@@ -118,11 +126,9 @@ export const postJson = async (url, body, option = {}) => {
   } else {
     _option.headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json'
     };
   }
   let response = await post(option);
   return response.json();
 };
-
-

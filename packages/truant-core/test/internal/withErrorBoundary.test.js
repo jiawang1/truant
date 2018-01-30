@@ -9,16 +9,22 @@ describe('test HOC with Error Boundary', () => {
       return this;
     }
     render() {
-      return (<div><span>test HOC</span></div>);
+      return (
+        <div>
+          <span>test HOC</span>
+        </div>
+      );
     }
   }
   const MockErrorComponent = () => {
     throw new Error('test');
-    return (<div>
-      <span>test HOC</span>
-    </div>);
+    return (
+      <div>
+        <span>test HOC</span>
+      </div>
+    );
   };
-  const MockFallback = () => (<div className="error">error</div>);
+  const MockFallback = () => <div className="error">error</div>;
 
   it('test withErrorBoundary normal case', () => {
     const TComponent = withErrorBoundary()(MockComponent);
