@@ -20,7 +20,6 @@ const __serialize = (node, constructor, oCache) => {
       result = node; // Reuse ref to node (avoids object creation)
       break cache;
     }
-    // Get 'id'
     id = node.id;
 
     // In cache, get it!
@@ -78,58 +77,6 @@ export const serialize = (node, oCache) => {
   return node.constructor === Object || (node.constructor === Array && node.length !== 0)
     ? __serialize(node, node.constructor, oCache)
     : node;
-};
-
-export const troopQuery2 = (url, ...queries) => {
-  return new Promise((resolve, reject) => {
-    const ids = [];
-
-    const normalizeQuery = queries
-      .reduce((list, query) => [...list, ...query.split('|')], [])
-      .map((query, queryIndex) => {
-        // Get AST
-        const ast = parse2AST(query);
-        // If we have an ID
-        if (ast.length > 0) {
-          // Store raw ID
-          ids[queryIndex] = ast[0].raw;
-        }
-        return ASTRewrite2Query(ast);
-      });
-
-    const request = () => {
-      const fetchOptions = Object.assign(
-        {},
-        {
-          method: 'post',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        },
-        {
-          body: 'q=' + encodeURIComponent(normalizeQuery.join('|'))
-        }
-      );
-      return fetch(url, fetchOptions);
-    };
-
-    const done = data => {
-      // Add all new data to cache
-      let oCache = {};
-      data.json().then(json => {
-        serialize(json, oCache);
-        resolve(normalizeQuery.map((query, inx) => (ids[inx] ? oCache[ids[inx]] : query)));
-      });
-    };
-
-    const fail = e => {
-      //TODO
-      reject(queries);
-    };
-    // Request and handle response
-    request().then(done, fail);
-  });
 };
 
 export const troopQuery = (url, ...queries) => {

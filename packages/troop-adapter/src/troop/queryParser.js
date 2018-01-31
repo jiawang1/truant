@@ -9,7 +9,7 @@ const TO_RAW = '$2';
  * @param  {} query
  */
 export const parse2AST = query => {
-  let _query = query;
+  const _query = query;
   let index;
   const length = _query.length;
   let char;
