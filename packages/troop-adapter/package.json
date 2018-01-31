@@ -1,21 +1,22 @@
 {
-  "name": "truant-example",
-  "version": "0.1.2-beta",
-  "description": "an example base on truant",
+  "name": "@school/troop-adapter",
+  "version": "0.1.0",
+  "description": "support basic troop feature",
   "main": "index.js",
   "scripts": {
-    "start": "node ./tools/server.js",
     "build": "node ./tools/build.js --build",
     "dist": "node ./tools/build.js --dist",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
     "st": "./node_modules/.bin/_mocha --",
-    "analyze": "node ./tools/build.js --dist -- --analyze",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "analyze": "node ./tools/build.js --dist -- --analyze"
   },
   "author": "Wang jia",
   "dependencies": {
     "hoist-non-react-statics": "^2.3.1",
-    "isomorphic-fetch": "^2.2.1",
+    "invariant": "^2.2.2",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "peerDependencies":{
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -24,15 +25,11 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "style-loader": "^0.13.1",
-    "truant-core": "^0.1.2-beta",
-    "@school/troop-adapter":"0.1.0"
+    "style-loader": "^0.13.1"
   },
   "devDependencies": {
     "@school/truant-dll": "^0.1.2-0",
-    "@storybook/react": "^3.3.11",
-    "mocha": "^4.0.1",
-    "webpack": "^3.2.0"
+    "mocha": "^4.0.1"
   },
   "license": "MIT",
   "private": true

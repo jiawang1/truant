@@ -16,15 +16,15 @@ export default {
   },
   topSaga: {},
   reducer: (state = initialState, action) => {
-  switch (action.type) {
-    case '':
-      return {
-        ...state,
-        random: action.payload
-      };
+    switch (action.type) {
+      case '':
+        return {
+          ...state,
+          random: action.payload
+        };
 
-    default:
-      return state;
+      default:
+        return state;
     }
   }
 };

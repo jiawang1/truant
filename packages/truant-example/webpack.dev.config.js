@@ -7,6 +7,12 @@ const baseConfig = require('./base.config');
 
 const dashboard = new Dashboard();
 
+const onProxyReq = (proxyReq, req, res)=>{
+  proxyReq.setHeader('Origin', 'https://schooluat.englishtown.com');
+  proxyReq.setHeader('Host', 'schooluat.englishtown.com');
+  proxyReq.setHeader('Referer', 'https://schooluat.englishtown.com/');
+};
+
 module.exports = {
   devtool: 'inline-source-map',
   cache: true,
@@ -23,14 +29,22 @@ module.exports = {
     sourceMapFilename: '[name].map'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'src')
+    contentBase: path.join(__dirname, 'src'),
     /*eslint-enable*/
-    // proxy: {
-    //   '!(**/_admin/**|**/_tmp/**|/**/_admin/|/_tmp/*/**)': {
-    //     target: 'http://localhost:8079',
-    //     secure: false
-    //   }
-    // }
+    proxy: {
+      '/services/api/proxy/queryproxy': {
+        target: 'https://localhost:8079/',
+        secure: false
+      },
+      '/login/secure.ashx': {
+        target: 'https://localhost:8079/',
+        secure: false
+      },
+      '/login/handler.ashx': {
+        target: 'https://localhost:8079/',
+        secure: false
+      }
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

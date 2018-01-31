@@ -3,14 +3,11 @@ const webpack = require('webpack');
 
 module.exports = {
   devtool: false,
-  context: path.normalize(__dirname),// eslint-disable-line
+  context: path.normalize(__dirname), // eslint-disable-line
   entry: {
-    truant: [
-      './index'
-    ]
+    truant: ['./index']
   },
-  output: {
-  },
+  output: {},
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin(),

@@ -46,6 +46,7 @@ function startDevServer() {
     })
   );
 
+  let aPublicpath;
   devConfig.plugins.push(
     new HtmlWebpackPlugin({
       // generate HTML
@@ -53,7 +54,9 @@ function startDevServer() {
       template: 'index.ejs',
       inject: true,
       dllName: path.join('/_tmp', dllName),
-      publicContext: devConfig.output.publicPath.match(/^(\/[^/]*)\/.*/)[1]
+      publicContext: (aPublicpath = devConfig.output.publicPath.match(/^(\/[^/]*)\/.*/)
+        ? aPublicpath[1]
+        : '')
     })
   );
 
@@ -66,7 +69,7 @@ function startDevServer() {
     noInfo: false,
     quiet: true,
     index: 'index.html',
-    //https: true,
+    https: true,
     historyApiFallback: true
   }).listen(baseConfig.webpackDevServerPort, err => {
     if (err) {
