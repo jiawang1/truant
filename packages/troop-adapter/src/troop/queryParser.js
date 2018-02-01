@@ -8,7 +8,7 @@ const TO_RAW = '$2';
 /**
  * @param  {} query
  */
-export const parse2AST = query => {
+export const parse2AST = (query = '') => {
   const _query = query;
   let index;
   const length = _query.length;
@@ -68,7 +68,6 @@ export const parse2AST = query => {
         if (quote !== null) {
           break;
         }
-
         // If there's an active op, store TEXT and push on _AST
         if (operation !== null) {
           operation.raw = (operation.text = _query.substring(mark, index)).replace(RE_TEXT, TO_RAW);
@@ -92,15 +91,11 @@ export const parse2AST = query => {
 };
 
 export const ASTRewrite2Query = ast => {
-  const length = ast.length;
-  let index;
-  let operation;
-  let root;
   let result = '';
-
+  let root;
   // Step through AST
-  for (index = 0; index < length; index++) {
-    operation = ast[index];
+  for (let index = 0, length = ast.length; index < length; index++) {
+    const operation = ast[index];
     switch (operation.op) {
       case OP_ID:
         //cache root node

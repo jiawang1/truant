@@ -1,7 +1,6 @@
 import 'isomorphic-fetch';
 import invariant from 'invariant';
-import { QueryService, Cache } from '@school/troopjs-query';
-import { troopQuery } from './SimpleQuery';
+import { troopQuery } from './simpleQuery';
 
 const mimeType = {
   json: 'application/json',
@@ -110,9 +109,9 @@ const postForm = async (url, body, option = {}) => {
   return response.text();
 };
 
-const query = async (url, query) => {
+const query = (url, query, troopContext) => {
 
-  return troopQuery(url,query);
+  return troopQuery(url,query,troopContext);
 };
 
 export const troopClient = {

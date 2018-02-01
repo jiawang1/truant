@@ -1,9 +1,12 @@
-import { put } from 'truant-core';
+import { put, call, select } from 'truant-core';
 import { troopClient } from '@school/troop-adapter';
 
 const LOG_SUCCESS = 'logon/success';
 const LOG_USER = 'logon/currentUser';
 const LOG_FAILED = 'logon/failed';
+const LOG_UPDATE_CONTEXR = 'logon/updateContext';
+
+const getState = state => state.logonState;
 
 /**
  *  construct initial state. this should be immutable object
@@ -17,10 +20,19 @@ export default {
     sagaNamespace: 'logon',
     *logonSchool({ data }) {
       try {
-        yield troopClient.postForm('/login/secure.ashx', data);
+        yield call(troopClient.postForm, '/login/secure.ashx', data);
         yield put({
           type: LOG_SUCCESS,
           payload: { userName: data.userName, message: 'logon success' }
+        });
+        const results = yield call(
+          troopClient.query,
+          '/services/api/proxy/queryproxy',
+          'context!current'
+        );
+        yield put({
+          type: LOG_UPDATE_CONTEXR,
+          payload: results[0]
         });
       } catch (error) {
         console.error(error);
@@ -43,9 +55,11 @@ export default {
     },
     *getUserByTroopAPI() {
       try {
+        const state =  yield select(getState);
         const response = yield troopClient.query(
           '/services/api/proxy/queryproxy',
-          'student_level!ca06ddea-857d-4966-a55b-4d14641d9371.children,.levelTest|user!current'
+          'student_level!ca06ddea-857d-4966-a55b-4d14641d9371.children,.levelTest|user!current|context!current',
+          state.context
         );
         console.log(response);
       } catch (err) {
@@ -72,6 +86,11 @@ export default {
         return {
           ...state,
           userInfo: action.payload
+        };
+      case LOG_UPDATE_CONTEXR:
+        return {
+          ...state,
+          context: action.payload
         };
       default:
         return state;

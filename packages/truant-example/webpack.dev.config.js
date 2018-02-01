@@ -7,7 +7,7 @@ const baseConfig = require('./base.config');
 
 const dashboard = new Dashboard();
 
-const onProxyReq = (proxyReq, req, res)=>{
+const onProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader('Origin', 'https://schooluat.englishtown.com');
   proxyReq.setHeader('Host', 'schooluat.englishtown.com');
   proxyReq.setHeader('Referer', 'https://schooluat.englishtown.com/');
@@ -31,20 +31,13 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'src'),
     /*eslint-enable*/
-    proxy: {
-      '/services/api/proxy/queryproxy': {
-        target: 'https://localhost:8079/',
-        secure: false
-      },
-      '/login/secure.ashx': {
-        target: 'https://localhost:8079/',
-        secure: false
-      },
-      '/login/handler.ashx': {
+    proxy: [
+      {
+        context: ['/services/api/proxy/queryproxy', '/login/secure.ashx'],
         target: 'https://localhost:8079/',
         secure: false
       }
-    }
+    ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

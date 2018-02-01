@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import querystring, { parse, stringify } from 'querystring';
 import { parse2AST, ASTRewrite2Query } from './queryParser';
 import { isObject, isArray } from './utils';
 
@@ -48,17 +49,8 @@ export const serialize = jsonNode => {
   return oCache;
 };
 
-export const troopQuery = (url, ...queries) => {
-  const ids = [];
-  const normalizeQuery = queries.reduce((list, query) => [...list, ...query.split('|')], []).map((query, queryIndex) => {
-    const ast = parse2AST(query);
-    if (ast.length > 0) {
-      // Store raw ID list used to figure out final response
-      ids[queryIndex] = ast[0].raw;
-    }
-    return ASTRewrite2Query(ast);
-  });
-  const fetchOptions = Object.assign(
+const __prepareHTTPOption = normalizeQuery =>
+  Object.assign(
     {},
     {
       method: 'post',
@@ -68,11 +60,41 @@ export const troopQuery = (url, ...queries) => {
       }
     },
     {
-      body: 'q=' + encodeURIComponent(normalizeQuery.join('|'))
+      body: normalizeQuery.length > 0 ? 'q=' + encodeURIComponent(normalizeQuery.join('|')) : ''
     }
   );
 
-  return fetch(url, fetchOptions)
+export const __prepareContextURL = (url, troopContext) => {
+  if (!troopContext) return url;
+  const [_url, queryStr] = url.split('?');
+  const queryParam = queryStr ? querystring.parse(queryStr) : {};
+  const { c: extraContext = '', ...otherParam } = queryParam;
+  const contextValues = troopContext.values;
+  const contextParams = Object.keys(contextValues).reduce(
+    (params, key) =>
+      Object.assign(params, {
+        [key]: contextValues[key].value
+      }),
+    {}
+  );
+  const queryObject = { ...otherParam, c: querystring.stringify({ ...querystring.parse(extraContext), ...contextParams }, '|') };
+  return `${_url}?${querystring.stringify(queryObject)}`;
+};
+
+export const troopQuery = (url, jointQuery, troopContext) => {
+  const ids = [];
+  const normalizeQuery = jointQuery.split('|').map((query, queryIndex) => {
+    const ast = parse2AST(query);
+    if (ast.length > 0) {
+      // Store raw ID list used to figure out final response
+      ids[queryIndex] = ast[0].raw;
+    }
+    return ASTRewrite2Query(ast);
+  });
+  const fetchOptions = __prepareHTTPOption(normalizeQuery);
+  const __url = __prepareContextURL(url, troopContext);
+
+  return fetch(__url, fetchOptions)
     .then(response => response.json())
     .then(json => {
       const serialObject = serialize(json);
