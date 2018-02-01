@@ -111,7 +111,8 @@ const postForm = async (url, body, option = {}) => {
 };
 
 const query = async (url, query) => {
-  return troopQuery(url, query);
+
+  return troopQuery(url,query);
 };
 
 export const troopClient = {

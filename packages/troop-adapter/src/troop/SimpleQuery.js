@@ -1,97 +1,63 @@
 import 'isomorphic-fetch';
 import { parse2AST, ASTRewrite2Query } from './queryParser';
+import { isObject, isArray } from './utils';
 
-const __serialize = (node, constructor, oCache) => {
-  /*jshint validthis:true, forin:false, curly:false, -W086*/
-  let result;
+const __serialize = (node, oCache) => {
   let id;
-  let i;
-  let iMax;
-  let _constructor = constructor;
-  // let generation;
-  // let generations = me[GENERATIONS];
   let value;
-  let deserializeIndex = oCache;
+  const deserializeCache = oCache;
+  let result = node;
 
-  // First add node to cache (or get the already cached instance)
-  cache: {
-    // Can't cache if there is no 'id'
-    if (!('id' in node)) {
-      result = node; // Reuse ref to node (avoids object creation)
-      break cache;
-    }
+  if ('id' in node) {
     id = node.id;
-
-    // In cache, get it!
-    if (id in deserializeIndex) {
-      result = deserializeIndex[id];
-
-      // Bypass collapsed object that already exists in cache.
+    if (Object.prototype.hasOwnProperty.call(deserializeCache, id)) {
+      result = deserializeCache[id];
       if (node.collapsed) {
-        return result;
+        return result; // Bypass collapsed object that already exists in cache.
       }
-      break cache;
+    } else {
+      deserializeCache[id] = node; // Reuse ref to node (avoids object creation)
     }
-
-    // Not in cache, add it!
-    result = deserializeIndex[id] = node; // Reuse ref to node (avoids object creation)
   }
 
-  // Check that this is an ARRAY
-  if (_constructor === Array) {
-    // Index all values
-    for (i = 0, iMax = node.length; i < iMax; i++) {
-      // Keep value
+  if (isArray(node)) {
+    for (let i = 0, iMax = node.length; i < iMax; i++) {
       value = node[i];
-
-      // Get _constructor of value (safely, falling back to UNDEFINED)
-      _constructor = value === null || value === undefined ? undefined : value.constructor;
-
-      // Do magic comparison to see if we recursively put this in the cache, or plain put
-      result[i] =
-        _constructor === Object || (_constructor === Array && value.length !== 0)
-          ? __serialize.call(null, value, _constructor, deserializeIndex)
-          : value;
+      result[i] = isObject(value) || (isArray(value) && value.length !== 0) ? __serialize(value, deserializeCache) : value;
     }
-  } else if (_constructor === Object) {
-    // Index all properties
+  } else if (isObject(node)) {
     Object.keys(node).forEach(key => {
       if (key === 'id' || (key === 'collapsed' && !result.collapsed)) {
         return;
       }
-      // Keep value
       value = node[key];
-      // Get _constructor of value (safely, falling back to UNDEFINED)
-      _constructor = value === null || value === undefined ? undefined : value.constructor;
-      result[key] =
-        _constructor === Object || (_constructor === Array && value.length !== 0)
-          ? __serialize.call(null, value, _constructor, deserializeIndex)
-          : value;
+      result[key] = isObject(value) || (isArray(value) && value.length !== 0) ? __serialize(value, deserializeCache) : value;
     });
   }
   return result;
 };
 
-export const serialize = (node, oCache) => {
-  if (!node) return node;
-  return node.constructor === Object || (node.constructor === Array && node.length !== 0)
-    ? __serialize(node, node.constructor, oCache)
-    : node;
+export const serialize = jsonNode => {
+  if (!jsonNode) return jsonNode;
+  let oCache = {};
+  if (isObject(jsonNode) || (isArray(jsonNode) && jsonNode.length !== 0)) {
+    __serialize(jsonNode, oCache);
+  } else {
+    oCache = jsonNode;
+  }
+  return oCache;
 };
 
 export const troopQuery = (url, ...queries) => {
   const ids = [];
-  const normalizeQuery = queries
-    .reduce((list, query) => [...list, ...query.split('|')], [])
-    .map((query, queryIndex) => {
-      const ast = parse2AST(query);
-      if (ast.length > 0) {
-        // Store raw ID list
-        ids[queryIndex] = ast[0].raw;
-      }
-      return ASTRewrite2Query(ast);
-    });
-
+  const normalizeQuery = queries.reduce((list, query) => [...list, ...query.split('|')], []).map((query, queryIndex) => {
+    const ast = parse2AST(query);
+    if (ast.length > 0) {
+      // Store raw ID list used to figure out final response
+      ids[queryIndex] = ast[0].raw;
+    }
+    return ASTRewrite2Query(ast);
+  });
   const fetchOptions = Object.assign(
     {},
     {
@@ -109,9 +75,8 @@ export const troopQuery = (url, ...queries) => {
   return fetch(url, fetchOptions)
     .then(response => response.json())
     .then(json => {
-      let oCache = {};
-      serialize(json, oCache);
-      return normalizeQuery.map((query, inx) => (ids[inx] ? oCache[ids[inx]] : query));
+      const serialObject = serialize(json);
+      return ids.map(id => serialObject[id]);
     })
     .catch(err => {
       console.error(err);
