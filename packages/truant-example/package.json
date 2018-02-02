@@ -1,6 +1,6 @@
 {
   "name": "truant-example",
-  "version": "0.1.2-beta",
+  "version": "0.1.2-beta.0",
   "description": "an example base on truant",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,8 @@
   },
   "author": "Wang jia",
   "dependencies": {
+    "@school/troop-adapter": "^0.1.1",
+    "@school/truant-core": "^0.1.2-beta.0",
     "hoist-non-react-statics": "^2.3.1",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.6.0",
@@ -24,12 +26,10 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "style-loader": "^0.13.1",
-    "truant-core": "^0.1.2-beta",
-    "@school/troop-adapter":"0.1.0"
+    "style-loader": "^0.13.1"
   },
   "devDependencies": {
-    "@school/truant-dll": "^0.1.2-0",
+    "@school/truant-dll": "^0.1.2-1",
     "@storybook/react": "^3.3.11",
     "mocha": "^4.0.1",
     "webpack": "^3.2.0"

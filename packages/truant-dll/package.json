@@ -1,6 +1,6 @@
 {
   "name": "@school/truant-dll",
-  "version": "0.1.2-0",
+  "version": "0.1.2-1",
   "description": "DLL shared for all packages",
   "main": "./tools/buildDll.js",
   "scripts": {

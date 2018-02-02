@@ -1,4 +1,4 @@
-import { put, select, call, take } from 'truant-core';
+import { put, select, call, take } from '@school/truant-core';
 import * as immutable from 'immutable';
 
 const SAMPLE_RANDOM = 'sample/random';

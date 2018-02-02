@@ -1,4 +1,4 @@
-import { put } from 'truant-core';
+import { put } from '@school/truant-core';
 
 /**
  *  construct initial state. this should be immutable object

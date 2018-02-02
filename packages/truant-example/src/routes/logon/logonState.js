@@ -1,4 +1,4 @@
-import { put, call, select } from 'truant-core';
+import { put, call, select } from '@school/truant-core';
 import { troopClient } from '@school/troop-adapter';
 
 const LOG_SUCCESS = 'logon/success';

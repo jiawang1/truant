@@ -5,7 +5,7 @@ module.exports = {
   devtool: false,
   context: path.normalize(__dirname), // eslint-disable-line
   entry: {
-    truant: ['./index']
+    troopAdapter: ['./index']
   },
   output: {},
   plugins: [

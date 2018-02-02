@@ -1,14 +1,16 @@
 {
-    "name": "truant-core",
-    "version": "0.1.2-beta",
+    "name": "@school/truant-core",
+    "version": "0.1.2-beta.2",
     "description": "School project",
     "scripts": {
-        "build": "node ./tools/build.js --build",
-        "dist": "node ./tools/build.js --dist",
+        "dist": "node ./tools/buildModule.js --dist",
         "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
         "st": "./node_modules/.bin/_mocha --",
-        "analyze": "node ./tools/build.js --dist -- --analyze"
+        "analyze": "node ./tools/buildModule.js --dist -- --analyze"
     },
+    "main": "dist/truantCore.bundle.js",
+    "module": "index.js",
+    "jsnext:main": "index.js",
     "dependencies": {
         "hoist-non-react-statics": "^2.3.1",
         "immutable": "^3.8.2",
@@ -58,5 +60,10 @@
         "webpack-dashboard": "^1.0.0",
         "webpack-dev-server": "^2.3.0"
     },
-    "private": true
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "/dist/**"
+    ]
 }

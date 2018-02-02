@@ -1,18 +1,18 @@
 {
   "name": "@school/troop-adapter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "support basic troop feature",
-  "main": "index.js",
+  "main": "dist/troopAdapter.bundle.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
   "scripts": {
-    "build": "node ./tools/build.js --build",
-    "dist": "node ./tools/build.js --dist",
+    "dist": "node ./tools/buildModule.js --dist",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
     "st": "./node_modules/.bin/_mocha --",
-    "analyze": "node ./tools/build.js --dist -- --analyze"
+    "analyze": "node ./tools/buildModule.js --dist -- --analyze"
   },
   "author": "Wang jia",
   "dependencies": {
-    "hoist-non-react-statics": "^2.3.1",
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",
     "querystring": "^0.2.0"
@@ -24,14 +24,17 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
-    "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "style-loader": "^0.13.1"
+    "redux": "^3.7.2"
   },
   "devDependencies": {
-    "@school/truant-dll": "^0.1.2-0",
+    "@school/truant-dll": "^0.1.2-1",
     "mocha": "^4.0.1"
   },
   "license": "MIT",
-  "private": true
+  "publishConfig": {
+    "access": "public"
+    },
+    "files": [
+        "/dist/**"
+    ]
 }

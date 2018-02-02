@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { configureStore } from 'truant-core';
+import { configureStore } from '@school/truant-core';
 import RootApp from './containers/Routes';
 import rootState from './containers/rootState';
 import { loadingMiddleware } from './common/loadingMiddleware';

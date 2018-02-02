@@ -1,4 +1,4 @@
-import { put, take } from 'truant-core';
+import { put, take } from '@school/truant-core';
 
 const LOADING_STATE = 'loading/state';
 /**

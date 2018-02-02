@@ -1,4 +1,4 @@
-import { AsyncFactory } from 'truant-core';
+import { AsyncFactory } from '@school/truant-core';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
