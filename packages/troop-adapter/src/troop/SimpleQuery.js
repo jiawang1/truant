@@ -1,7 +1,7 @@
 import 'isomorphic-fetch';
-import querystring, { parse, stringify } from 'querystring';
+import querystring from 'querystring';
 import { parse2AST, ASTRewrite2Query } from './queryParser';
-import { isObject, isArray } from './utils';
+import utils from './utils';
 
 const __serialize = (node, oCache) => {
   let id;
@@ -21,18 +21,18 @@ const __serialize = (node, oCache) => {
     }
   }
 
-  if (isArray(node)) {
+  if (utils.isArray(node)) {
     for (let i = 0, iMax = node.length; i < iMax; i++) {
       value = node[i];
-      result[i] = isObject(value) || (isArray(value) && value.length !== 0) ? __serialize(value, deserializeCache) : value;
+      result[i] = utils.isObject(value) || (utils.isArray(value) && value.length !== 0) ? __serialize(value, deserializeCache) : value;
     }
-  } else if (isObject(node)) {
+  } else if (utils.isObject(node)) {
     Object.keys(node).forEach(key => {
       if (key === 'id' || (key === 'collapsed' && !result.collapsed)) {
         return;
       }
       value = node[key];
-      result[key] = isObject(value) || (isArray(value) && value.length !== 0) ? __serialize(value, deserializeCache) : value;
+      result[key] = utils.isObject(value) || (utils.isArray(value) && value.length !== 0) ? __serialize(value, deserializeCache) : value;
     });
   }
   return result;
@@ -41,7 +41,7 @@ const __serialize = (node, oCache) => {
 export const serialize = jsonNode => {
   if (!jsonNode) return jsonNode;
   let oCache = {};
-  if (isObject(jsonNode) || (isArray(jsonNode) && jsonNode.length !== 0)) {
+  if (utils.isObject(jsonNode) || (utils.isArray(jsonNode) && jsonNode.length !== 0)) {
     __serialize(jsonNode, oCache);
   } else {
     oCache = jsonNode;
@@ -82,6 +82,7 @@ export const __prepareContextURL = (url, troopContext) => {
 };
 
 export const troopQuery = (url, jointQuery, troopContext) => {
+  console.log(utils);
   const ids = [];
   const normalizeQuery = jointQuery.split('|').map((query, queryIndex) => {
     const ast = parse2AST(query);

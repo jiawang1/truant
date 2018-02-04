@@ -7,8 +7,12 @@ const __isType = type => oTarget => Object.prototype.toString.call(oTarget).repl
  *  isNumber
  *  isUndefined
  *  isFunction
+ *  isArray
+ *  isNull
  */
-const oType = module.exports;
+const oType = {};
 ['String', 'Object', 'Number', 'Undefined', 'Function', 'Array', 'Null'].forEach(_type => {
   oType[`is${_type}`] = __isType(_type);
 });
+
+export default oType;

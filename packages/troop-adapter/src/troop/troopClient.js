@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import querystring from 'querystring';
 import invariant from 'invariant';
 import { troopQuery } from './simpleQuery';
 
@@ -14,47 +15,6 @@ const method = {
   post: 'POST',
   put: 'PUT',
   DELETE: 'DELETE'
-};
-
-/**
- * return type for target obj, possible value are:
- * null         => Null
- * undefined    => Undefined
- * Object       => Object
- * number       => Number
- * array        => Array
- * string       => String
- *
- * @param {*} obj
- */
-export const getType = obj => Object.prototype.toString.call(obj).replace(/.*\s(.*)]$/, '$1');
-
-const serialize = payload => {
-  return Object.keys(payload).reduce((pre, current) => {
-    if (
-      getType(payload[current]) === 'String' ||
-      getType(payload[current]) === 'Number' ||
-      getType(payload[current]) === 'Boolean'
-    ) {
-      return (
-        pre + (pre.length > 0 ? '&' : '') + current + '=' + encodeURIComponent(payload[current])
-      );
-    } else if (getType(payload[current]) === 'Array') {
-      return (
-        pre +
-        (pre.length > 0 ? '&' : '') +
-        current +
-        '=' +
-        encodeURIComponent(payload[current].join(','))
-      );
-    } else if (getType(payload[current]) === 'Undefined' || getType(payload[current]) === 'Null') {
-      return pre;
-    } else if (getType(payload[current]) === 'Date') {
-      return pre + (pre.length > 0 ? '&' : '') + current + '=' + payload[current].getTime();
-    } else {
-      throw new Error(`payload type ${getType(payload[current])} for query is not supported`);
-    }
-  }, '');
 };
 
 const __fetch = _method => async (url, option, payload) => {
@@ -94,7 +54,7 @@ const DELETE = __fetch(method.DELETE);
 const postForm = async (url, body, option = {}) => {
   invariant(url !== undefined, 'URL must be supplied');
   invariant(body !== undefined, 'HTTP request payload mest be supplied');
-  const _body = typeof body === 'string' ? body : serialize(body);
+  const _body = typeof body === 'string' ? body : querystring.stringify(body);
   let _option = option;
   if (_option.headers) {
     _option.headers['Content-Type'] = mimeType.form;
@@ -110,8 +70,7 @@ const postForm = async (url, body, option = {}) => {
 };
 
 const query = (url, query, troopContext) => {
-
-  return troopQuery(url,query,troopContext);
+  return troopQuery(url, query, troopContext);
 };
 
 export const troopClient = {
