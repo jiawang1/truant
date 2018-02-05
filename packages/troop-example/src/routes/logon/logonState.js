@@ -44,11 +44,10 @@ export default {
         const response = yield troopClient.postForm(
           '/services/api/proxy/queryproxy?c=countrycode%3Dde%7Cculturecode%3Dzh-CN%7Cpartnercode%3DNone%7Csiteversion%3Ddevelopment%7Cstudentcountrycode%3Dde%7Clanguagecode%3Dcs',
           {
-            q: 'student_level!ca06ddea-857d-4966-a55b-4d14641d9371.children,.levelTest'
+            q: 'student_level'
           }
         );
-        const data = JSON.parse(response);
-        yield put({ type: LOG_USER, payload: data[0] });
+        yield put({ type: LOG_USER, payload: response[0] });
       } catch (err) {
         console.log(err);
       }

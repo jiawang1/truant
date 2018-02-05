@@ -1,7 +1,7 @@
 import 'isomorphic-fetch';
-import querystring from 'querystring';
 import invariant from 'invariant';
 import { troopQuery } from './simpleQuery';
+import utils from './utils';
 
 const mimeType = {
   json: 'application/json',
@@ -54,7 +54,7 @@ const DELETE = __fetch(method.DELETE);
 const postForm = async (url, body, option = {}) => {
   invariant(url !== undefined, 'URL must be supplied');
   invariant(body !== undefined, 'HTTP request payload mest be supplied');
-  const _body = typeof body === 'string' ? body : querystring.stringify(body);
+  const _body = typeof body === 'string' ? body : utils.encode(body);
   let _option = option;
   if (_option.headers) {
     _option.headers['Content-Type'] = mimeType.form;
@@ -66,7 +66,7 @@ const postForm = async (url, body, option = {}) => {
     };
   }
   let response = await post(url, _option, _body);
-  return response.text();
+  return response.json();
 };
 
 const query = (url, query, troopContext) => {

@@ -4,6 +4,7 @@
 **/src/_temp/**
 **/build/**
 **/dist/**
+**/es/**
 **/src/_tmp/**
 src/_tmp/**
 **/.DS_store

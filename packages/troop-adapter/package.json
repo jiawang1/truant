@@ -2,14 +2,15 @@
   "name": "@school/troop-adapter",
   "version": "0.1.1",
   "description": "support basic troop feature",
-  "main": "dist/troopAdapter.bundle.js",
-  "module": "index.js",
-  "jsnext:main": "index.js",
+  "main": "dist/troop-adapter.bundle.js",
+  "module": "es/@school/troop-adapter.bundle.js",
+  "jsnext:main": "es/@school/troop-adapter.bundle.js",
   "scripts": {
     "dist": "node ./tools/buildModule.js --dist",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
     "st": "./node_modules/.bin/_mocha --",
-    "analyze": "node ./tools/buildModule.js --dist -- --analyze"
+    "analyze": "node ./tools/buildModule.js --dist -- --analyze",
+    "build": "rollup -c"
   },
   "author": "Wang jia",
   "dependencies": {
@@ -27,14 +28,25 @@
     "redux": "^3.7.2"
   },
   "devDependencies": {
-    "@school/truant-dll": "^0.1.2-1",
-    "mocha": "^4.0.1"
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.5.0",
+    "babel-runtime": "^6.26.0",
+    "mocha": "^4.0.1",
+    "rollup": "^0.55.3",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.2"
   },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
-    },
-    "files": [
-        "/dist/**"
-    ]
+  },
+  "files": [
+    "/dist/**"
+  ]
 }

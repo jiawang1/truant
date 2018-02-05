@@ -1,5 +1,4 @@
 import 'isomorphic-fetch';
-import querystring from 'querystring';
 import { parse2AST, ASTRewrite2Query } from './queryParser';
 import utils from './utils';
 
@@ -67,7 +66,7 @@ const __prepareHTTPOption = normalizeQuery =>
 export const __prepareContextURL = (url, troopContext) => {
   if (!troopContext) return url;
   const [_url, queryStr] = url.split('?');
-  const queryParam = queryStr ? querystring.parse(queryStr) : {};
+  const queryParam = queryStr ? utils.decode(queryStr) : {};
   const { c: extraContext = '', ...otherParam } = queryParam;
   const contextValues = troopContext.values;
   const contextParams = Object.keys(contextValues).reduce(
@@ -77,12 +76,11 @@ export const __prepareContextURL = (url, troopContext) => {
       }),
     {}
   );
-  const queryObject = { ...otherParam, c: querystring.stringify({ ...querystring.parse(extraContext), ...contextParams }, '|') };
-  return `${_url}?${querystring.stringify(queryObject)}`;
+  const queryObject = { ...otherParam, c: utils.encode({ ...utils.decode(extraContext), ...contextParams }, '|') };
+  return `${_url}?${utils.encode(queryObject)}`;
 };
 
 export const troopQuery = (url, jointQuery, troopContext) => {
-  console.log(utils);
   const ids = [];
   const normalizeQuery = jointQuery.split('|').map((query, queryIndex) => {
     const ast = parse2AST(query);
