@@ -9,3 +9,4 @@
 src/_tmp/**
 **/.DS_store
 **.log
+**package-lock.json

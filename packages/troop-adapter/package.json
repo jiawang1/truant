@@ -3,14 +3,13 @@
   "version": "0.1.1",
   "description": "support basic troop feature",
   "main": "dist/troop-adapter.bundle.js",
-  "module": "es/@school/troop-adapter.bundle.js",
-  "jsnext:main": "es/@school/troop-adapter.bundle.js",
+  "module": "index.js",
+  "jsnext:main": "es/troop-adapter.bundle.js",
   "scripts": {
-    "dist": "node ./tools/buildModule.js --dist",
+    "dist": "rollup -c",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
     "st": "./node_modules/.bin/_mocha --",
-    "analyze": "node ./tools/buildModule.js --dist -- --analyze",
-    "build": "rollup -c"
+    "build": "rollup -c --watch"
   },
   "author": "Wang jia",
   "dependencies": {
@@ -40,13 +39,15 @@
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-json": "^2.3.0",
-    "rollup-plugin-node-resolve": "^3.0.2"
+    "rollup-plugin-node-resolve": "^3.0.2",
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "/dist/**"
+    "/dist/**",
+    "/es/**"
   ]
 }
