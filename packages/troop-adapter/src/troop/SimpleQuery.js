@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import 'whatwg-fetch';
 import { parse2AST, ASTRewrite2Query } from './queryParser';
 import utils from './utils';
 

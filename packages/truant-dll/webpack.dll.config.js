@@ -8,7 +8,7 @@ module.exports = {
       'react-router-redux',
       'redux',
       'redux-logger',
-      'isomorphic-fetch'
+      'whatwg-fetch'
     ]
   },
   plugins: [],

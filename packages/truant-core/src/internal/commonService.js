@@ -1,5 +1,5 @@
 import { getType } from './utils';
-import 'isomorphic-fetch';
+import 'whatwg-fetch';
 
 var rootContext = null;
 

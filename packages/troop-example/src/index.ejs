@@ -345,6 +345,7 @@
             },
             "callback" : function (localRequire) {
                 localRequire(["jquery"], function(jQuery){
+                  window.$ = jQuery;
                   localRequire([
                     "troopjs-browser/application/widget",
                     "troopjs-browser/ajax/service",

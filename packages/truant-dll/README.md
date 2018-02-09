@@ -7,4 +7,4 @@ open source libraries, include following parts:
 - react-router-redux
 - redux
 - redux-logger
-- isomorphic-fetch
+- whatwg-fetch

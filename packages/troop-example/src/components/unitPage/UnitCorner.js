@@ -18,7 +18,6 @@ class UnitCorner extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="unit-corner">
         <span style={{display: "block"}}>Unit part rendered by react</span>

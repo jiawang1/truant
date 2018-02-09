@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import 'whatwg-fetch';
 import invariant from 'invariant';
 import { troopQuery } from './simpleQuery';
 import utils from './utils';

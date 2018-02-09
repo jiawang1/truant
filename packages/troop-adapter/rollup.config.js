@@ -4,16 +4,18 @@ import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
+import sizes from 'rollup-plugin-sizes';
 
 const config = {
   input: 'index.js',
   sourcemap: true,
+  external: ['react', 'prop-types', 'react-dom', 'whatwg-fetch'],
   plugins: [
     json(),
     resolve({
       jsnext: true,
       main: true,
-      preferBuiltins: true
+      preferBuiltins: false
     }),
     commonjs({
       exclude: 'src/**'
@@ -21,9 +23,10 @@ const config = {
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true
-    })
+    }),
+    sizes()
   ],
-  watch:{
+  watch: {
     include: 'src/**'
   }
 };
@@ -43,11 +46,11 @@ export default [
     {
       output: {
         file: `dist/${pkg.name.indexOf('/') > 0 ? pkg.name.split('/')[1] : pkg.name}.bundle.min.js`,
-        format: 'umd'
+        format: 'cjs'
       },
       name: 'troop-adapter'
     },
-    { plugins: uglify() },
-    config
+    config,
+    { plugins: [...config.plugins, uglify()] }
   )
 ];
