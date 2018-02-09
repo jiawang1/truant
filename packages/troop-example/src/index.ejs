@@ -10,18 +10,404 @@
   <meta charset="utf-8"/>
   <title>troop example</title>
   <meta id="context-root" value="<%=htmlWebpackPlugin.options.publicContext%>" />
+  <link rel="stylesheet/less" type="text/css" href="public/css/ets-global.less" media="all"/>
+  <link rel="stylesheet/less" type="text/css" href="public/css/ets-ui-main.less" media="all"/>
+
   <script type="text/javascript">
     less = {}; less.env = 'development';
   </script>
-  <script type="text/javascript" src="/_shared/less/1.3.0/less.js"></script>
+  <script type="text/javascript" src="public/less.js"></script>
 </head>
 
 <body>
   <script type="text/javascript" src="<%=htmlWebpackPlugin.options.dllName%>"></script>
-  <div class="ets-ui-unit-page" data-weave="school-ui-study/widget/application school-ui-study/widget/school" data-z-index="200"></div>
+  <div class="ets-ui-unit-page" data-weave="public/widget/application public/widget/school" data-z-index="200"></div>
 
+  <script type="text/javascript">
+    var require = (function() {
+      return {
+        "callback" : function () {
+          var config = {
+            "app-version":{
+              "school-ui-activity": "{CCL:school.ui.activity.version}",
+              "school-ui-activity-container": "{CCL:school.ui.activity.container.version}",
+              "school-ui-shared": "{CCL:school.ui.shared.version}",
+              "school-ui-study": "{CCL:school.ui.study.version}",
+            },
+            //{CONFIG:DEBUG>>}
+            'logging': {
+              "verbose": 'true'
+            },
+            "debug" : true,
+          };
+          //reset app version only for dev debug
+          config["app-version"] = {
+            "school-ui-activity": "snapshot",
+            "school-ui-activity-container": "snapshot",
+            "school-ui-shared": "snapshot",
+            "school-ui-study": "snapshot",
+          };
+          var callbacks = [];
+          require.config({
+            "context" : "troopjs-2.0",
+            "waitSeconds": 0,
+            "baseUrl": "/",
+            "packages": [
+              {
+                "name": "school-ui-shared",
+                "location": "_shared/school-ui-shared/{CCL:school.ui.shared.version}/../snapshot/js/2.x",
+                "main": ""
+              },
+              {
+                "name": "school-ui-study",
+                "location": "_shared/school-ui-study/{CCL:school.ui.study.version}/../snapshot/js",
+                "main": ""
+              },
+              {
+                "name": "school-ui-activity-container",
+                "location": "_shared/school-ui-activity-container/{CCL:school.ui.activity.container.version}/../snapshot/js",
+                "main": ""
+              },
+              {
+                "name": "school-ui-activity",
+                "location": "_shared/school-ui-activity/{CCL:school.ui.activity.version}/../snapshot/js",
+                "main": ""
+              },
+              {
+                "name": "troopjs-bundle",
+                "location": "public",
+                "main": "maxi"
+              },
+              {
+                "name": "troopjs-ef",
+                "location": "public",
+                "main": "nodeps"
+              },
+              {
+                "name": "jquery",
+                "location": "public",
+                "main": "jquery-1.9.1"
+              },
+              {
+                "name": "jquery-jsonp",
+                "location": "_shared/jquery-jsonp/2.1.4",
+                "main": "jquery-jsonp"
+              },
+              {
+                "name": "poly",
+                "location": "public",
+                "main": "poly-bundle"
+              },
+              {
+                "name": "Cookies",
+                "location": "_shared/Cookies/0.3.1",
+                "main": "cookies"
+              },
+              {
+                "name": "jquery.easing",
+                "location": "_shared/jquery-easing/1.3",
+                "main": "jquery.easing"
+              },
+              {
+                "name": "jquery.mousewheel",
+                "location": "_shared/jquery-mousewheel/3.0.6",
+                "main": "jquery.mousewheel"
+              },
+              {
+                "name": "jquery.ui",
+                "location": "_shared/jquery-ui/1.10.3",
+                "main": "jquery-ui"
+              },
+              {
+                "name": "jquery.transit",
+                "location": "_shared/jquery-transit/0.1.3",
+                "main": "jquery.transit"
+              },
+              {
+                "name": "jquery.jscrollpane",
+                "location": "_shared/jquery-jscrollpane/2.0.0b12",
+                "main": "jquery.scrollpane"
+              },
+              {
+                "name": "jquery.scrollto",
+                "location": "_shared/jquery-scrollto/1.4.2",
+                "main": "jquery.scrollto"
+              },
+              {
+                "name": "jquery.viewport",
+                "location": "_shared/jquery-viewport/1.0",
+                "main": "jquery.viewport"
+              },
+              {
+                "name": "jquery.flip",
+                "location": "_shared/jquery-flip/0.9.10-shim",
+                "main": "jquery.flip"
+              },
+              {
+                "name": "jquery.form",
+                "location": "_shared/jquery-form/3.20",
+                "main": "jquery.form"
+              },
+              {
+                "name": "swfobject",
+                "location": "_shared/swfobject/2.2",
+                "main": "swfobject"
+              },
+              {
+                "name": "base64",
+                "location": "_shared/ScriptSharp/0.5.6",
+                "main": "base64-amd"
+              },
+              {
+                "name": "underscore",
+                "location": "_shared/underscore.js/1.3.3",
+                "main": "underscore"
+              },
+              {
+                "name": "gollum",
+                "location": "_shared/gollum/1.0.0-3",
+                "main": "gollum"
+              },
+              {
+                "name": "string.split",
+                "location": "_shared/string-split/0",
+                "main": "string-split"
+              },
+              {
+                "name":"common-ui-shared",
+                "location" : "_shared/common-ui-shared/{CCL:common.ui.shared.version}/../snapshot/js",
+                "main": ""
+              },
+              {
+                "name": "jquery.counter",
+                "location": "_shared/jquery-counter/2.2",
+                "main": "jquery.counter"
+              },
+              {
+                "name": "markdownjs",
+                "location": "_shared/markdown-js/0.4.0",
+                "main": "markdown"
+              },
+              {
+                "name": "jquery-tipsy",
+                "location": "_shared/jquery-tipsy/1.0.0a-refined/javascripts",
+                "main": "jquery.tipsy"
+              },
+              {
+                "name": "json2",
+                "location": "public",
+                "main": "json2"
+              },
+              {
+                "name" : "when",
+                "location": "public",
+                "main": "when-bundle"
+              },
+              {
+                "name": "jquery.fancybox",
+                "location": "public/fancybox",
+                "main": "jquery.fancybox"
+              },
+              {
+                "name" : "text",
+                "location" : "public",
+                "main" : "text"
+              },
+              {
+                "name": "jquery.gudstrap",
+                "location": "_shared/gudstrap/1.0.0-2-ef.1/js",
+                "main": "gudstrap"
+              },
+              {
+                "name": "jquery.cookie",
+                "location": "_shared/jquery-cookie/1.3.1",
+                "main": "jquery.cookie"
+              }
+            ],
 
-  <script type="text/javascript" src="/_shared/require.js/2.0.4-ef.1/require.js"></script>
+            "shim" : {
+              "json2" : {
+                exports : function () {
+                  return window.JSON;
+                }
+              },
+              "jquery.fancybox" : {
+                deps :[ "jquery", "jquery.easing", "jquery.mousewheel" ],
+                exports : function ($, easing, mousewheel) {
+                  return $;
+                }
+              },
+              "jquery.easing" : {
+                deps :[ "jquery" ],
+                exports : function ($) {
+                  return $;
+                }
+              },
+              "jquery.mousewheel" :  {
+                deps :[ "jquery" ],
+                exports : function ($) {
+                  return $;
+                }
+              },
+              "jquery.scrollto": {
+                deps: ["jquery"],
+                exports: function($) {
+                  return $;
+                }
+              },
+              "jquery.viewport": {
+                deps: ["jquery"],
+                exports: function($) {
+                  return $;
+                }
+              },
+              "jquery.ui": {
+                deps: ["jquery"],
+                exports: function($){
+                  return $;
+                }
+              },
+              "jquery.transit" : ["jquery"],
+              "jquery.flip":{
+                deps: ["jquery"],
+                exports: function($){
+                  return $;
+                }
+              },
+              "underscore": {
+                exports: function(){
+                  return _;
+                }
+              },
+              'jquery.counter': {
+                deps :[ "jquery" ],
+                exports : function ($) {
+                  return $;
+                }
+              },
+              "jquery.form": {
+                deps: ['jquery'],
+                exports: function ($) {
+                  return $;
+                }
+              },
+              "swfobject": {
+                exports: function () {
+                  return window.swfobject;
+                }
+              },
+              "markdownjs": {
+                exports: function () {
+                  return window.markdown;
+                }
+              },
+              "jquery-tipsy": {
+                deps: ['jquery'],
+                exports: function($) {
+                  return $;
+                }
+              },
+              "jquery.gudstrap":  {
+                deps :[ "jquery" ],
+                exports : function ($) {
+                  return $;
+                }
+              },
+              "when": {
+                deps: ["poly"]
+              }
+            },
+            "deps" : ["require", "when", "poly", "troopjs-bundle", "troopjs-ef"],
+            "config" : {
+              "troopjs-data/query/service" : {
+                "url" : "/services/api/proxy/queryproxy",
+                "type" : "post"
+              },
+              "school-ui": config,
+              "school-ui-study/module": config,
+              "school-ui-activity": config,
+              "school-ui-activity-container": config,
+              "school-ui-activity-container/widget/activity/activity-manager/main": config,
+              "school-ui-shared/module": config
+            },
+            "map" : {
+              "*" : {
+                "mv" : "troopjs-requirejs/multiversion",
+                "template" : "troopjs-requirejs/template",
+                "shadow" : "troopjs-requirejs/shadow",
+                "jquery" : "troopjs-jquery/noconflict",
+                "logger" : "troopjs-core/logger/console"
+              },
+
+              "troopjs-jquery/noconflict" : {
+                "jquery" : "jquery"
+              }
+            },
+            "callback" : function (localRequire) {
+                localRequire(["jquery"], function(jQuery){
+                  localRequire([
+                    "troopjs-browser/application/widget",
+                    "troopjs-browser/ajax/service",
+                    "troopjs-data/query/service",
+                    "troopjs-data/cache/component",
+                    "troopjs-core/pubsub/hub",
+                    "troopjs-browser/route/widget",
+
+                    "troopjs-ef/service/config",
+                    "public/context",
+                    "public/load",
+                    "troopjs-core/logger/service",
+                    "troopjs-jquery/loom",
+                    "public/https-compatibility"
+                  ], function (
+                    Application,
+                    AjaxService,
+                    QueryService,
+                    Cache,
+                    Hub,
+                    RouteWidget,
+                    ConfigService,
+                    ContextService,
+                    LoadService,
+                    Loom,
+                    httpsCompat
+                  ) {
+                    jQuery(function ($) {
+                      var cache = Cache();
+                      var sourceParams = {
+                        "devicetypeid": {
+                          "value": 1
+                        },
+                        "productid": {
+                          "value": 100
+                        }
+                      };
+
+                      let oEvent = null;
+                      let startupEvent = 'troop/ready';
+                      if (document.createEvent) {
+                        oEvent = document.createEvent("HTMLEvents");
+                        oEvent.initEvent(startupEvent, true, true);
+                        document.dispatchEvent(oEvent);
+                      } else {
+                        oEvent = document.createEventObject();
+                        oEvent.eventType = startupEvent;
+                        document.fireEvent("on" + event.eventType, event);
+                      }
+
+                      Application($("html"), "bootstrap", AjaxService(), RouteWidget($(window), "route"), QueryService(cache), ConfigService(cache, sourceParams), ContextService(), LoadService())
+                          .start();
+                    });
+                  });
+                });
+
+            }
+          });
+        }
+      };
+    })();
+  </script>
+  <script type="text/javascript" src="public/require.js"></script>
 </body>
 
 </html>
