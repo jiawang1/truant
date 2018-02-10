@@ -5,14 +5,10 @@ import { getTroopConnector } from './troopConnector';
 import TroopWrapper from './TroopWrapper';
 
 export const renderToTroop = (option = {}) => WrappedComponent => {
-  const { sub, pub } = option;
+  const { sub } = option;
 
-  const wrap = WrappedComponent =>{
-    return React.createElement(
-      TroopWrapper,
-      { asWrapper: true , test: 1 },
-      React.createElement(WrappedComponent)
-    );
+  const wrap = WrappedComponent => {
+    return React.createElement(TroopWrapper, { asWrapper: true }, React.createElement(WrappedComponent));
   };
 
   const connector = getTroopConnector();
@@ -20,5 +16,4 @@ export const renderToTroop = (option = {}) => WrappedComponent => {
     const { node, ...props } = option;
     ReactDOM.render(wrap(WrappedComponent), node);
   });
-
 };

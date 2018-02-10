@@ -23,34 +23,53 @@ const config = {
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true
-    }),
-    sizes()
-  ],
-  watch: {
-    include: 'src/**'
-  }
+    })
+  ]
 };
 
-export default [
-  Object.assign(
+const buildESModule = mode => {
+  const plugins = config.plugins.slice();
+  if (mode === 'development') {
+    plugins.push(sizes());
+  }
+  return Object.assign(
     {
       output: {
         file: `es/${pkg.name.indexOf('/') > 0 ? pkg.name.split('/')[1] : pkg.name}.bundle.js`,
         format: 'es'
       }
     },
-    config
-  ),
+    config,
+    {
+      watch: {
+        include: 'src/**'
+      }
+    },
+    { plugins }
+  );
+};
 
-  Object.assign(
+const buildCJS = () => {
+  const plugins = config.plugins.slice();
+  plugins.push(uglify());
+  return Object.assign(
     {
       output: {
         file: `dist/${pkg.name.indexOf('/') > 0 ? pkg.name.split('/')[1] : pkg.name}.bundle.min.js`,
         format: 'cjs'
-      },
-      name: 'troop-adapter'
+      }
     },
     config,
-    { plugins: [...config.plugins, uglify()] }
-  )
-];
+    { plugins }
+  );
+};
+
+const build = mode => {
+  if (mode === 'development') {
+    return buildESModule(mode);
+  } else {
+    return [buildESModule(mode), buildCJS()];
+  }
+};
+
+export default build(process.env.NODE_ENV);

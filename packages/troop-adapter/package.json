@@ -6,10 +6,10 @@
   "module": "es/troop-adapter.bundle.js",
   "jsnext:main": "es/troop-adapter.bundle.js",
   "scripts": {
-    "dist": "rollup -c",
+    "dist": "node ./tools/build.js -- --production",
     "test": "find ./test -name '*.test.js' | xargs ./node_modules/.bin/_mocha --recursive ",
     "st": "./node_modules/.bin/_mocha --",
-    "build": "rollup -c --watch"
+    "dev": "node ./tools/build.js"
   },
   "author": "Wang jia",
   "dependencies": {
@@ -19,7 +19,6 @@
     "prop-types": "^15.6.0",
     "whatwg-fetch": "^2.0.3",
     "react": "^16.2.0",
-
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
