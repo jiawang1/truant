@@ -1,10 +1,10 @@
-import pkg from './package.json';
 import json from 'rollup-plugin-json';
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import sizes from 'rollup-plugin-sizes';
+import pkg from './package.json';
 
 const config = {
   input: 'index.js',
@@ -67,9 +67,8 @@ const buildCJS = () => {
 const build = mode => {
   if (mode === 'development') {
     return buildESModule(mode);
-  } else {
-    return [buildESModule(mode), buildCJS()];
   }
+  return [buildESModule(mode), buildCJS()];
 };
 
 export default build(process.env.NODE_ENV);
