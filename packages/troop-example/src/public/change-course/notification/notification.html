@@ -1,0 +1,20 @@
+<%
+    var model = data || {},
+        tpl = model.tpl || {};
+%>
+<span class="ets-chl-alert-main-copy"><%=tpl.mainTitle%></span>
+<div class="ets-chl-alert-bottom">
+    <div class="ets-chl-alert-sub-copy">
+        <span class="ets-chl-alert-sub-copy-item"><%=tpl.subTitle%></span>
+    </div>
+    <div class="ets-chl-alert-btns">
+        <%if(model.isConfirm) {%>
+            <div class="ets-btn ets-btn-blue ets-btn-shadowed">
+                <span class="ets-chl-alert-btn-cancel" data-action="cancel" data-text-en="Cancel"><%=tpl.cancelButton%></span>
+            </div>
+        <%}%>
+        <div class="ets-btn ets-btn-white ets-btn-shadowed">
+            <span class="ets-chl-alert-btn-confirm" data-action="<%=tpl.confirmAction%>"><%=tpl.confirmButton%></span>
+        </div>
+    </div>
+</div>

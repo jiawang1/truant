@@ -1,0 +1,63 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Level Passs
+//  File:          ets-ui-level-pass.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@ets-level-pass-container-bg:"../img/ets-ui-level-pass-bg.png";
+
+.ets-level-pass-container{
+	background:#84C400 url("@{ets-level-pass-container-bg}") repeat;
+	width:523px;
+	height:344px;
+	margin:0 auto;
+	position: absolute;
+	top:1px;
+	left:113px;
+	z-index:200;
+	color:#FFF;
+	padding:162px 50px 0 180px;
+	overflow: hidden;
+	h2 {
+	  font-size:56px;
+	  text-shadow:0 1px 0px #333;
+    font-weight:bold;
+    line-height: 1.1;
+    position: relative;
+    margin-bottom: 15px;
+    > i {
+      position: absolute;
+      left: -70px;
+      top: 10px;
+    }
+	}
+	p {
+    font-size:18px;
+    font-weight:bold;
+    text-shadow:0 1px 0px #333;
+    line-height:1.4;
+	}
+    .ets-ui-spinnable {
+      *height: 506px; //hack for IE7 spinnable height error
+    }
+}
+
+.ets-level-pass-close-btn{
+	position: absolute;
+	top:7px;
+	right:10px;
+	text-decoration:underline;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.ets-level-pass-btns{
+	margin-top: 45px;
+	.ets-btn{
+		margin:0 10px 0 0;
+	}
+}

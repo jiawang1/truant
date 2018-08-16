@@ -1,0 +1,19 @@
+<%
+var units = data,
+unitCount = units.length,
+unit;
+%>
+<div class="ets-ui-unn-ft">
+	<ul class="ets-ui-unn-dots">
+		<%
+			for(var i = 0; i < unitCount; i++) {
+				unit = units[i].unit || units[i];
+				%>
+					<li data-unit-index="<%=i%>" data-unit-id="<%=unit.id%>" class="ets-ui-unn-dot" data-at-id="lbl-unit-dot-<%=i%>"></li>
+				<%
+			}
+		%>
+	</ul>
+</div>
+<div class="ets-ui-unn-btn-prev" data-action="route" data-at-id="btn-unit-navigation-left"></div>
+<div class="ets-ui-unn-btn-next" data-action="route" data-at-id="btn-unit-navigation-right"></div>

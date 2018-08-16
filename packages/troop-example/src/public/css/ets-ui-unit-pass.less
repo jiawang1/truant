@@ -1,0 +1,139 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Unit Pass
+//  File:          ets-ui-unit-pass.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+@ets-level-pass-container-bg:"../img/ets-ui-level-pass-bg.png";
+
+.ets-unit-pass-wrap{
+	width:768px;
+	height:400px;
+	margin: 0 auto;
+	position: relative;
+}
+.ets-ui-unit-status-passed-animate{
+	background:#84C400 url("@{ets-level-pass-container-bg}") repeat;
+	width:690px;
+	height:112px;
+	overflow: hidden;
+	position: absolute;
+	box-shadow: 0 1px 3px #aaa;
+	z-index:100;
+	top:0;
+	right:0;
+	overflow: hidden;
+	padding:40px 20px 0 20px;
+	span{
+		color:#FFF;
+		font-weight:bold;
+	}
+}
+
+.ets-unit-pass-tag{
+	width:51px;
+	height:41px;
+	.inline-block;
+	position: relative;
+	top:5px;
+	margin-right: 10px;
+	float: left;
+}
+
+.ets-unit-pass-copy1{
+	font-size:40px;	
+	float: left;
+}
+
+.ets-unit-pass-copy2{
+	.inline-block;
+	//width: 270px;
+	span{
+		display: block;
+		left:400px;
+	}
+}
+
+// b2s custom
+.ets-ui-unit-b2s-info {
+  font-size: 10px;
+  display: none;
+  padding-left: 26px;
+}
+
+.ets-unit-pass-copy2-line1{
+	position: absolute;
+	top:40px;
+	font-size:22px;
+	width: 290px;
+}
+
+.ets-unit-pass-copy2-line2{
+	position: absolute;
+	top:65px;
+	font-size:18px;
+	width: 290px;
+}
+
+.ets-unit-legacy-pass-container{
+	background:#84C400 url("@{ets-level-pass-container-bg}") repeat;
+	width:523px;
+	height:344px;
+	margin:0 auto;
+	position: absolute;
+	top:0;
+	left:-11px;
+	z-index:199;
+	color:#FFF;
+	padding:162px 50px 0 180px;
+	overflow: hidden;
+	h2 {
+	  font-size:56px;
+	  text-shadow:0 1px 0px #333;
+    font-weight:bold;
+    line-height: 1.1;
+    position: relative;
+    margin-bottom: 15px;
+    > i {
+      position: absolute;
+      left: -70px;
+      top: 10px;
+    }
+	}
+	p {
+    font-size:18px;
+    font-weight:bold;
+    text-shadow:0 1px 0px #333;
+    line-height:1.4;
+	}
+}
+
+.ets-unit-legacy-pass-close-btn{
+	position: absolute;
+	top:7px;
+	right:10px;
+	text-decoration:underline;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.ets-unit-legacy-pass-btns{
+	margin-top: 45px;
+	.ets-btn{
+		margin:0 10px 0 0;
+	}
+}
+
+
+// b2s custom
+.ets-unit-pass-b2s-btn {
+  position: absolute;
+  top: 80px;
+  left: 400px;
+  .ets-btn {
+	margin-right: 8px;
+  }
+}

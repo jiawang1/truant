@@ -1,0 +1,78 @@
+<%
+    var GROUP_SIZE = 8;
+    var me = this,
+        model = data || {},
+        courses = (model.courses || {}).items || [],
+        levelNotices = model.levelNotices,
+        hasPassed = model.hasPassed;
+%>
+<div class="ets-chl-options ets-none">
+    <div class="ets-chl-alert ets-none" data-weave="public/change-course/notification/main"></div>
+    <%
+        courses.forEach(renderCourse);
+    %>
+    <div class="ets-clear"></div>
+    <% levelNotices.forEach(function(notice) { %>
+        <p class="ets-chl-notice">* <%=notice%></p>
+    <% }); %>
+</div>
+
+<% function renderCourse(course) { %>
+<div class="ets-chl-options-course-container">
+    <ul class="ets-chl-options-course">
+        <li class="ets-chl-options-course-name-container">
+            <span class="ets-chl-options-course-name ets-overflow" title="<%=course.courseName%>"><%=course.courseName%></span>
+        </li>
+        <%
+        var levels = course.children || [];
+        var levelCount = levels.length;
+        var groupCount = Math.ceil(levelCount / GROUP_SIZE);
+
+        for(var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
+            var groupLevelCount = (groupIndex < groupCount -1) ?
+                GROUP_SIZE :
+                (levelCount - (groupCount -1) * GROUP_SIZE);
+
+            startCourseLevelGroup(groupIndex === 0);
+            for(var i = 0; i < groupLevelCount; i++) {
+                var level = levels[groupIndex * GROUP_SIZE + i];
+                renderLevel(course, level);
+            }
+            endCourseLevelGroup();
+        }
+        %>
+    </ul>
+</div>
+<%}%>
+
+<% function renderLevel(course, level) {
+    var templateLevelId = level.templateLevelId;
+    var levelName = level.levelName || "";
+    var isAccessible = level.isAccessible === undefined ? true : level.isAccessible;    //from efec enrollable courses
+    var targetUrlForInaccessible = level.targetUrlForInaccessible;                      //from efec enrollable courses
+    var accessibleComment = level.accessibleComment;                                    //from efec enrollable courses
+
+    var className = isAccessible ? '' : ' ets-inaccessible';
+    var action = isAccessible ? 'change/course' : 'navigate';
+    var showMark = accessibleComment;
+
+    var passed = hasPassed(level.progress.state || 0);
+    var passedClass = passed ? ' ets-passed' : '';
+
+    var courseTypeCode = course.courseTypeCode;
+%>
+<li class="ets-chl-course-level-container<%=className%>" data-template-id="<%=templateLevelId%>" data-course-type-code="<%=courseTypeCode%>"  data-passed="<%=passed%>" data-action="<%=action%>" data-url="<%=targetUrlForInaccessible%>">
+    <span class="ets-chl-course-level">
+        <span class="ets-chl-course-level-name ets-overflow" title="<%=levelName%>"><%=levelName%><%if (showMark) {%><span class="ets-chl-course-level-mark">*</span><%}%></span>
+        <span class="ets-chl-course-level-status<%=passedClass%>"></span>
+    </span>
+</li>
+<%}%>
+
+<% function startCourseLevelGroup(isFirstGroup) { %>
+<li class="ets-chl-course-level-group<%=(isFirstGroup ? ' ets-chl-course-level-first-group': '')%>"><ul>
+<%}%>
+
+<% function endCourseLevelGroup() { %>
+</ul></li>
+<%}%>

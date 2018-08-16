@@ -1,0 +1,54 @@
+<%
+    var levelTemplateId = data.levelTemplateId,
+        passCopy1 = {
+            blurb_id : 450032,
+            blurb_en : "Level passed"
+        },
+        passCopy2 = {
+            blurb_id : 450033,
+            blurb_en : "Well done, you have passed this level."
+        },
+        passCopy3 = {
+            blurb_id : 450034,
+            blurb_en : "You can take a level test or move on."
+        },
+        levelMoveOnAction, levelMoveOnData, levelTestId;
+        
+    // for SPIN course
+    if(data.isSPIN) {
+        passCopy1.blurb_id = 461318;
+        passCopy1.blurb_en = "Course passed";
+
+        passCopy2.blurb_id = 461319;
+        passCopy2.blurb_en = "Congratulations! Well done!";
+
+        passCopy3.blurb_id = 461586;
+        passCopy3.blurb_en = "Select the next course you would like to do.";
+    } else {
+        levelMoveOnAction = "data-action='next/level'";
+        levelMoveOnData = 'data-template-id="'+ (levelTemplateId)+'"';
+        levelTestId = data.levelTestId;
+    }
+%>
+<span class="ets-level-pass-close-btn" data-action="close" data-weave="troopjs-ef/blurb/widget" data-blurb-id="450020" data-text-en="close" data-at-id="btn-level-pass-close"></span>
+<span class="ets-level-pass-tag"></span>
+<div class="ets-level-pass-copy">
+    <h2 data-weave="troopjs-ef/blurb/widget" data-blurb-id="<%=passCopy1.blurb_id%>" data-text-en="<%=passCopy1.blurb_en%>" data-at-id="lbl-level-pass-title"></h2>
+    <p data-weave="troopjs-ef/blurb/widget" data-blurb-id="<%=passCopy2.blurb_id%>" data-text-en="<%=passCopy2.blurb_en%>" data-at-id="lbl-level-pass-message"></p>
+	<%if(data.enableGoToNextLevel && data.hasLevelTest) {%>
+	<p data-weave="troopjs-ef/blurb/widget" data-blurb-id="<%=passCopy3.blurb_id%>" data-text-en="<%=passCopy3.blurb_en%>" data-at-id="lbl-level-pass-sub-message"></p>
+	<%}%>
+</div>
+<div class="ets-level-pass-btns">
+    <%if(data.isGE) {%>
+        <%if(!data.isLastLevel && data.enableGoToNextLevel) {%>
+            <div class="ets-btn ets-btn-shadowed ets-btn-white" data-at-id="btn-select-the-next-level" <%=levelMoveOnData%> <%=levelMoveOnAction%> ><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450036" data-text-en="Go to next level"></span></div>
+        <%}%>
+
+        <%if(data.hasLevelTest){ %>
+            <a class="ets-btn ets-btn-shadowed ets-btn-white" data-at-id="btn-take-the-level-test" href="/school/content/leveltest.aspx?testid=<%=levelTestId%>" target="_blank"><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450035" data-text-en="Take the level test"></span></a>
+        <%}%>
+	<%} else if (data.enableSelectCourse) {%>
+	<div class="ets-btn ets-btn-shadowed ets-btn-white" data-action="open/course-list" data-at-id="btn-select-course"><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="461320" data-text-en="Select course"></span></div>
+	<%}%>
+</div>

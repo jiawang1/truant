@@ -1,0 +1,139 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Common Styles
+//  File:          ets-ui-common.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@ets-ui-main-img: "../img/ets-ui-main.png";
+@ets-ui-pattern-dots: "../img/ets-ui-pattern-dots.png";
+@ets-ui-spinning-dark-l: "../img/ets-loading-dark-l.gif";
+@ets-ui-spinning-dark-s: "../img/ets-loading-dark-s.gif";
+@ets-ui-spinning-white-l: "../img/ets-loading-white-l.gif";
+@ets-ui-spinning-white-s: "../img/ets-loading-white-s.gif";
+
+@unit-page-min-height: 585px;
+
+.ets-ui-unit-page {
+  min-height: @unit-page-min-height;
+}
+
+.ets-ui-wrap {
+  //global resets
+  font-family: @sansFontFamily;
+  font-size: @baseFontSize;
+  color: @grayDarker;
+  line-height: 1.2;
+
+  background: #CDD2D8 url("@{ets-ui-main-img}") 0 -600px repeat-x;
+  min-height: @unit-page-min-height;
+
+  
+  /* 
+    reset its z index to make sure,
+    the z of inner content does not interfere widget out side 
+    current element
+  */
+  position: relative;
+  z-index: 0;
+  _zoom: 1;
+}
+
+.ets-ui-main {
+  width: 980px;
+  margin: 0 auto;
+}
+
+/*=========Common styles===========*/
+
+.ets-ui-icon-pass-s {
+  .inline-block;
+  .size(30px, 30px);
+  background: url("@{ets-ui-main-img}") -775px -153px no-repeat;
+}
+
+.ets-ui-icon-pass-m {
+  .inline-block;
+  .size(54px, 41px);
+  background: url("@{ets-ui-main-img}") -749px -100px no-repeat;
+}
+
+.ets-ui-icon-pass-l {
+  .inline-block;
+  .size(73px, 58px);
+  background: url("@{ets-ui-main-img}") -380px -240px no-repeat;
+}
+
+.ets-ui-icon-max-s {
+  .inline-block;
+  .size(30px, 30px);
+  background: url("@{ets-ui-main-img}") -180px -250px no-repeat;
+}
+
+.ets-ui-icon-max-s {
+  .inline-block;
+  .size(30px, 30px);
+  background: url("@{ets-ui-main-img}") -180px -250px no-repeat;
+}
+
+.ets-ui-icon-max {
+  .inline-block;
+  .size(102px, 102px);
+  background: url("@{ets-ui-main-img}") -240px -210px no-repeat;
+}
+
+.ets-ui-icon-pass-rounded-s {
+  .inline-block;
+  .size(30px, 30px);
+  background: url("@{ets-ui-main-img}") -125px -245px no-repeat;
+}
+
+.ets-ui-icon-loading-dark-s {
+  .inline-block;
+  .size(12px, 12px);
+  background: url("@{ets-ui-spinning-dark-s}") -125px -245px no-repeat;
+}
+
+.ets-ui-icon-loading-white-s {
+  .inline-block;
+  .size(12px, 12px);
+  background: url("@{ets-ui-spinning-white-s}") -125px -245px no-repeat;
+}
+
+/*=========Loading Icon=======*/
+
+.ets-ui-spinning
+{
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100%;
+}
+
+.ets-ui-spinning.ets-dark
+{
+  background-image: url("@{ets-ui-spinning-dark-l}");
+}
+
+/*========= backdrop =======*/
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  background-color: #000000;
+
+  &.fade {
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  &.in {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+}

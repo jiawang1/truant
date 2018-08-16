@@ -1,0 +1,222 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Unit
+//  File:          ets-ui-unit.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+
+
+.ets-ui-unit {
+  position:relative;
+
+  &.ets-ui-ph{
+    .ets-ui-unit-btn-uno, .ets-ui-unit-name{
+      display: none;
+    }    
+  }
+
+  .ets-ui-spinnable {
+    display: none;
+  }
+
+  &.ets-spinning {
+    .ets-ui-spinnable {
+      display: block;
+    }
+  }
+}
+
+.ets-ui-unit h1 {
+  font-size: 28px;
+  font-weight: 300;
+  color: #57606B;
+//  float: left;
+}
+
+.ets-ui-unit h1 strong {
+  font-weight: 700;
+  color: #222;
+}
+
+.ets-ui-unit-hd {
+  padding: 15px 0px 10px 0;
+  margin: 0 20px;
+  border-bottom: 1px solid #d2d2d2;
+  position: relative;
+  *z-index: 2;
+}
+
+.ets-ui-unit-bd {
+  padding: 30px 0;
+  overflow: hidden;
+  height: 360px;
+  position: relative;
+  *z-index: 1;
+}
+
+.ets-ui-unit-locked-hint {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  z-index:101;
+  width: 754px;
+  background: #3a4047 url("@{ets-ui-pattern-dots}") repeat;
+  .ets-ui-unit-locked-hint-info {
+    height:63px;
+    padding: 33px 20px 33px 130px;
+    .ets-ui-unit-locked-hint-icon{
+      float:left;
+      width: 52px;
+      height: 63px;
+      background: url("@{ets-ui-main-img}") right -285px no-repeat;
+    }
+    .ets-ui-unit-locked-hint-con{
+      float:left;
+      width:500px;
+      height: 63px;
+      margin: 0 0 0 27px;
+      color: #FFFFFF;
+      font-weight: bold;
+      .ets-ui-unit-locked-hint-con-top{
+        font-size: 25px;
+        text-shadow: 0px 1px 0 #333;
+      }
+      .ets-ui-unit-locked-hint-con-bottom{
+        padding-top:8px;
+        font-size:15px;
+        text-shadow: 0px 1px 0 #333;
+      }
+    }
+  }
+}
+
+.ets-ui-unit-bd-container {
+  top: -1020px;
+  position: relative;
+}
+
+.ets-ui-unit-bd-container table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ets-ui-unit-bd-container td {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 2400px;
+  vertical-align: middle;
+}
+
+.ets-ui-unit-btn-uno {
+  .inline-block;
+  float: left;
+  color: #2887BF;
+  cursor: pointer;
+  padding: 3px 8px;
+  margin: 6px 0;
+  &:hover {
+    background: #008DDE;
+    color: #fff;
+    border-radius: 10px;
+  }
+  &:active {
+    .opacity(60);
+  }
+}
+
+.ets-ui-unit-btn-upt {
+  visibility: hidden; // hide "unit pretest" button now
+  .inline-block;
+  display: none !important; //fixed ie7 error
+//  float: right;
+  color: #2887BF;
+  cursor: pointer;
+  padding: 3px 8px;
+  margin: 6px 0;
+  &:hover {
+    background: #008DDE;
+    color: #fff;
+    border-radius: 10px;
+  }
+  &:active {
+    .opacity(60);
+  }
+}
+
+.ets-ui-unit-status-passed{
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 0;
+  padding: 10px 7px 10px 8px;
+  line-height: 30px;
+  background: #7EC000 url("@{ets-ui-pattern-dots}") repeat;
+  color: #fff;
+  text-shadow: 0px 1px 0 #999;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 1px 3px #aaa;
+  z-index: 100;
+  span {
+	.inline-block;
+	// b2s custom
+	&.ets-ui-unit-pass-tag {
+	  .size(21px, 16px);
+	  background: url("@{ets-ui-main-img}") -779px -160px no-repeat;
+	  margin-right: 6px;
+	}
+	// b2s custom
+	&.ets-ui-unit-b2s-info {
+	  display: block;
+	  font-size: 10px;
+	  line-height: normal;
+	  padding-left: 28px;
+	}
+  }
+}
+
+// b2s custom
+.ets-ui-unit-status-passed-b2s {
+  cursor: pointer;
+}
+
+.ets-ui-unit-status-locked {
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 0;
+  height: 30px;
+  padding: 10px; 
+  line-height: 30px;
+  background: #7C858D url("@{ets-ui-pattern-dots}") repeat;
+  color: #fff;
+  text-shadow: 0px 1px 0 #333;
+  font-size: 21px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px #aaa;
+  span {
+    .inline-block;
+    .size(16px, 19px);
+    background: url("@{ets-ui-main-img}") -784px -260px no-repeat;
+    margin-right: 6px;
+  }
+  em {
+    font-style: normal;
+  }
+}
+
+.ets-ui-unit.ets-locked .ets-ui-unit-status-locked {
+  display: block;
+}
+
+.ets-ui-unit.ets-passed .ets-ui-unit-status-passed {
+  display: block;
+}

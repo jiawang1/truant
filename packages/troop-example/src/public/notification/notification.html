@@ -1,0 +1,38 @@
+<%
+    var outBlurb = function(id,en){
+        var res = "data-weave='troopjs-ef/blurb/widget' data-blurb-id='"+id+"' data-text-en='"+en+"'";
+
+        return res;
+    };
+%>
+<!--
+add class="ets-ntf" to container
+-->
+<div class="ets-ntf-backdrop"></div>
+<div class="ets-ntf">
+    <div class="ets-ntf-header" <%= outBlurb(473826, 'Your course have been upgraded.') %> ></div>
+    <div class="ets-ntf-body ets-cf">
+        <div class="ets-sidebar">
+            <ul class="ets-info">
+                <li>
+                    <div class="ets-title" <%= outBlurb(473827, 'Renovated learning material') %>></div>
+                    <p <%= outBlurb(473828, 'When you finish this unit, you will get access to new and updated learning material. It\'s more relevant and applicable than ever before. Keep going, and you will soon see the benefits.') %>></p>
+                </li>
+                <li>
+                    <div class="ets-title" <%= outBlurb(473829, 'Streamlined experience') %> ></div>
+                    <p  <%= outBlurb(473830, 'Our new exercises are more innovative than ever, so you can build skills and make faster progress to your next level. We\'ll store everything you\'ve learned so far. ') %> ></p>
+					<br/>
+					<p  <%= outBlurb(484774, 'All you need to do now is keep studying, and you\'ll soon see the benefits.') %> ></p>
+                </li>
+            </ul>
+        </div>
+        <div class="ets-section">
+            <img src="/_imgs/UI/courseware/study/ets-ui-unit-page-thumbnail.png" alt="Unit Page">
+            <div class="ets-btn ets-btn-purple" data-action="close">
+                <span <%= outBlurb(478209, 'Ok, I got it!') %>></span>
+                <span>&gt;</span>
+            </div>
+        </div>
+    </div>
+    <div class="ets-ntf-footer"></div>
+</div>

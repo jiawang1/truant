@@ -1,0 +1,375 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Lesson
+//  File:          ets-ui-lesson.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@img-lesson-no-pic:"../img/lesson-no-pic.png";
+@img-lesson-place-holder:"../img/img-place-holder.png";
+@img-cross-device:"../img/ets-ui-cross-device.png";
+
+
+.ets-ui-lesson-container {
+  @padding: 10px;
+  @width: 260px;
+  @height: 160px;
+
+  .size(@width + @padding * 2, @height + @padding * 2);
+
+  position: relative;
+  /* lesson should covers step-list even when step-list is position relative */
+  z-index: 1;
+
+  .ets-ui-lesson {
+    .size(@width, @height);
+    padding: 10px;
+    overflow: visible;
+    background: #f3f3f3;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #bbb;
+    cursor: pointer;
+    position: relative;
+    &:hover {
+      background: #fcfcfc;
+      box-shadow: 1px 1px 3px #999;
+    }
+    .ets-ui-lesson-ph, .ets-ui-lesson-new{
+      display: none;
+    }
+
+    &.ets-ui-ph{
+      div{
+        display: none;
+      }
+      .ets-ui-lesson-ph{
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: url("@{img-lesson-place-holder}") 0 0 no-repeat; 
+      }
+      .ets-ui-lesson-new{
+        display: block;
+        width: 100%;
+        background-color: #338096;
+        position: absolute;
+        left:0;
+        top:40%;        
+        text-align: center;
+
+        span {
+          line-height: 40px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .ets-ui-lesson.ets-passed .ets-ui-lesson-status-passed {
+    display: block;
+  }
+
+  .ets-ui-lesson.ets-locked .ets-ui-lesson-status-locked {
+    display: block;
+  }
+  
+  .ets-ui-lesson.ets-ui-ph .ets-ui-lesson-status-locked {
+    display: none;
+  }
+
+  .ets-ui-lesson-title {
+      position: absolute;
+      color: #fff;
+      font-size: 14px;
+      padding: 6px 10px;
+      width: 240px;
+      .opacity(80);
+      left: 10px;
+      background: #000;
+  }
+  
+  .ets-ui-lesson-img {
+    width: 260px;
+    height: 160px;
+  }
+  
+  .ets-ui-lesson-img-no-pic {
+    background: url("@{img-lesson-no-pic}") 0 0 no-repeat;
+  }
+
+  .ets-ui-lesson-status-passed {
+    display: none;
+    position: absolute;
+    right: 10px;
+    height: 30px;
+    padding: 5px 10px; 
+    line-height: 30px;
+    background: #7EC000 url("@{ets-ui-pattern-dots}") repeat;
+    color: #fff;
+    text-shadow: 0px 1px 0 #999;
+    font-size: 16px;
+    font-weight: 700;
+    .ets-ui-icon-pass-s {
+      margin-right: 10px;
+      float: left;
+    }
+  }
+
+  .ets-ui-lesson-status-locked {
+    display: none;
+    position: absolute;
+    .size(260px, 105px);
+    left: 10px;
+    top: 10px;
+    padding: 55px 0 0 0;
+    background: #000;
+    .opacity(50);
+    span {
+      display: block;
+      margin: 0 auto;
+      .size(42px, 50px);
+      background: url("@{ets-ui-main-img}") -758px -200px no-repeat;
+    }
+  }
+}
+
+.ets-ui-lesson-container.ets-nth-1 {
+  float: left;
+  margin: 0 0 10px 90px;
+  .ets-ui-lesson-title {
+    bottom: 10px;
+  }
+  .ets-ui-lesson-status-passed {
+    bottom: 50px;
+  }
+}
+
+.ets-ui-lesson-container.ets-nth-2 {
+  float: right;
+  margin: 0 90px 10px 0;
+  .ets-ui-lesson-title {
+    bottom: 10px;
+  }
+  .ets-ui-lesson-status-passed {
+    bottom: 50px;
+  }
+}
+
+.ets-ui-lesson-container.ets-nth-3 {
+  float: left;
+  margin: 10px 0 0 90px;
+  .ets-ui-lesson-title {
+    top: 10px;
+  }
+  .ets-ui-lesson-status-passed {
+    top: 50px;
+  }
+}
+
+.ets-ui-lesson-container.ets-nth-4 {
+  float: right;
+  margin: 10px 90px 0 0;
+  .ets-ui-lesson-title {
+    top: 10px;
+  }
+  .ets-ui-lesson-status-passed {
+    top: 50px;
+  }
+}
+
+.ets-ui-lesson-xd {
+  position: absolute;
+  padding: 5px 10px;
+  line-height: 30px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+  .clearfix();
+  &.ets-pass {
+    background-color: #87c600;
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.2), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.2), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,.2), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.2), rgba(0,0,0,0));
+    background-image: linear-gradient(to top, rgba(0,0,0,.2), rgba(0,0,0,0));
+
+    .ets-ui-icon-xd-state {
+      .inline-block();
+      .size(30px, 30px);
+      background: url("@{img-cross-device}") 0 0 no-repeat;
+      vertical-align: middle;
+    }
+
+    .ets-ui-icon-xd-state-mobile {
+      .inline-block();
+      .size(30px, 30px);
+      background: url("@{img-cross-device}") -60px 0 no-repeat;
+      vertical-align: middle;
+    }
+  }
+
+  &.ets-start {
+    background-color: #a1a1a1;
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.35), rgba(0,0,0,0));
+    background-image: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,0));
+
+    .ets-ui-icon-xd-state-mobile {
+      .inline-block();
+      .size(30px, 30px);
+      background: url("@{img-cross-device}") -30px 0 no-repeat;
+      vertical-align: middle;
+    }
+  }
+
+  &.ets-nth-1 {
+    bottom: 48px;
+  }
+
+  &.ets-nth-2 {
+    bottom: 48px;
+  }
+
+  &.ets-nth-3 {
+    top: 48px;
+  }
+
+  &.ets-nth-4 {
+    top: 48px;
+  }
+
+  span {
+    display: none;
+    line-height: normal;
+    vertical-align: middle;
+    color: white;
+    white-space: normal;
+    max-width: 185px;
+  }
+  &.ets-ui-lesson-xd-mobile span {
+    max-width: 155px;
+  }
+
+  .ets-ui-icon-xd-qa {
+    display: none;
+    .size(30px, 30px);
+    background: url("@{img-cross-device}") -90px 0 no-repeat;
+    vertical-align: middle;
+  }
+}
+
+.ets-ui-lesson-container.ets-active
+{
+  z-index: 2;
+
+  .ets-ui-lesson-xd {
+    width: auto;
+    span {
+      .inline-block();
+    }
+    .ets-ui-icon-xd-qa {
+      .inline-block();
+    }
+  }
+}
+
+.ets-ui-lesson-xd-popup-mobile {
+  width: 800px;
+  padding: 30px 0;
+
+  .ets-ui-lesson-xd-popup-inner {
+    width: 600px;
+    margin: 0 auto;
+    .clearfix();
+  }
+
+  .ets-ui-lesson-xd-popup-content {
+    float: left;
+    width: 520px;
+
+    h1 {
+      font-weight: bold;
+      line-height: 2;
+      color: #3d4756;
+      font-size: 2em;
+    }
+
+    p {
+      color: #3d4756;
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    div.ets-btn {
+      margin: 20px 0;
+    }
+  }
+
+  &.ets-start {
+    background-color: #efefef;
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: linear-gradient(to top, rgba(0,0,0,.1), rgba(0,0,0,0));
+
+    .ets-ui-icon-xd-popup-state-mobile {
+      display: block;
+      .size(33px, 61px);
+      background: url("@{img-cross-device}") 0 -30px no-repeat;
+      float: left;
+      margin-right: 40px;
+    }
+
+    .ets-ui-lesson-xd-popup-content {
+      h1 {
+        color: #3d4756;
+      }
+
+      p {
+        color: #3d4756;
+      }
+    }
+  }
+
+  &.ets-pass {
+    background-color: #87c600;
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,.1), rgba(0,0,0,0));
+    background-image: linear-gradient(to top, rgba(0,0,0,.1), rgba(0,0,0,0));
+
+    .ets-ui-icon-xd-popup-state-mobile {
+      display: block;
+      .size(40px, 62px);
+      background: url("@{img-cross-device}") -33px -30px no-repeat;
+      float: left;
+      margin-right: 40px;
+    }
+
+    .ets-ui-lesson-xd-popup-content {
+      h1 {
+        color: #fff;
+      }
+
+      p {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.ets-ui-lesson-xd-popup-mobile-wrapper-start,
+.ets-ui-lesson-xd-popup-mobile-wrapper-pass {
+  display: none;
+}

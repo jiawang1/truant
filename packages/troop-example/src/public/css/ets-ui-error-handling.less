@@ -1,0 +1,86 @@
+@ets-ui-error-handling-closeBtn: "../img/ets-ui-error-handling-closeBtn.png";
+
+.ets-ui-error-handling {
+  background-color: #fcbd00;
+  background-image: -webkit-linear-gradient(top, rgb(252,202,0) 50%, rgb(252,172,0) 100%);
+  background-image: linear-gradient(top, rgb(252,202,0) 50%, rgb(252,172,0) 100%);
+  background-image: -moz-linear-gradient(top, rgb(252,202,0) 50%, rgb(252,172,0) 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, rgb(252,202,0)), color-stop(1, rgb(252,172,0)));
+  width: 100%;
+  color: #ffffff;
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  display: none;
+}
+
+.ets-ui-error-handling-container {
+  width: 960px;
+  margin: 0 auto;
+
+  table {
+    width: 100%;
+    td {
+      vertical-align:middle;
+      padding: 10px 0;
+    }
+    td.ets-ui-error-handling-message {
+      width: 660px;
+    }
+  }
+}
+
+a.ets-ui-error-handling-closeBtn {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin: 0 6px 0 16px;
+  background: url("@{ets-ui-error-handling-closeBtn}") no-repeat 0 0;
+  &:hover {
+    background-position: -20px 0;
+  }
+}
+
+.ets-ui-error-handling-title,
+.ets-ui-error-handling-description,
+.ets-ui-error-handling-colon {
+  font-size: 14px;
+  font-weight: bold;
+}
+.ets-ui-error-handling-link{
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration:underline;
+}
+
+a.ets-ui-error-handling-button {
+  float: right;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  display: inline-block;
+  min-width: 194px;
+  padding: 0 6px;
+  height: 32px;
+  line-height: 32px;
+  vertical-align: middle;
+  text-align: center;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background-color: #232932;
+  -webkit-box-shadow: 0 1px rgba(255,255,255,.5), inset 0 1px 2px rgba(0,0,0,.8);
+  -moz-box-shadow: 0 1px rgba(255,255,255,.5), inset 0 1px 2px rgba(0,0,0,.8);
+  box-shadow: 0 1px rgba(255,255,255,.5), inset 0 1px 2px rgba(0,0,0,.8);
+  &:hover {
+    text-decoration: underline;
+    color: white;
+  }
+}
+
+.ets-ui-error-handling-button-container {
+  text-align: right;
+}

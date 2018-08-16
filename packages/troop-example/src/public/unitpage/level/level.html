@@ -1,0 +1,10 @@
+<%
+var level = data.level;
+var levelTestId = data.levelTestId;
+//notice: level-pass widget's attribute `data-level-test-id` may be read by outside widget.
+%>
+<div class="ets-level-pass-container ets-none" data-weave="public/unitpage/level/level-pass/main" data-level-test-id="<%=levelTestId%>" data-level-template-id="<%=level.templateLevelId%>" data-level-id="<%=level.id%>"></div>
+
+<div class="ets-ui-unn">
+	<div class="ets-ui-unn-bd" data-weave="public/unitpage/unit/main"></div>
+</div>

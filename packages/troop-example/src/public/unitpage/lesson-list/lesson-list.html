@@ -1,0 +1,31 @@
+<%
+    var unit = data.unit;
+    var lessons = data.lessons || [];
+    var lessonCount = lessons.length > 4 ? 4 : lessons.length;
+
+    for (var i = 0; i < lessonCount; i++) {
+        if (i == 2) {
+            writeStepContainer();
+        }
+
+        writeLessonContainer(i + 1, unit.id, lessons[i].id);
+    }
+%>
+
+<%
+    function writeLessonContainer(count, unitId, lessonId) {
+%>
+    <div class="<%= data.classes.LESSON_CONTAINER %> ets-nth-<%= count %>" data-weave="public/unitpage/lesson/main(<%= count %>, <%= unitId %>, <%= lessonId %>)" data-at-id="btn-lesson-block-<%=count%>"></div>
+<%
+    }
+%>
+
+<%
+    function writeStepContainer() {
+%>
+<div class="ets-ui-step-container">
+    <div class="ets-ui-steps-wrap" data-weave="public/unitpage/step-list/main"></div>
+</div>
+<%
+    }
+%>

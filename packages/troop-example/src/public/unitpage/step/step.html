@@ -1,0 +1,33 @@
+<%
+var step = data || {};
+var stateClassName = (step.uiMode === "passed"
+    ? "ets-passed"
+    : ((step.uiMode === "startup" || step.uiMode === "tried")
+        ? "ets-active"
+        : ""));
+var canAlsoStart = step.uiMode === "";
+var canStartClass = canAlsoStart ? " ets-ui-step-action-start" : "";
+%>
+<!-- Step Start -->
+<div class="ets-ui-step <%= stateClassName %>" data-at-id="lbl-step-body-<%= step.stepNo %>" data-step-id="<%= step.id %>" data-action="route">
+    <div class="ets-ui-step-index" data-at-id="lbl-step-index-<%= step.stepNo %>"><%= step.stepNo %></div>
+    <div class="ets-ui-step-type ets-overflow" data-at-id="lbl-step-category-<%= step.stepNo %>" title="<%= step.stepTypeName %>"><%= step.stepTypeName %></div>
+    <div class="ets-ui-step-title ets-overflow" data-at-id="lbl-step-title-<%= step.stepNo %>" title="<%= step.stepName %>"><%= step.stepName %></div>
+    <% if(step.uiMode === "tried") { %>
+    <div class="ets-ui-step-action" data-at-id="btn-step-continue-<%= step.stepNo %>"><span class="ets-btn-small ets-btn-purple"><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450010" data-text-en="Continue"></span></span></div>
+    <% } else if(step.uiMode === "startup" || canAlsoStart) { %>
+    <div class="ets-ui-step-action<%=canStartClass%>" data-at-id="btn-step-start-<%= step.stepNo %>"><span class="ets-btn-small ets-btn-purple"><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450009" data-text-en="Start"></span></span></div>
+    <% } %>
+    <% if (step.progress.score === 100) { %>
+        <div class="ets-ui-step-status ets-ui-step-perfect">
+            <div class="ets-ui-step-perfect-warp" data-at-id="lbl-step-status-<%= step.stepNo %>">
+                <span class="ets-overflow" data-weave="troopjs-ef/blurb/widget" data-blurb-id="462935" data-text-en="Perfect"></span><i class="ets-ui-icon-pass-rounded-s"></i>
+            </div><span class="ets-ui-step-perfect-right" data-at-id="lbl-step-mark-<%= step.stepNo %>"></span>
+        </div>
+    <% } else { %>
+        <div class="ets-ui-step-status" data-at-id="lbl-step-mark-<%= step.stepNo %>">
+            <i class="ets-ui-icon-pass-rounded-s"></i>
+        </div>
+    <% } %>
+</div>
+<!-- Step End -->

@@ -1,0 +1,76 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Notification
+//  File:          ets-ui-notification.less
+//  Images:        
+//  Dependencies:  
+//  Description:   This is a common notification for school new courseware.
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@section-height: 350px;
+.ets-ntf-backdrop{
+    position: absolute;
+    .size(100%, 100%);
+    top:0;
+    left:0;
+    background-color: white;
+    .opacity(90);
+    z-index: 200;
+}
+
+.ets-ntf{
+    position: absolute;
+    top:10px;
+    left:0;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 40px 10%;
+    width: 80%;
+    background: white;
+    border: 2px solid @grayLight;
+    .box-shadow(0 0 20px black);
+    z-index: 201;
+    
+    .ets-ntf-header{
+        font-size: 30px;
+        color: @gray;
+    }
+    .ets-ntf-body{
+        margin: 0 auto;
+        > div{
+            height: @section-height;
+        }
+        .ets-title {
+            font-size: 18px;
+            color: @gray;
+        }
+        p {
+            color: @grayLight;
+            line-height: 20px;
+        }
+        .ets-sidebar{
+            .size(30%, auto);
+            float:left;
+            li {
+                margin: 20px 0;
+            }
+        }
+        .ets-section{
+            .size(65%, 100%);
+            float:right;
+            margin-top: 20px;
+            .inline-block;
+            img{
+                .size(100%, @section-height);
+            }
+            .ets-btn{
+                margin-top: 10px;
+                float:right;
+            }
+        }
+    }
+    .ets-ntf-footer{
+
+    }
+}

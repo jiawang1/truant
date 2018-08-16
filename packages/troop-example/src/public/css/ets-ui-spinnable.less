@@ -1,0 +1,77 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Spinnable
+//  File:          ets-ui-spinnable.less
+//  Images:        
+//  Dependencies:  
+//  Description:   Providing spinning icon solution for widgets in school
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+.ets-ui-spinnable
+{
+	.size(100%, 100%);
+	position: absolute; 
+	left: 0;
+	top: 0;
+
+	/* a bit higher than the other so it covers */
+	z-index: 1;
+    *min-height:50px;
+    *max-height:616px;
+
+	> .ets-inner
+	{
+		
+	    display: table;
+	    width: 100%;
+	    height: 100%;
+	    top: 0;
+	    left: 0;
+
+	    text-align: center;
+
+	    *position: absolute;
+	    *left: 50%;
+	    *top: 50%;
+
+	    *width: 50px;
+	    *height: auto;
+
+	    > .ets-inner-cell
+	    {
+	    	.inline-block;
+
+	    	display: table-cell;
+	    	vertical-align: middle;
+
+	    	> .ets-icon
+		    {
+			    .inline-block;
+			    .size(50px, 50px);
+
+			    vertical-align: middle;
+
+			    *position: relative;
+
+			    *left: -50%;
+			    *top: -50%;
+
+			    background: url("@{ets-ui-spinning-dark-l}");
+		    }
+	    }
+
+	}
+
+	> .ets-backdrop
+	{
+		.size(100%, 100%);
+
+		background-color: #000;
+
+		.opacity(20);
+
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}

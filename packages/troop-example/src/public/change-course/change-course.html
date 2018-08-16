@@ -1,0 +1,12 @@
+<% if(data.showCourseName){ %>
+<div class="ets-chl-nav-container">
+	<div class="ets-chl-nav">
+		<span class="ets-chl-current-level" data-action="toggle">
+			<span class="ets-chl-current-level-course"><%=data.courseName%></span>
+			<span class="ets-chl-current-level-name" data-at-id="lbl-current-level"><%=data.levelName%></span>
+			<span class="ets-chl-btn ets-hidden"></span>
+		</span>
+	</div>
+</div>
+<div class="ets-chl-options-container ets-chl-options-container-hidden" data-weave="troopjs-ef/ccl/placeholder('public/change-course/course-list/main')" data-ccl="<%=data.ccl.enableChangeLevel %>"></div>
+<% } %>

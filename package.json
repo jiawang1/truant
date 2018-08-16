@@ -5,7 +5,8 @@
   "scripts": {
     "dist": "node ./tools/build.js",
     "init": "lerna bootstrap --hoist",
-    "lint": "eslint ./packages/** --ignore-path .gitignore"
+    "lint": "eslint ./packages/** --ignore-path .gitignore",
+    "publish":"lerna publish --canary"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

@@ -1,0 +1,157 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Header
+//  File:          ets-ui-header.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@ets-ui-header-bg:"../img/ets-ui-header-bg.png";
+@ets-ui-header:"../img/ets-ui-header.png";
+@ets-ui-header-btn-bg:"../img/ets-ui-header-btn-bg.png";
+@ets-ui-header-btn-act-bg:"../img/ets-ui-header-btn-act-bg.png";
+@ets-ui-header-change-lng-container-bg:"../img/ets-ui-header-change-lng-container-bg.png";
+@ets-ui-header-top-panel:"../img/ets-ui-header-top-panel.png";
+
+.headerfooter-header {
+  position: relative;
+  z-index: 1;
+}
+
+.ets-ui-header{
+	height: 59px;
+	background:#f1f1f1 url("@{ets-ui-header-bg}") top left repeat-x;
+}
+
+.ets-ui-header-container{
+	width:932px;
+	height: 59px;
+	margin: 0 auto;
+	padding-left: 8px;
+}
+
+.ets-ui-header-logo{
+	height: 56px;
+	width:209px;
+	float: left;
+	background:transparent url("@{ets-ui-header}") 0 0 no-repeat;
+}
+
+.ets-ui-header-btns{
+	float: right;
+	clear: right;
+	span{
+		color:#898989;
+		font-size: 11px;
+	}
+}
+
+.ets-ui-header-home{
+	.inline-block;
+	background:transparent url("@{ets-ui-header}") -229px 0 no-repeat;
+	width: 55px;
+	height: 12px;
+	float: left;
+	margin:5px 15px 0 0;
+}
+
+.ets-ui-header-change-lng{
+	text-decoration: none;
+	float: left;
+	*cursor: pointer;
+}
+
+.ets-ui-header-login{
+	float: left;
+	text-decoration: none;
+	*cursor: pointer;
+}
+
+.ets-ui-header-btn-l{
+	background: transparent url("@{ets-ui-header}") -304px 0 no-repeat;
+	width:15px;
+	height: 21px;
+	float: left;
+}
+
+.ets-ui-header-btn-m{
+	background: transparent url("@{ets-ui-header-btn-bg}") top left repeat-x;
+	padding:0 3px;
+	float: left;
+	height: 21px;
+}
+
+.ets-ui-header-btn-r{
+	background: transparent url("@{ets-ui-header}") -339px 0 no-repeat;
+	width:15px;
+	height: 21px;
+	float: left;
+}
+
+.ets-ui-header-change-lng.ets-active{
+	.ets-ui-header-btn-l{
+		background-position: -374px 0;
+	}
+	.ets-ui-header-btn-m{
+		background-image: url("@{ets-ui-header-btn-act-bg}");
+	}
+	.ets-ui-header-btn-r{
+		background-position: -409px 0;
+	}	
+}
+
+.ets-ui-header-top{
+	background-color: #21282D;
+	height: 0;
+	display: none;
+}
+
+.ets-ui-header-change-lng-container{
+	//background: #21282D url("@{ets-ui-header-change-lng-container-bg}") right top no-repeat;
+	width: 940px;
+	height: 150px;
+	margin:0 auto;
+	position: relative;
+}
+
+.ets-ui-header-top-panel{
+	//background: url("@{ets-ui-header-top-panel}") left top no-repeat;
+	height: 110px;
+	padding: 20px 30px;
+	color: #999;
+	h2{
+		height: 40px;
+		line-height: 40px;
+		color: white;
+		font-size: 175%;
+	}
+}
+
+.ets-ui-header-top-panel{
+	ul{
+		float: left;
+		li{
+			line-height: 1.2em;
+			padding-right: 60px;
+			margin-top: 6px;
+			a{
+				color: #999;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.ets-ui-header-top-close{
+	display: block;
+	background: url("@{ets-ui-header}") right 0  no-repeat;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding-right: 20px;
+	line-height: 18px;
+	color: #666;
+	text-decoration: none;
+}

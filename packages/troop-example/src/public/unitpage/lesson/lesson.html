@@ -1,0 +1,113 @@
+<%
+
+if (!data || !data.hasPassed || !data.isLocked){
+
+%>
+
+<div class="ets-ui-lesson">
+    Data broken
+</div>
+
+<%
+    }
+    else {
+    var lesson = data.lesson;
+    var pcLesson = data.pcLesson;
+    var stateClassName = data.isLocked() ?
+                        (data.hasNewContent() ? "ets-locked ets-ui-ph" : "ets-locked" ):
+                        (data.hasPassed() ? "ets-passed" : "");
+    var lessonImageUrl = (!lesson.lessonImage || !lesson.lessonImage.url)
+                            ? "" : lesson.lessonImage.url;
+    var dataAction = data.isLocked() ? 'click/lesson': 'route';
+    var _hasPassed = data._hasPassed;
+    var _hasStarted = data._hasStarted;
+    var pcProgress = data.pcProgress;
+    var mobileProgress = data.mobileProgress;
+    var progress = data.progress;
+%>
+
+<div class="ets-ui-lesson <%= stateClassName %> " data-action="<%= dataAction %>" data-lesson-id="<%= pcLesson.id %>">
+    <%if (lessonImageUrl == "") {%>
+    <div class="ets-ui-lesson-img ets-ui-lesson-img-no-pic"></div>
+    <%} else {%>
+    <div class="ets-ui-lesson-img"><img src="<%= lessonImageUrl %>" width="260" height="160" /></div>
+    <%}%>
+    <div class="ets-ui-lesson-title" data-at-id="lbl-lesson-title-<%=lesson.lessonNo%>"><strong><%= pcLesson.lessonNo %></strong> <%= pcLesson.lessonName %></div>
+    <div class="ets-ui-lesson-ph"></div>
+    <div class="ets-ui-lesson-status-locked ets-locked" data-at-id="lbl-lesson-lock-<%=pcLesson.lessonNo%>"><span></span></div>
+    <!--<div class="ets-ui-lesson-status-passed ets-passed" data-at-id="lbl-lesson-status-<%=pcLesson.lessonNo%>">-->
+        <!--<i class="ets-ui-icon-pass-s"></i>-->
+        <!--<span class="ets-ui-lesson-status-passed-score"><%= (pcLesson && pcLesson.progress && pcLesson.progress.score) %>%</span>-->
+    <!--</div>-->
+    <div class="ets-ui-lesson-new">
+        <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="479198" data-text-en="New Content Coming"></span>
+    </div>
+
+    <%if (pcProgress && _hasPassed(pcProgress.state)) {%>
+        <div class="ets-ui-lesson-xd ets-pass ets-nth-<%=lesson.lessonNo%>">
+            <i class="ets-ui-icon-xd-state"></i>
+            <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450040" data-text-en="Lesson Passed"></span>
+        </div>
+    <% } else if (mobileProgress && _hasPassed(mobileProgress.state)) { %>
+        <div class="ets-ui-lesson-xd ets-ui-lesson-xd-mobile ets-pass ets-nth-<%=lesson.lessonNo%>">
+            <i class="ets-ui-icon-xd-state-mobile"></i>
+            <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661847" data-text-en="Passed on phone"></span>
+            <i class="ets-ui-icon-xd-qa" data-action="mobile-pass"></i>
+        </div>
+    <% } else if (mobileProgress && _hasStarted(mobileProgress.state)) { %>
+        <div class="ets-ui-lesson-xd ets-ui-lesson-xd-mobile ets-start ets-nth-<%=lesson.lessonNo%>">
+            <i class="ets-ui-icon-xd-state-mobile"></i>
+            <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661846" data-text-en="Started on phone"></span>
+            <i class="ets-ui-icon-xd-qa" data-action="mobile-start"></i>
+        </div>
+    <% } else if (progress && _hasPassed(progress.state)) { %>
+        <div class="ets-ui-lesson-xd ets-pass ets-nth-<%=lesson.lessonNo%>">
+            <i class="ets-ui-icon-xd-state"></i>
+            <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450040" data-text-en="Lesson Passed"></span>
+        </div>
+    <% } %>
+</div>
+
+<%
+}
+%>
+
+<div class="ets-ui-lesson-xd-popup-mobile-wrapper-start">
+    <div class="ets-ui-lesson-xd-popup-mobile ets-start">
+        <div class="ets-ui-lesson-xd-popup-inner">
+            <i class="ets-ui-icon-xd-popup-state-mobile"></i>
+            <div class="ets-ui-lesson-xd-popup-content">
+                <h1>
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661846" data-text-en="Started on phone"></span>
+                </h1>
+                <p>
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661848" data-text-en="You have started this lesson on your mobile."></span><br/>
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="663229" data-text-en="You can choose to study the lesson on the web as well, or continue on your phone."></span>
+                </p>
+                <div class="ets-btn ets-btn-white ets-btn-shadowed" data-action="close-popup">
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661850" data-text-en="Cool, got it"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ets-ui-lesson-xd-popup-mobile-wrapper-pass">
+    <div class="ets-ui-lesson-xd-popup-mobile ets-pass">
+        <div class="ets-ui-lesson-xd-popup-inner">
+            <i class="ets-ui-icon-xd-popup-state-mobile"></i>
+            <div class="ets-ui-lesson-xd-popup-content">
+                <h1>
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661847" data-text-en="Passed on phone"></span>
+                </h1>
+                <p>
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="663228" data-text-en="You have passed this lesson on your mobile."></span><br/>
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661849" data-text-en="You might see more new content here but don't worry, all good!"></span>
+                </p>
+                <div class="ets-btn ets-btn-white ets-btn-shadowed" data-action="close-popup">
+                    <span data-weave="troopjs-ef/blurb/widget" data-blurb-id="661850" data-text-en="Cool, got it"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

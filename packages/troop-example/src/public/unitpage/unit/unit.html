@@ -1,0 +1,54 @@
+<%
+var me = this;
+var unit = data || {};
+var stateClassName = unit.isLocked ? (unit.hasNewContent ? "ets-locked ets-ui-ph" : "ets-locked" ): (unit.hasPassed ? "ets-passed" : "");
+%>
+<!-- Unit Start -->
+<div class="ets-ui-unit <%=stateClassName%>" data-weave="troopjs-ef/spinner/widget" data-delay-stop="500">
+  <div class='react-test' style="float:right; position:relative;height:50px"></div>
+    <!-- Locked Hint Start -->
+    <div class="ets-ui-unit-locked-hint ets-none" data-weave="public/unitpage/unit/unit-lock/main"></div>
+    <!-- Locked Hint End -->
+    <div class="ets-ui-unit-hd ets-cf">
+        <h1 class="ets-overflow" title="<%=unit.unitName%>">
+        <%if(me._isGE){%><strong data-weave="troopjs-ef/blurb/widget" data-blurb-id="105267" data-text-en="Unit"></strong>
+        <strong data-at-id="lbl-unit-no"><%=unit.unitNo%></strong>
+        <%}%>
+        <span class="ets-ui-unit-name" data-at-id="lbl-unit-title"><%=unit.unitName%></span>
+        <span class="ets-ui-unit-name event-test" style="color:#14892c; font-weight: bold"></span>
+        </h1>
+        <div class="ets-ui-unit-btn-upt" data-weave="troopjs-ef/blurb/widget" data-blurb-id="450314" data-text-en="Is this unit too easy?"></div>
+        <%if(unit.showUnitOverview) {%>
+        <div class="ets-ui-unit-btn-uno" data-action="overview" data-template-unit-id="<%=unit.templateUnitId%>" data-weave="public/unitpage/unit/unit-overview/main(templateUnitId)" data-at-id="btn-unit-overview"></div>
+        <% } %>
+        <!--b2s custom-->
+        <% if(unit.isB2S) {%>
+            <div class="ets-unit-pass-icon ets-ui-unit-status-passed ets-passed ets-ui-unit-status-passed-b2s" data-url="/school/elab/mypage" data-action="openLink" data-at-id="lbl-unit-status"><span class="ets-ui-unit-pass-tag"></span><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="450037" data-text-en="Unit passed"></span><span class="ets-ui-unit-b2s-info" data-weave="troopjs-ef/blurb/widget" data-blurb-id="507052"></span></div>
+        <!--custom end-->
+        <% } else if(unit.unitPassIcon){%>
+            <div class="ets-unit-pass-icon" data-weave="<%=unit.unitPassIcon%>"></div>
+        <% } %>
+        <div class="ets-unit-pass-banner ets-ui-unit-status-passed-animate ets-none" data-weave="public/unitpage/unit/unit-pass-banner/main"></div>
+    </div>
+    <div class="ets-ui-unit-bd ets-cf">
+        <div class="ets-ui-unit-bd-container">
+            <table>
+                <tr>
+                    <td>
+                        <div class="ets-ui-unit-bd-content" data-weave="public/unitpage/lesson-list/main"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class='ets-ui-spinnable'>
+        <div class='ets-inner' >
+            <div class='ets-inner-cell'>
+                <div class='ets-icon'>
+                </div>
+            </div>
+        </div>
+        <div class='ets-backdrop'></div>
+    </div>
+</div>
+<!-- Unit End -->

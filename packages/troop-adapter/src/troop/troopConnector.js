@@ -18,7 +18,7 @@ class TroopEventConnector {
         document.addEventListener(STARTUPEVENT, __handler, false);
       } else if (window.attachEvent) {
         document.attachEvent(`on${STARTUPEVENT}`, __handler);
-      }else{
+      } else {
         throw new Error('too old browser, can not support');
       }
     }
@@ -52,13 +52,13 @@ class TroopEventConnector {
     return !!this.__troopHandler;
   }
 
-  __sub(eventName, context, cb){
+  __sub(eventName, context, cb) {
     const MEMORY_PREFIX = /^hub(:memory)?\//;
     let _eventName = eventName.replace(MEMORY_PREFIX, '');
 
     this.__troopHandler.subscribe(_eventName, context, cb);
 
-    if(MEMORY_PREFIX.test(eventName.trim())){
+    if (MEMORY_PREFIX.test(eventName.trim())) {
       this.__troopHandler.republish(_eventName, false, context, cb);
     }
   }

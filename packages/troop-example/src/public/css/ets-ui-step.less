@@ -1,0 +1,151 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Step
+//  File:          ets-ui-step.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@ets-ui-step-container-img: "../img/ets-ui-step-container-pattern.png";
+
+.ets-ui-step-container {
+  *line-height: 0;
+  *font-size: 0;
+  clear: both;
+  background: #A6ACB2 url("@{ets-ui-step-container-img}") repeat;
+  box-shadow: inset 1px 1px 6px #666;
+
+  /* because of at the startup the container should be closed, this make it easier for animation */
+  //height: 0;
+
+  overflow: hidden;
+  *position: relative;
+}
+
+.ets-ui-steps-wrap {
+  position: relative;
+  &.ets-expanded {
+    opacity: 1;
+  }
+}
+
+.ets-ui-steps {
+  width: 600px;
+  padding: 50px 0;
+  margin: 0 auto;
+  *line-height: 1.2;
+  *font-size: 13px;
+}
+
+.ets-ui-step {
+  .size(600px, 37px);
+  margin: 0 auto;
+  background: transparent url("@{ets-ui-main-img}") 0 -420px repeat-x;
+  text-shadow: 0 1px 0 #fff;
+  color: #7F8386;
+  clear: both;
+  cursor: pointer;
+}
+
+.ets-ui-step-bd {
+  overflow: hidden;
+  margin: 0 0 2px 0;
+  *margin: 0; /*Fix extra margin in ie7*/
+}
+
+.ets-ui-step-index {
+  width: 30px;
+  padding-left: 20px;
+  line-height: 37px;
+  float: left;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ets-ui-step-type {
+  width: 150px;
+  line-height: 37px;
+  float: left;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ets-ui-step-title {
+  width: 258px;
+  line-height: 37px;
+  float: left;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.ets-ui-step-action {
+  float: right;
+  padding: 6px 10px 0 0;
+}
+
+.ets-ui-step.ets-active {
+  background-position: 0 -360px;
+  cursor: pointer;
+  text-shadow: 0 1px 0 #fff;
+  color: #7F8386;
+  .ets-ui-step-index {
+    
+  }
+}
+
+.ets-ui-step.ets-passed {
+  background-position: 0 -480px;
+  cursor: pointer;
+  text-shadow: 0 1px 0 #507005;
+  color: #fff;
+  &:hover {
+    
+  }
+}
+
+.ets-ui-step-status {
+  float: right;
+  padding: 3px 10px 0 10px;
+  display: none;
+}
+
+.ets-ui-step.ets-passed .ets-ui-step-status {
+  display: block;
+}
+
+.ets-ui-step-action-start {
+  display: none;
+}
+.ets-ui-step:hover .ets-ui-step-action-start {
+  display: block;
+}
+
+.ets-ui-step-perfect {
+  padding: 0;
+  .ets-ui-step-perfect-warp {
+    background-color: #569800;
+    display: inline-block;
+    padding-left: 8px;
+    span {
+      line-height: 37px;
+      font-size: 15px;
+      font-weight: 700;
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 100px;
+    }
+    .ets-ui-icon-pass-rounded-s {
+      vertical-align: middle;
+    }
+  }
+}
+
+.ets-ui-step-perfect-right {
+  background: url("@{ets-ui-main-img}") -596px -521px;
+  width: 4px;
+  height: 37px;
+  vertical-align: middle;
+  display: inline-block;
+}

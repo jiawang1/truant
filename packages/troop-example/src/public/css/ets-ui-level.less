@@ -1,0 +1,103 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Level
+//  File:          ets-ui-level.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+.ets-ui-level {
+  position: relative;
+}
+
+/* ====Unit Navigation===== */
+.ets-ui-unn {
+  width: 980px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.ets-ui-unn-bd {
+  width: 770px;
+  border: 1px solid #ACB8C5;
+  background: #fff;
+  margin: 0 auto;
+  min-height: 483px;
+}
+
+.ets-ui-unn-ft {
+  background: transparent url("@{ets-ui-main-img}") top center no-repeat;
+  height: 50px;
+}
+
+.ets-ui-unn-btn-prev {
+  .size(33px, 58px);
+  position: absolute;
+  top: 250px;
+  left: 10px;
+  background: url("@{ets-ui-main-img}") 0 -150px no-repeat;
+  cursor: pointer;
+  &:hover {
+    background-position: -100px -150px;
+  }
+  &:active {
+    .opacity(60);
+  }
+}
+
+.ets-ui-unn-btn-prev.ets-disabled {
+  .opacity(30);
+  cursor: default;
+  &:hover {
+    background-position: 0px -150px;
+  }
+  &:active {
+    .opacity(30);
+  }
+}
+
+.ets-ui-unn-btn-next {
+  .size(33px, 58px);
+  position: absolute;
+  top: 250px;
+  right: 10px;
+  background: url("@{ets-ui-main-img}") -50px -150px no-repeat;
+  cursor: pointer;
+  &:hover {
+    background-position: -150px -150px;
+  }
+  &:active {
+    .opacity(60);
+  }
+}
+
+.ets-ui-unn-btn-next.ets-disabled {
+  .opacity(30);
+  cursor: default;
+  &:hover {
+    background-position: -50px -150px;
+  }
+  &:active {
+    .opacity(30);
+  }
+}
+
+.ets-ui-unn-dots {
+  text-align: center;
+  padding: 15px 0;
+  .disable-user-select;
+}
+
+.ets-ui-unn-dot {
+  .inline-block;
+  .size(11px, 11px);
+  background: url("@{ets-ui-main-img}") -789px -360px no-repeat;
+  margin: 0 2px;
+}
+
+.ets-ui-unn-dot.ets-active {
+  background-position: -789px -380px;
+}
+

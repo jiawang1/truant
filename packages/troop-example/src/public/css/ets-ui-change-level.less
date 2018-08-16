@@ -1,0 +1,272 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////
+//
+//  Hierarchy:     Englishtown > School > Courseware UI > Change Level
+//  File:          ets-ui-change-level.less
+//  Images:        
+//  Dependencies:  
+//  Description:   
+//
+////////////////////////////////////////////////////////////////////////////////////// */
+
+@ets-ui-change-level-container-bg: "../img/ets-ui-change-level-container-pattern.png";
+@ets-chl-options-course-bg:"../img/ets-ui-change-level-options-content.png";
+@ets-chl-options-course-hover-bg:"../img/ets-ui-change-level-options-content-hover.png";
+@ets-chl-alert-bg:"../img/ets-chl-alert-bg.png";
+@ets-ui-change-level-bg: "../img/ets-ui-change-level.png";
+
+.ets-chl-background-change(@h,@v){
+	background: url("@{ets-ui-change-level-bg}") @h @v no-repeat;
+}
+
+.ets-ui-change-level-container{
+	height: 100%;
+	width:100%;
+}
+
+
+//change level nav part begin
+.ets-chl-nav-container{
+	width:100%;
+	position: relative;
+	height: 35px;
+	padding-top: 15px;
+	z-index:1;
+	*z-index: 10;
+}
+
+
+.ets-chl-nav{
+	color:#505A68;
+	width: 770px;
+	margin: 0 auto;
+}
+
+//current level begin
+.ets-chl-current-level{
+	height:15px;
+	float:left;
+}
+
+.ets-chl-current-level-course{
+	font-weight:bold;
+	padding-right: 2px;
+	font-size:14px;
+	float:left;
+	white-space: nowrap;
+}
+
+.ets-chl-current-level-name{
+	font-size:14px;
+	padding-right: 10px;
+	float:left;
+	white-space: nowrap;
+}
+
+.ets-chl-btn{
+	.ets-chl-background-change(0,0);
+	.inline-block;
+	float:left;
+	width:7px;
+	height:5px;
+	position: relative;
+	top:6px;
+}
+
+.ets-chl-btn.ets-active{
+	.ets-chl-background-change(-27px,0);
+}
+//current level end
+
+//change level nav part end
+
+//level options part begin
+.ets-chl-options-container-hidden{
+	display:none;
+}
+
+.ets-chl-options-container{
+	width:100%;
+	height:auto;
+	background:#B4BBC6 url("@{ets-ui-change-level-container-bg}") repeat;
+	position: relative;
+	top: -50px;
+	*z-index: 2;
+}
+
+.ets-chl-options{
+	padding: 32px 0 25px;
+	width: 907px;
+    *width: 916px;
+	margin: 0 auto;
+	position: relative;
+	*white-space: nowrap;
+}
+
+.ets-chl-options-course{
+	.inline-block;
+	min-height:37px;
+	min-width:183px; 
+	height:243px;
+	padding: 6px 22px 17px 0px;
+	background:#AAB2BC url("@{ets-chl-options-course-bg}") repeat;
+	border-radius:5px;
+	border:1px solid #8D94A0;
+	box-shadow:inset 0px 0px 3px #999;
+	cursor: pointer;
+	color:#FFF;
+
+	&:hover{
+		background:#949BA4 url("@{ets-chl-options-course-hover-bg}") repeat;
+		border:1px solid #676D75;
+		box-shadow:inset 0px 0px 10px #888;
+	}
+}
+
+.ets-chl-options-first-course{
+	margin-left:0;
+}
+
+.ets-chl-options-course-container{
+	padding:23px 9px 0 9px;
+	height:268px;
+	width:auto;
+	float:left;
+}
+
+.ets-chl-options-course-name-container{
+	width:165px;
+	padding-left:18px;
+	*padding-left:0;
+}
+
+.ets-chl-options-course-name{
+	.inline-block;
+	padding:0 0 6px 2px;
+	font-weight:bold;
+	font-size:14px;
+	border-bottom:1px solid #CCCCCC;
+	width:163px;
+}
+
+.ets-chl-course-level-group{
+	float: left;
+	margin-left: 41px;
+	*float:none;
+	*display: inline;
+	*zoom:1;
+	*vertical-align: top;
+}
+
+.ets-chl-course-level-container{
+	padding-left:18px;	
+}
+
+.ets-chl-course-level{
+	.inline-block;
+	height: 16px;
+	padding:5px 0 5px 2px;
+	width:163px;
+	border-bottom:1px solid #B7BDC5;
+	&:hover{
+		background-color: #848A95;
+	}
+}
+
+.ets-chl-course-level-name{
+	width:150px;
+	font-size:12px;
+	float:left;
+}
+
+.ets-chl-course-level-mark {
+	margin-left: 5px;
+}
+
+.ets-chl-course-level-status.ets-passed{
+	width:8px;
+	height:8px;
+	float: right;
+	display: block;
+	.ets-chl-background-change(-123px,0);
+	position: relative;
+	top:6px;
+	right:8px;
+}
+
+.ets-chl-course-level-container.ets-active{
+	height:26px;
+	.ets-chl-background-change(-145px,7px);
+	background-color:#454B53;
+	border-bottom:1px solid #B7BDC5;
+}
+
+.ets-chl-course-level-container.ets-inaccessible {
+	color: #cbd0d7;
+}
+
+.ets-chl-course-level{
+	border:none;
+	&:hover{
+		background-color: #454B53;
+	}
+}
+
+.ets-chl-course-level-first-group{
+	margin-left:0;	
+}
+
+//level options part end
+
+//change level alert box start
+.ets-chl-alert{
+	background:#3B4148 url("@{ets-chl-alert-bg}") top left repeat-x;
+	width: 814px;
+	height: auto;
+	position: fixed;
+	z-index: 300;
+	padding:30px 0 30px 0;
+	white-space: normal;
+	span{
+		display: block;
+	}
+	color: #FFF;
+}
+
+.ets-chl-alert-main-copy{
+	font-size: 32px;
+	font-weight: 700;
+	text-shadow: 0px 1px 0px #222;
+	text-align: left;
+	padding: 0 40px;
+}
+
+.ets-chl-alert-bottom{
+	margin: 20px auto 0;
+}
+
+.ets-chl-alert-sub-copy{
+	width: 500px;
+	float: left;
+	position: relative;
+	left: 40px;
+}
+
+.ets-chl-alert-sub-copy-item{
+	font-size: 15px;
+	text-shadow:0px 1px 0px #222;
+}
+
+.ets-chl-alert-btns{
+	float: right;
+	position: relative;
+	right: 40px;
+	top: 5px;
+}
+
+//change level alert box end
+
+.ets-chl-notice {
+	margin-top: 10px;
+	margin-left: 10px;
+	color: #fff;
+}

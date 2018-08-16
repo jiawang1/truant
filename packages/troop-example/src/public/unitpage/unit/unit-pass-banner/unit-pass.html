@@ -1,0 +1,21 @@
+<div class="ets-unit-pass-banner-content">
+	<img class="ets-unit-pass-tag" src="<%=data.imgPath%>/img/unit-pass-tag.png" alt="" />
+	<span data-at-id="lbl-unit-status" class="ets-unit-pass-copy1" data-weave="troopjs-ef/blurb/widget" data-blurb-id="450037" data-text-en="Unit passed"></span>
+	<!--b2s custom-->
+	<% if(data.isB2S){ %>
+		<span class="ets-ui-unit-b2s-info" data-weave="troopjs-ef/blurb/widget" data-blurb-id="507052"></span>
+	<% } %>
+	<!--custom end-->
+	<span class="ets-unit-pass-copy2">
+		<span class="ets-unit-pass-copy2-line1" data-weave="troopjs-ef/blurb/widget" data-blurb-id="450038" data-text-en="Congratulations!"></span>
+	<span class="ets-unit-pass-copy2-line2" data-weave="troopjs-ef/ccl/placeholder('troopjs-ef/blurb/widget')" data-blurb-id="450039" data-ccl="school.courseware.enable.navigateUnit" data-text-en="The next unit is now unlocked"></span>
+		<!--b2s custom-->
+		<% if(data.isB2S){ %>
+			<div class="ets-unit-pass-b2s-btn">
+				<div class="ets-btn ets-btn-shadowed ets-btn-white" data-url="/school/elab/mypage" data-action="openLink"><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="507052"></span></div>
+				<div class="ets-btn ets-btn-shadowed ets-btn-white" data-action="reviewUnit"><span data-weave="troopjs-ef/blurb/widget" data-blurb-id="507054"></span></div>
+			</div>
+		<% } %>
+		<!--custom end-->
+	</span>
+</div>

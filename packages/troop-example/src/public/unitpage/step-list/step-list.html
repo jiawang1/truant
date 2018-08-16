@@ -1,0 +1,18 @@
+<%
+var steps = data || [];
+%>
+<ul class="ets-ui-steps">
+    <%
+        for (var i = 0; i < steps.length; i++) {
+            var step = steps[i];
+            var uiMode = step.hasPassed ? "passed": (step.hasStarted ? "tried" : (step.isStartup ? "startup" : ""));
+            writeStep(step, uiMode);
+        }
+    %>
+</ul>
+
+<% function writeStep(step, uiMode) { %>
+    <!-- Step Start -->
+    <li class="ets-ui-step-bd" data-weave="public/unitpage/step/main(id, stepUiMode)" data-id="<%= step.id %>" data-step-ui-mode="<%= uiMode %>"></li>
+    <!-- Step End -->
+<% } %>

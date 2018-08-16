@@ -1,0 +1,114 @@
+.ets-uo-word-list {
+	font-size: 12px;
+
+	.ets-uo-word-list-title {
+		display: none;
+	}
+
+	//table
+	table {
+		border-collapse: collapse;
+		border: 0;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+
+		th {
+			border: 0;
+			text-align: left;
+			padding: 2px 5px;
+		}
+		td {
+			border: 0;
+			text-align: left;
+			padding: 2px 0;
+		}
+	}
+
+	//table columns
+	tbody {
+		.ets-uo-word-list-column-player {
+			min-width: 25px;
+		}
+		.ets-uo-word-list-column-vocabulary {
+			min-width: 125px;
+			font-size: 13px;
+			font-weight: bold;
+		}
+		.ets-uo-word-list-column-phonetic {
+			min-width: 170px;
+			font-size: 11px;
+			color: #999;
+		}
+		.ets-uo-word-list-column-partofspeech {
+			min-width: 40px;
+			font-size: 11px;
+		}
+		.ets-uo-word-list-column-translation {
+			min-width: 200px;
+		}
+	}
+
+	//table rows
+	thead tr {
+		background: #ddd;
+	}
+
+	tbody {
+		tr {
+			background: #fff;
+		}
+
+		tr:nth-child(2n) {
+			background: #f6f6f6;
+		}
+
+		tr.etc-unit-overview-word-selected {
+			background: #e3e3e9;
+		}
+	}
+
+	//player
+	.mejs-offscreen {
+		display: none;
+	}
+
+	.mejs-audio {
+		margin: 0 auto;
+		position: relative;
+		background: none;
+
+		.mejs-controls {
+			background: none;
+			width: 100%;
+			height: 100%;
+
+			.mejs-play, .mejs-pause {
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+
+				button {
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+
+					margin: 0;
+					padding: 0;
+					border: 0;
+					outline: 0;
+					background: url(/_imgs/ui/courseware/study/uno_btn_play-png8.png) 2px 2px no-repeat;
+				}
+			}
+
+			.mejs-pause button {
+				background-position: 2px -28px;
+			}
+		}
+	}
+
+}
